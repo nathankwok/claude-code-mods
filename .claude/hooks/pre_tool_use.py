@@ -8,6 +8,7 @@ import sys
 import re
 from pathlib import Path
 from datetime import datetime
+from utils.constants import ensure_session_log_dir
 
 def is_dangerous_rm_command(command):
     """
@@ -16,7 +17,7 @@ def is_dangerous_rm_command(command):
     """
     # Normalize command by removing extra spaces and converting to lowercase
     normalized = ' '.join(command.lower().split())
-    
+
     # Pattern 1: Standard rm -rf variations
     patterns = [
         r'\brm\s+.*-[a-z]*r[a-z]*f',  # rm -rf, rm -fr, rm -Rf, etc.
@@ -26,12 +27,12 @@ def is_dangerous_rm_command(command):
         r'\brm\s+-r\s+.*-f',  # rm -r ... -f
         r'\brm\s+-f\s+.*-r',  # rm -f ... -r
     ]
-    
+
     # Check for dangerous patterns
     for pattern in patterns:
         if re.search(pattern, normalized):
             return True
-    
+
     # Pattern 2: Check for rm with recursive flag targeting dangerous paths
     dangerous_paths = [
         r'/',           # Root directory
@@ -44,12 +45,12 @@ def is_dangerous_rm_command(command):
         r'\.',          # Current directory
         r'\.\s*$',      # Current directory at end of command
     ]
-    
+
     if re.search(r'\brm\s+.*-[a-z]*r', normalized):  # If rm has recursive flag
         for path in dangerous_paths:
             if re.search(path, normalized):
                 return True
-    
+
     return False
 
 def is_env_file_access(tool_name, tool_input):
@@ -62,7 +63,7 @@ def is_env_file_access(tool_name, tool_input):
             file_path = tool_input.get('file_path', '')
             if '.env' in file_path and not file_path.endswith('.env.sample'):
                 return True
-        
+
         # Check bash commands for .env file access
         elif tool_name == 'Bash':
             command = tool_input.get('command', '')
@@ -75,41 +76,46 @@ def is_env_file_access(tool_name, tool_input):
                 r'cp\s+.*\.env\b(?!\.sample)',  # cp .env
                 r'mv\s+.*\.env\b(?!\.sample)',  # mv .env
             ]
-            
+
             for pattern in env_patterns:
                 if re.search(pattern, command):
                     return True
-    
+
     return False
 
 def main():
     try:
         # Read JSON input from stdin
-        input_data = json.load(sys.stdin)
-        
+        input_data = {
+            "timestamp": datetime.now().isoformat(),
+            **json.loads(sys.stdin.read())
+        }
+
         tool_name = input_data.get('tool_name', '')
         tool_input = input_data.get('tool_input', {})
-        
+
         # Check for .env file access (blocks access to sensitive environment files)
         if is_env_file_access(tool_name, tool_input):
             print("BLOCKED: Access to .env files containing sensitive data is prohibited", file=sys.stderr)
             print("Use .env.sample for template files instead", file=sys.stderr)
             sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
-        
+
         # Check for dangerous rm -rf commands
         if tool_name == 'Bash':
             command = tool_input.get('command', '')
-            
+
             # Block rm -rf commands with comprehensive pattern matching
             if is_dangerous_rm_command(command):
                 print("BLOCKED: Dangerous rm command detected and prevented", file=sys.stderr)
                 sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
-        
-        # Ensure log directory exists
-        log_dir = Path.cwd() / 'logs'
-        log_dir.mkdir(parents=True, exist_ok=True)
+
+        # Extract session_id
+        session_id = input_data.get('session_id', 'unknown')
+
+        # Ensure session log directory exists
+        log_dir = ensure_session_log_dir(session_id)
         log_path = log_dir / 'pre_tool_use.json'
-        
+
         # Read existing log data or initialize empty list
         if log_path.exists():
             with open(log_path, 'r') as f:
@@ -119,15 +125,9 @@ def main():
                     log_data = []
         else:
             log_data = []
-        
-        # Add timestamp to input data
-        timestamped_data = {
-            "timestamp": datetime.now().isoformat(),
-            **input_data
-        }
-        
-        # Append new data with timestamp
-        log_data.append(timestamped_data)
+
+        # Append new data
+        log_data.append(input_data)
         
         # Write back to file with formatting
         with open(log_path, 'w') as f:

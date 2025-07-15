@@ -8,17 +8,23 @@ import os
 import sys
 from pathlib import Path
 from datetime import datetime
+from utils.constants import ensure_session_log_dir
 
 def main():
     try:
         # Read JSON input from stdin
-        input_data = json.load(sys.stdin)
-        
-        # Ensure log directory exists
-        log_dir = Path.cwd() / 'logs'
-        log_dir.mkdir(parents=True, exist_ok=True)
+        input_data = {
+            "timestamp": datetime.now().isoformat(),
+            **json.loads(sys.stdin.read())
+        }
+
+        # Extract session_id
+        session_id = input_data.get('session_id', 'unknown')
+
+        # Ensure session log directory exists
+        log_dir = ensure_session_log_dir(session_id)
         log_path = log_dir / 'post_tool_use.json'
-        
+
         # Read existing log data or initialize empty list
         if log_path.exists():
             with open(log_path, 'r') as f:
@@ -28,15 +34,9 @@ def main():
                     log_data = []
         else:
             log_data = []
-        
-        # Add timestamp to input data
-        timestamped_data = {
-            "timestamp": datetime.now().isoformat(),
-            **input_data
-        }
-        
-        # Append new data with timestamp
-        log_data.append(timestamped_data)
+
+        # Append new data
+        log_data.append(input_data)
         
         # Write back to file with formatting
         with open(log_path, 'w') as f:
