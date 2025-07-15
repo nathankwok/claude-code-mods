@@ -29,7 +29,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run .claude/hooks/pre_tool_use.py"
+            "command": "uv run hooks/pre_tool_use.py"
+          },
+          {
+            "type": "command",
+            "command": "uv run hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type PreToolUse --summarize"
           }
         ]
       }
@@ -41,6 +45,10 @@
           {
             "type": "command",
             "command": "uv run hooks/post_tool_use.py"
+          },
+          {
+            "type": "command",
+            "command": "uv run hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type PostToolUse --summarize"
           }
         ]
       }
@@ -51,7 +59,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run hooks/notification.py --notify"
+            "command": "uv run hooks/notification.py --notify "
+          },
+          {
+            "type": "command",
+            "command": "uv run hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type Notification --summarize"
           }
         ]
       }
@@ -63,6 +75,10 @@
           {
             "type": "command",
             "command": "uv run hooks/stop.py --chat"
+          },
+          {
+            "type": "command",
+            "command": "uv run hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type Stop --add-chat"
           }
         ]
       }
@@ -74,6 +90,21 @@
           {
             "type": "command",
             "command": "uv run hooks/subagent_stop.py"
+          },
+          {
+            "type": "command",
+            "command": "uv run hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type SubagentStop"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type PreCompact"
           }
         ]
       }
