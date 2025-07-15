@@ -65,7 +65,7 @@ def get_tts_script_path():
 def get_llm_completion_message():
     """
     Generate completion message using available LLM services.
-    Priority order: OpenAI > Anthropic > fallback to random message
+    Priority order: Azure OpenAI > OpenAI > Anthropic > fallback to random message
     
     Returns:
         str: Generated or fallback completion message
@@ -74,7 +74,24 @@ def get_llm_completion_message():
     script_dir = Path(__file__).parent
     llm_dir = script_dir / "utils" / "llm"
     
-    # Try OpenAI first (highest priority)
+    # Try Azure OpenAI first (highest priority)
+    if os.getenv('AZURE_OPENAI_API_KEY') and os.getenv('AZURE_OPENAI_ENDPOINT'):
+        azure_oai_script = llm_dir / "azure_oai.py"
+        if azure_oai_script.exists():
+            try:
+                result = subprocess.run([
+                    "uv", "run", str(azure_oai_script), "--completion"
+                ], 
+                capture_output=True,
+                text=True,
+                timeout=10
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    return result.stdout.strip()
+            except (subprocess.TimeoutExpired, subprocess.SubprocessError):
+                pass
+    
+    # Try OpenAI second
     if os.getenv('OPENAI_API_KEY'):
         oai_script = llm_dir / "oai.py"
         if oai_script.exists():
@@ -91,7 +108,7 @@ def get_llm_completion_message():
             except (subprocess.TimeoutExpired, subprocess.SubprocessError):
                 pass
     
-    # Try Anthropic second
+    # Try Anthropic third
     if os.getenv('ANTHROPIC_API_KEY'):
         anth_script = llm_dir / "anth.py"
         if anth_script.exists():
