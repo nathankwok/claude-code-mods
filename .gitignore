@@ -103,3 +103,5 @@ coverage/
 .cache/
 tmp/
 temp/
+
+.env
