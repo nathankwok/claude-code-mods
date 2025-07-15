@@ -4,7 +4,6 @@
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
   },
   "includeCoAuthoredBy": false,
-  "model": "sonnet",
   "permissions": {
     "allow": [
       "Bash(mkdir:*)",
@@ -22,6 +21,7 @@
     ],
     "deny": []
   },
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
