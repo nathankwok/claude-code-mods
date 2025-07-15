@@ -142,7 +142,7 @@ def main():
                     pass  # Fail silently
 
         # Announce subagent completion via TTS
-        announce_subagent_completion()
+        # announce_subagent_completion()
 
         sys.exit(0)
 

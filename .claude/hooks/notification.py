@@ -125,7 +125,7 @@ def main():
         # Announce notification via TTS only if --notify flag is set
         # Skip TTS for the generic "Claude is waiting for your input" message
         if args.notify and input_data.get('message') != 'Claude is waiting for your input':
-            announce_notification()
+            # announce_notification()
         
         sys.exit(0)
         

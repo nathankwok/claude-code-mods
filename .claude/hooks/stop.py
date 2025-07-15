@@ -221,7 +221,7 @@ def main():
                     pass  # Fail silently
 
         # Announce completion via TTS
-        announce_completion()
+        # announce_completion()
 
         sys.exit(0)
 
