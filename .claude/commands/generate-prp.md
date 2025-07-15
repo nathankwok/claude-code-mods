@@ -48,12 +48,8 @@ The AI agent only gets the context you are appending to the PRP and training dat
 
 ### Validation Gates (Must be Executable) eg for python
 ```bash
-# Syntax/Style
-ruff check --fix && mypy .
-
 # Unit Tests
 uv run pytest tests/ -v
-
 ```
 
 *** CRITICAL AFTER YOU ARE DONE RESEARCHING AND EXPLORING THE CODEBASE BEFORE YOU START WRITING THE PRP ***
