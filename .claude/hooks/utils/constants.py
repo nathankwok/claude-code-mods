@@ -10,6 +10,14 @@ Constants for Claude Code Hooks.
 import os
 from pathlib import Path
 
+
+try:
+    from dotenv import load_dotenv
+    env_path = Path.home() / ".claude" / ".env"
+    load_dotenv(env_path)
+except ImportError:
+    pass  # dotenv is optional
+
 # Base directory for all logs
 # Default is 'logs' in the current working directory
 LOG_BASE_DIR = os.environ.get("CLAUDE_HOOKS_LOG_DIR", "logs")
