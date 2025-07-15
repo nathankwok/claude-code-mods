@@ -13,6 +13,7 @@ import sys
 import subprocess
 import random
 from pathlib import Path
+from datetime import datetime
 
 try:
     from dotenv import load_dotenv
@@ -108,8 +109,14 @@ def main():
         else:
             log_data = []
         
-        # Append new data
-        log_data.append(input_data)
+        # Add timestamp to input data
+        timestamped_data = {
+            "timestamp": datetime.now().isoformat(),
+            **input_data
+        }
+        
+        # Append new data with timestamp
+        log_data.append(timestamped_data)
         
         # Write back to file with formatting
         with open(log_file, 'w') as f:
