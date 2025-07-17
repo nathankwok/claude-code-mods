@@ -23,6 +23,17 @@
   },
   "model": "sonnet",
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run ~/.claude/hooks/send_event.py --source-app cc-hook-multi-agent-obvs --event-type UserPromptSubmit --summarize"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "",
