@@ -10,8 +10,8 @@ Implement a feature using using the PRD file.
    - Read the specified PRD file
    - Understand all context and requirements
    - Follow all instructions in the PRD and extend the research if needed
-   - Ensure you have all needed context to implement the PRD fully
-   - Do more web searches and codebase exploration as needed
+   - Ensure you have all needed context to implement the PRD fully. Make sure you use either the ref mcp server (preferable) or the context7 mcp server (fallback) for getting documentation on APIs, libraries, services, and code functions.
+   - Do more web searches and codebase exploration as needed. If doing a web search, prefer to use the gemini cli web search tool before falling back to claude's web search tool.
 
 2. **ULTRATHINK**
    - Think hard before you execute the plan. Create a comprehensive plan addressing all requirements.
