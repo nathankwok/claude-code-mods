@@ -27,7 +27,7 @@ The AI agent only gets the context you are appending to the PRD and training dat
 ## PRD Generation
 
 ### Critical Context to Include and pass to the AI agent as part of the PRD
-- **Documentation**: URLs with specific sections
+- **Documentation**: URLs with specific sections. Make sure you use either the ref mcp server (preferable) or the context7 mcp server (fallback) for getting documentation on APIs, libraries, services, and code functions.
 - **Code Examples**: Real snippets from codebase
 - **Gotchas**: Library quirks, version issues
 - **Patterns**: Existing approaches to follow
