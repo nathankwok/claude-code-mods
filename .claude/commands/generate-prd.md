@@ -15,8 +15,8 @@ The AI agent only gets the context you are appending to the PRD and training dat
    - Check test patterns for validation approach
 
 2. **External Research**
-   - Search for similar features/patterns online
-   - Library documentation (include specific URLs)
+   - Search for similar features/patterns online. If doing a web search, prefer to use the gemini cli web search tool before falling back to claude's web search tool.
+   - Library documentation (include specific URLs). Make sure you use either the ref mcp server (preferable) or the context7 mcp server (fallback) for getting documentation on APIs, libraries, services, and code functions.
    - Implementation examples (GitHub/StackOverflow/blogs)
    - Best practices and common pitfalls
 
