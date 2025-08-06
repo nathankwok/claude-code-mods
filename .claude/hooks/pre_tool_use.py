@@ -61,7 +61,7 @@ def is_env_file_access(tool_name, tool_input):
         # Check file paths for file-based tools
         if tool_name in ['Read', 'Edit', 'MultiEdit', 'Write']:
             file_path = tool_input.get('file_path', '')
-            if '.env' in file_path and not file_path.endswith('.env.sample'):
+            if '.env' in file_path and not ( file_path.endswith('.env.sample') or file_path.endswith('.env.template') ):
                 return True
 
         # Check bash commands for .env file access
