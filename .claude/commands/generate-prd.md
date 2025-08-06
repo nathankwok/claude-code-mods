@@ -36,7 +36,9 @@ The AI agent only gets the context you are appending to the PRD and training dat
 - Start with pseudocode showing approach
 - Reference real files for patterns
 - Include error handling strategy
-- list tasks to be completed to fullfill the PRD in the order they should be completed
+- When writing a PRD for implementing a feature, break the implementation into phases with tasks within each phase.
+- List the phases and tasks to be completed to fullfill the PRP in the order they should be completed.
+- Consider how each phase would affect or depend on the previous phase.
 
 ## Anti-Patterns to Avoid
 - Don't create new patterns when existing ones work

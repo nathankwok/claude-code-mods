@@ -9,6 +9,10 @@
 - Include a .env.example, README with instructions for setup and installation
 - Include the project structure in the README
 - Use python_dotenv and load_env() for environment variables
+- When writing a PRD for implementing a feature, break the implementation into phases with tasks within each phase. 
+  - List the phases and tasks to be completed to fullfill the PRP in the order they should be completed. 
+  - Consider how each phase would affect or depend on the previous phase.
+
 
 
 - If doing a web search or fetching a document on the web, prefer to use the gemini cli mcp web search tool before falling back to Claude's webfetch tool.
