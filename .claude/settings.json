@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 120,
   "env": {
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
@@ -23,7 +24,26 @@
       "mcp__gemini-cli__ask-gemini",
       "mcp__clear-thought__sequentialthinking",
       "mcp__grep__searchGitHub",
-      "WebFetch(domain:*)"
+      "WebFetch(domain:*)",
+      "mcp__n8n-mcp__tools_documentation",
+      "mcp__n8n-mcp__search_nodes",
+      "mcp__n8n-mcp__get_node_essentials",
+      "mcp__n8n-mcp__search_node_properties",
+      "mcp__n8n-mcp__validate_node_minimal",
+      "mcp__n8n-mcp__validate_workflow",
+      "mcp__n8n-mcp__n8n_health_check",
+      "mcp__n8n-mcp__n8n_create_workflow",
+      "mcp__n8n-mcp__n8n_get_workflow",
+      "mcp__n8n-mcp__n8n_get_workflow_details",
+      "mcp__n8n-mcp__n8n_diagnostic",
+      "mcp__n8n-mcp__n8n_list_workflows",
+      "mcp__n8n-mcp__get_node_documentation",
+      "mcp__n8n-mcp__n8n_validate_workflow",
+      "mcp__n8n-mcp__n8n_update_partial_workflow",
+      "mcp__n8n-mcp__n8n_get_workflow_structure",
+      "mcp__n8n-mcp__validate_workflow_connections",
+      "mcp__n8n-mcp__n8n_list_executions",
+      "mcp__n8n-mcp__validate_node_operation"
     ],
     "deny": []
   },
@@ -117,5 +137,9 @@
       }
     ]
   },
-  "$schema": "https://json.schemastore.org/claude-code-settings.json"
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
+  }
 }
