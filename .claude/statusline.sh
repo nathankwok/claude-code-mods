@@ -77,10 +77,17 @@ session_color() {
   else                          SCLR='1;32'; fi
   if [ "$use_color" -eq 1 ]; then printf '\033[%sm' "$SCLR"; fi
 }
+context_color() { 
+  if   (( context_pct >= 85 )); then CCLR='1;31'  # Red for high usage
+  elif (( context_pct >= 70 )); then CCLR='1;33'  # Yellow for medium usage
+  else                               CCLR='1;32'; fi  # Green for low usage
+  if [ "$use_color" -eq 1 ]; then printf '\033[%sm' "$CCLR"; fi
+}
 
 # ---- ccusage integration ----
 session_txt=""; session_pct=0; session_bar=""
 cost_usd=""; cost_per_hour=""; tpm=""; tot_tokens=""
+context_txt=""; context_pct=0; context_bar=""
 
 if command -v jq >/dev/null 2>&1; then
   blocks_output=$(npx ccusage@latest blocks --json 2>/dev/null || ccusage blocks --json 2>/dev/null)
@@ -106,6 +113,34 @@ if command -v jq >/dev/null 2>&1; then
         session_txt="$(printf '%dh %dm until reset at %s (%d%%)' "$rh" "$rm" "$end_hm" "$session_pct")"
         session_bar=$(progress_bar "$session_pct" 10)
       fi
+    fi
+  fi
+fi
+
+# ---- context usage calculation ----
+if command -v jq >/dev/null 2>&1; then
+  # Try ccusage statusline first (if available)
+  context_statusline=$(timeout 3s npx ccusage@latest statusline --offline 2>/dev/null || timeout 3s ccusage statusline --offline 2>/dev/null || echo "")
+  
+  if [ -n "$context_statusline" ]; then
+    # Parse ccusage statusline output if available
+    context_txt="$context_statusline"
+  else
+    # Fallback: estimate context usage from session data
+    # Approximate context limit for Claude models (adjust as needed)
+    model_context_limit=200000  # 200k tokens as common limit
+    
+    if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
+      # Estimate current context as recent portion of total tokens
+      # This is a rough approximation - real context would need conversation tracking
+      estimated_context=$(( tot_tokens / 10 ))  # Rough estimate: ~10% of session tokens
+      if [ "$estimated_context" -gt "$model_context_limit" ]; then
+        estimated_context=$model_context_limit
+      fi
+      
+      context_pct=$(( estimated_context * 100 / model_context_limit ))
+      context_bar=$(progress_bar "$context_pct" 10)
+      context_txt="$(printf '%dk/%dk (%d%%)' $((estimated_context/1000)) $((model_context_limit/1000)) "$context_pct")"
     fi
   fi
 fi
@@ -139,5 +174,13 @@ if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
     printf '  📊 %s%s tok (%.0f tpm)%s' "$(usage_color)" "$tot_tokens" "$tpm" "$(rst)"
   else
     printf '  📊 %s%s tok%s' "$(usage_color)" "$tot_tokens" "$(rst)"
+  fi
+fi
+# context usage progress bar
+if [ -n "$context_txt" ]; then
+  if [ -n "$context_bar" ]; then
+    printf '  🧠 %s%s%s %s[%s]%s' "$(context_color)" "$context_txt" "$(rst)" "$(context_color)" "$context_bar" "$(rst)"
+  else
+    printf '  🧠 %s%s%s' "$(context_color)" "$context_txt" "$(rst)"
   fi
 fi
