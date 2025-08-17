@@ -119,7 +119,7 @@ fi
 # ---- context usage calculation ----
 if command -v jq >/dev/null 2>&1; then
   # Try ccusage statusline first (if available)
-  context_statusline=$(timeout 3s npx ccusage@latest statusline --offline 2>/dev/null || timeout 3s ccusage statusline --offline 2>/dev/null || echo "")
+  context_statusline=$(timeout 3s npx ccusage@latest statusline --offline 2>/dev/null | grep -v "Error\|error\|failed\|No input" || timeout 3s ccusage statusline --offline 2>/dev/null | grep -v "Error\|error\|failed\|No input" || echo "")
   
   if [ -n "$context_statusline" ]; then
     # Parse ccusage statusline output if available
