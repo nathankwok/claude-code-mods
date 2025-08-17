@@ -86,7 +86,7 @@ context_color() {
 
 # ---- ccusage integration ----
 session_txt=""; session_pct=0; session_bar=""
-cost_usd=""; cost_per_hour=""; tpm=""; tot_tokens=""
+cost_usd=""; cost_per_hour=""; tpm="";
 context_txt=""; context_pct=0; context_bar=""
 
 if command -v jq >/dev/null 2>&1; then
@@ -96,8 +96,7 @@ if command -v jq >/dev/null 2>&1; then
     if [ -n "$active_block" ]; then
       cost_usd=$(echo "$active_block" | jq -r '.costUSD // empty')
       cost_per_hour=$(echo "$active_block" | jq -r '.burnRate.costPerHour // empty')
-      tot_tokens=$(echo "$active_block" | jq -r '.totalTokens // empty')
-      
+
       # Session time calculation
       reset_time_str=$(echo "$active_block" | jq -r '.usageLimitResetTime // .endTime // empty')
       start_time_str=$(echo "$active_block" | jq -r '.startTime // empty')
@@ -130,18 +129,6 @@ if command -v jq >/dev/null 2>&1; then
     # Approximate context limit for Claude models (adjust as needed)
     model_context_limit=200000  # 200k tokens as common limit
     
-    if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
-      # Estimate current context as recent portion of total tokens
-      # This is a rough approximation - real context would need conversation tracking
-      estimated_context=$(( tot_tokens / 10 ))  # Rough estimate: ~10% of session tokens
-      if [ "$estimated_context" -gt "$model_context_limit" ]; then
-        estimated_context=$model_context_limit
-      fi
-      
-      context_pct=$(( estimated_context * 100 / model_context_limit ))
-      context_bar=$(progress_bar "$context_pct" 10)
-      context_txt="$(printf '%dk/%dk (%d%%)' $((estimated_context/1000)) $((model_context_limit/1000)) "$context_pct")"
-    fi
   fi
 fi
 
@@ -166,14 +153,6 @@ if [ -n "$cost_usd" ] && [[ "$cost_usd" =~ ^[0-9.]+$ ]]; then
     printf '  💵 %s$%.2f ($%.2f/h)%s' "$(cost_color)" "$cost_usd" "$cost_per_hour" "$(rst)"
   else
     printf '  💵 %s$%.2f%s' "$(cost_color)" "$cost_usd" "$(rst)"
-  fi
-fi
-# tokens
-if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
-  if [ -n "$tpm" ] && [[ "$tpm" =~ ^[0-9.]+$ ]] && false; then
-    printf '  📊 %s%s tok (%.0f tpm)%s' "$(usage_color)" "$tot_tokens" "$tpm" "$(rst)"
-  else
-    printf '  📊 %s%s tok%s' "$(usage_color)" "$tot_tokens" "$(rst)"
   fi
 fi
 # context usage progress bar
