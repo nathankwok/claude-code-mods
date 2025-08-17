@@ -1,13 +1,22 @@
 {
   "mcpServers": {
-    "ElevenLabs": {
-      "command": "uvx",
+    "context7": {
+      "command": "npx",
       "args": [
-        "elevenlabs-mcp"
-      ],
-      "env": {
-        "ELEVENLABS_API_KEY": "<sample-api-key>"
-      }
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    },
+    "grep": {
+      "type": "http",
+      "url": "https://mcp.grep.app"
+    },
+    "clear-thought": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@waldzellai/clear-thought"
+      ]
     }
   }
 }
