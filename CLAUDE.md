@@ -10,7 +10,7 @@
 - Include the project structure in the README
 - Use python_dotenv and load_env() for environment variables
 - When writing a PRD for implementing a feature, break the implementation into phases with tasks within each phase. 
-  - List the phases and tasks to be completed to fullfill the PRP in the order they should be completed. 
+  - List the phases and tasks to be completed to fulfill the PRD in the order they should be completed. 
   - Consider how each phase would affect or depend on the previous phase.
 
 
