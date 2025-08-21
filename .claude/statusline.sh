@@ -118,52 +118,52 @@ if command -v jq >/dev/null 2>&1; then
 fi
 
 # ---- context usage calculation ----
-if command -v jq >/dev/null 2>&1; then
-  # Try ccusage statusline first (if available) - pass the input JSON
-  context_statusline=$(echo "$input" | timeout 3s npx ccusage@latest statusline --offline 2>/dev/null || echo "$input" | timeout 3s ccusage statusline --offline 2>/dev/null || echo "")
-  
-  if [ -n "$context_statusline" ] && ! echo "$context_statusline" | grep -q "❌\|Error\|error\|No input"; then
-    # Parse ccusage statusline output to extract context usage (🧠 portion)
-    # Expected format: "🤖 Model | 💰 costs | 🔥 rate | 🧠 context"
-    context_portion=$(echo "$context_statusline" | grep -o '🧠[^|]*' | sed 's/🧠 *//' | xargs)
-    if [ -n "$context_portion" ] && [ "$context_portion" != "N/A" ]; then
-      context_txt="$context_portion"
-      # Extract percentage if available for color coding
-      if echo "$context_portion" | grep -q '%'; then
-        context_pct=$(echo "$context_portion" | grep -o '[0-9]\+%' | sed 's/%//')
-        if [[ "$context_pct" =~ ^[0-9]+$ ]]; then
-          context_bar=$(progress_bar "$context_pct" 10)
-        fi
-      fi
-    fi
-  fi
-  
-  # Fallback: estimate context usage from session data if ccusage didn't provide useful data
-  if [ -z "$context_txt" ]; then
-    # Approximate context limit for Claude models (adjust as needed)
-    model_context_limit=200000  # 200k tokens as common limit
-    
-    if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
-      # Estimate current context usage
-      # Since we don't have real conversation tracking, make a reasonable estimate
-      # For very large sessions, assume we're using a significant portion but not all
-      if [ "$tot_tokens" -gt "$model_context_limit" ]; then
-        # For large sessions, estimate 60-80% context usage
-        estimated_context=$(( model_context_limit * 3 / 4 ))  # 75% of limit
-      elif [ "$tot_tokens" -gt $(( model_context_limit / 2 )) ]; then
-        # For medium sessions, estimate proportional usage
-        estimated_context=$(( tot_tokens * 2 / 3 ))
-      else
-        # For smaller sessions, use actual token count as approximation
-        estimated_context=$tot_tokens
-      fi
-      
-      context_pct=$(( estimated_context * 100 / model_context_limit ))
-      context_bar=$(progress_bar "$context_pct" 10)
-      context_txt="$(printf '%dk/%dk (%d%%)' $((estimated_context/1000)) $((model_context_limit/1000)) "$context_pct")"
-    fi
-  fi
-fi
+#if command -v jq >/dev/null 2>&1; then
+#  # Try ccusage statusline first (if available) - pass the input JSON
+#  context_statusline=$(echo "$input" | timeout 3s npx ccusage@latest statusline --offline 2>/dev/null || echo "$input" | timeout 3s ccusage statusline --offline 2>/dev/null || echo "")
+#
+#  if [ -n "$context_statusline" ] && ! echo "$context_statusline" | grep -q "❌\|Error\|error\|No input"; then
+#    # Parse ccusage statusline output to extract context usage (🧠 portion)
+#    # Expected format: "🤖 Model | 💰 costs | 🔥 rate | 🧠 context"
+#    context_portion=$(echo "$context_statusline" | grep -o '🧠[^|]*' | sed 's/🧠 *//' | xargs)
+#    if [ -n "$context_portion" ] && [ "$context_portion" != "N/A" ]; then
+#      context_txt="$context_portion"
+#      # Extract percentage if available for color coding
+#      if echo "$context_portion" | grep -q '%'; then
+#        context_pct=$(echo "$context_portion" | grep -o '[0-9]\+%' | sed 's/%//')
+#        if [[ "$context_pct" =~ ^[0-9]+$ ]]; then
+#          context_bar=$(progress_bar "$context_pct" 10)
+#        fi
+#      fi
+#    fi
+#  fi
+#
+#  # Fallback: estimate context usage from session data if ccusage didn't provide useful data
+#  if [ -z "$context_txt" ]; then
+#    # Approximate context limit for Claude models (adjust as needed)
+#    model_context_limit=200000  # 200k tokens as common limit
+#
+#    if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
+#      # Estimate current context usage
+#      # Since we don't have real conversation tracking, make a reasonable estimate
+#      # For very large sessions, assume we're using a significant portion but not all
+#      if [ "$tot_tokens" -gt "$model_context_limit" ]; then
+#        # For large sessions, estimate 60-80% context usage
+#        estimated_context=$(( model_context_limit * 3 / 4 ))  # 75% of limit
+#      elif [ "$tot_tokens" -gt $(( model_context_limit / 2 )) ]; then
+#        # For medium sessions, estimate proportional usage
+#        estimated_context=$(( tot_tokens * 2 / 3 ))
+#      else
+#        # For smaller sessions, use actual token count as approximation
+#        estimated_context=$tot_tokens
+#      fi
+#
+#      context_pct=$(( estimated_context * 100 / model_context_limit ))
+#      context_bar=$(progress_bar "$context_pct" 10)
+#      context_txt="$(printf '%dk/%dk (%d%%)' $((estimated_context/1000)) $((model_context_limit/1000)) "$context_pct")"
+#    fi
+#  fi
+#fi
 
 # ---- render statusline ----
 printf '📁 %s%s%s' "$(dir_color)" "$current_dir" "$(rst)"
