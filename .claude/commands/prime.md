@@ -14,7 +14,7 @@ This command loads essential context for a new agent session by examining the co
 
 ## Context
 - Codebase structure git accessible: !`git ls-files`
-- Codebase structure all: !`eza . --tree`
+- Codebase structure all: !`tree`
 - Project README: @README.md
 - Documentation: 
   - @ai_docs/cc_hooks_docs.md
