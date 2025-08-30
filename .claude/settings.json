@@ -102,6 +102,10 @@
           {
             "type": "command",
             "command": "uv run ~/.claude/hooks/subagent_stop.py"
+          },
+          {
+            "type": "command",
+            "command": "uv run ~/.claude/hooks/prd_review_trigger.py"
           }
         ]
       }
