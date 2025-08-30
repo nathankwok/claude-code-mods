@@ -47,30 +47,108 @@ After completing all tasks in a phase:
   - Any notes about decisions made during implementation
 
 #### 2.4 Automatic Code Review Integration
-- Use Task tool to invoke the code-review-agent with structured context:
-  ```
-  Phase Review Request:
-  - PRD File: [path to PRD]
-  - Phase: [phase name and number]
-  - Phase Requirements: [detailed phase requirements]
-  - Changed Files: [list of modified/created files]
-  - Implementation Summary: [what was implemented and why]
-  ```
+- Use Task tool to invoke the code-review-agent with the exact structured format required by PRD specification:
 
-#### 2.5 Process Review Feedback
+**Phase Completion Message to Review Agent:**
+```
+Please review the completed phase implementation:
+
+Phase Completion Context:
+{
+  "phase": "[phase_name_from_prd]",
+  "prd_file": "[absolute_path_to_prd_file]",
+  "changed_files": ["path/to/file1.ext", "path/to/file2.ext"],
+  "implementation_notes": "[detailed summary of what was implemented, why, and how it fulfills the phase requirements]"
+}
+
+Phase Requirements from PRD:
+[Copy the specific phase requirements from the PRD that were implemented]
+
+Please provide your review using the standardized format specified in your agent configuration.
+```
+
+#### 2.5 Process Review Feedback with Iteration Control
 - Receive structured feedback from code-review-agent
-- If status is "approved": proceed to next phase
-- If status is "needs-changes": 
-  - Analyze feedback and issues identified
-  - Implement necessary corrections
-  - Re-trigger review (max 3 iterations per phase)
-  - If max iterations reached, escalate to user
+- Load current iteration state from `.claude/state/prd-execution-state.json`
+- Process feedback based on status:
 
-### 3. Multi-Phase Coordination
-- Maintain implementation state across phases
-- Ensure phase dependencies are properly handled
-- Track overall progress and completion status
-- Handle interruptions and resume capability
+**If status is "approved":**
+- Reset iteration counter for current phase
+- Mark phase as completed in state file
+- Update TodoWrite with phase completion
+- Proceed to next phase
+
+**If status is "needs-changes" or "requires-major-revision":**
+- Increment iteration counter for current phase
+- Check if max iterations (default: 3) exceeded:
+  - If within limit: 
+    - Analyze feedback and issues identified
+    - Implement necessary corrections based on specific action items
+    - Update state file with iteration details
+    - Re-trigger review with updated implementation
+  - If max iterations exceeded:
+    - Log escalation reason in state file
+    - Create comprehensive escalation report
+    - Escalate to user with full context and recommendations
+
+**Project-Aware State Management Requirements:**
+
+#### Project Detection and State File Path Resolution:
+1. **Determine Project Context:**
+   - Extract project name from PRD file path (e.g., `/path/to/project/prds/feature.md` → `project`)
+   - If PRD path doesn't contain clear project name, use current working directory name
+   - Sanitize project name for filesystem use (remove special characters, spaces)
+
+2. **Project-Specific State File Paths:**
+   - Create project directory: `.claude/state/projects/[project-name]/`
+   - Use state file: `.claude/state/projects/[project-name]/prd-execution-state.json`
+   - Create project metadata file: `.claude/state/projects/[project-name]/project-info.json`
+
+3. **State Management Operations:**
+   - Always resolve correct project-specific state file before any operation
+   - Create project state directory if it doesn't exist
+   - Initialize project metadata on first use (project name, creation time, PRD file paths)
+   - Track: current PRD, current phase, iteration count, review history, escalation events
+   - Maintain audit trail of all review decisions and iterations per project
+   - Enable resume capability if session interrupted
+
+### 3. Multi-Phase Coordination and Project State Management
+
+#### Project Initialization:
+- Before starting any PRD execution:
+  - Detect project name from PRD file path or working directory
+  - Resolve project-specific state file path: `.claude/state/projects/[project-name]/prd-execution-state.json`
+  - Create project state directory if it doesn't exist
+  - Initialize project metadata file with:
+    ```json
+    {
+      "project_name": "project-name",
+      "created_at": "timestamp",
+      "prd_files": ["list of PRD files executed in this project"],
+      "last_activity": "timestamp"
+    }
+    ```
+  - Initialize execution session in project state file with unique session ID
+  - Record PRD path, total phases, start timestamp
+
+#### Per-Phase Operations:
+- For each phase:
+  - Load project-specific state file
+  - Update current phase in project state
+  - Track implementation progress and review outcomes
+  - Maintain dependency chain validation
+  - Save updated state back to project-specific file
+
+#### Session Management:
+- Handle session interruption/resume:
+  - Check project-specific state file on startup for incomplete executions
+  - Offer to resume from last completed phase within the detected project
+  - Validate system state before resuming
+  - Support multiple concurrent project executions (different projects, different state files)
+
+#### Example State File Paths:
+- **Project "claude-code-mods"**: `.claude/state/projects/claude-code-mods/prd-execution-state.json`
+- **Project "analytics-pipeline"**: `.claude/state/projects/analytics-pipeline/prd-execution-state.json`
 
 ### 4. Final Validation
 After all phases completed and approved:
