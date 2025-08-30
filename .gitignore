@@ -110,3 +110,4 @@ output
 outputs/
 
 extras/
+.claude.json
