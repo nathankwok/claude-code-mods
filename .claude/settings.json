@@ -43,7 +43,9 @@
       "mcp__n8n-mcp__n8n_get_workflow_structure",
       "mcp__n8n-mcp__validate_workflow_connections",
       "mcp__n8n-mcp__n8n_list_executions",
-      "mcp__n8n-mcp__validate_node_operation"
+      "mcp__n8n-mcp__validate_node_operation",
+      "mcp__codex__codex",
+      "mcp__codex__codex-reply"
     ],
     "deny": []
   },
