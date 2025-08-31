@@ -47,25 +47,38 @@ After completing all tasks in a phase:
   - Any notes about decisions made during implementation
 
 #### 2.4 Automatic Code Review Integration
-- Use Task tool to invoke the code-review-agent with the exact structured format required by PRD specification:
+- Use Task tool to invoke the code-review-agent with the unified structured format:
 
 **Phase Completion Message to Review Agent:**
 ```
-Please review the completed phase implementation:
+Phase Review Request:
 
-Phase Completion Context:
 {
-  "phase": "[phase_name_from_prd]",
-  "prd_file": "[absolute_path_to_prd_file]",
-  "changed_files": ["path/to/file1.ext", "path/to/file2.ext"],
-  "implementation_notes": "[detailed summary of what was implemented, why, and how it fulfills the phase requirements]"
+    "phase": "[exact_phase_name_from_prd]",
+    "prd_file": "[absolute_path_to_prd_file]",
+    "changed_files": ["path/to/file1.ext", "path/to/file2.ext"],
+    "implementation_notes": "[detailed summary of what was implemented, why, and how it fulfills the phase requirements]",
+    "review_trigger": "automated",
+    "phase_requirements": "[extract and copy the specific phase requirements text from the PRD]",
+    "success_criteria": "[extract specific acceptance criteria for this phase from PRD]",
+    "context_metadata": {
+      "session_id": "[generate_unique_session_id]",
+      "iteration_count": 1,
+      "previous_feedback": "[if iteration > 1, include summary of prior review feedback]"
+    }
 }
 
-Phase Requirements from PRD:
-[Copy the specific phase requirements from the PRD that were implemented]
-
-Please provide your review using the standardized format specified in your agent configuration.
+Please analyze this implementation against the phase requirements and provide your standardized review response.
 ```
+
+**Critical Requirements:**
+- Extract the exact phase name as it appears in the PRD
+- Include the full text of phase requirements from PRD in "phase_requirements" field
+- Extract and include specific success criteria/acceptance criteria
+- Set "review_trigger" to "automated" to indicate this is from implementation agent
+- Generate unique session_id for tracking (use timestamp or UUID)
+- Track iteration_count from project state file for feedback loops
+- Include previous_feedback if this is a re-review (iteration > 1)
 
 #### 2.5 Process Review Feedback with Iteration Control
 - Receive structured feedback from code-review-agent
