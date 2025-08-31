@@ -104,17 +104,9 @@ Create an automated code review flow where a code implementation agent writes co
 
 ### Phase 5: Integration Configuration
 
-#### Task 5.1: Settings Update
-- Ensure Codex MCP permissions are properly configured
-- Add any new tool permissions needed for agents
-- Configure review thresholds and iteration limits
-
-#### Task 5.2: Session State Management
-**File:** `.claude/state/prd-execution-state.json`
-- Track current PRD being executed
-- Current phase and iteration count
-- Review history and decisions
-- Allow resume from interruption
+#### Task 5.1: Test agents and validate input and output responses between agents
+- Test the code review agent that would use the codex mcp server using an example input with the review context input format and validate the response format from the codex mcp matches what is expected in order for the implementation agent to have all context needed
+- Review thresholds and iteration limits
 
 ## Technical Implementation Details
 
