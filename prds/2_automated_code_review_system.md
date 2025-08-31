@@ -1,7 +1,7 @@
 # PRD: Automated Code Review System
 
 ## Feature Overview
-Create an automated code review flow where a code implementation agent writes code for PRD phases, and a code review agent automatically reviews the changes to ensure accuracy to the PRD requirements. The system will use the Codex MCP server for Azure model access and implement an iterative feedback loop.
+Create an automated code review flow where a code implementation agent writes code for PRD phases, and a code review agent automatically reviews the changes to ensure accuracy to the PRD requirements. The system will use the Codex MCP server for external model access and implement an iterative feedback loop.
 
 ## Implementation Phases
 
@@ -22,12 +22,12 @@ Create an automated code review flow where a code implementation agent writes co
 
 #### Task 1.2: Code Review Agent  
 **File:** `.claude/agents/code-review-agent.md`
-- **Purpose:** Reviews code changes against PRD requirements using Azure models via Codex
+- **Purpose:** Reviews code changes against PRD requirements using external models via Codex
 - **Tools:** Read, Grep, Glob, mcp__codex__codex, mcp__codex__codex-reply, Write
 - **Model:** opus (better for analysis and review)
 - **Key Features:**
   - Receives PRD phase requirements and changed files list
-  - Uses Codex MCP to leverage Azure models for code review
+  - Uses Codex MCP to leverage external models for code review
   - Analyzes code changes for:
     - Correctness according to PRD requirements
     - Code quality and best practices
@@ -98,7 +98,7 @@ Create an automated code review flow where a code implementation agent writes co
 - Include review status in progress reporting
 
 #### Task 4.2: Manual Review Command
-**File:** `.claude/commands/review-phase.md`
+**File:** `.claude/commands/review-prd-phase.md`
 - Allow manual triggering of code review for specific phase
 - Useful for debugging and manual intervention
 
@@ -123,7 +123,7 @@ Create an automated code review flow where a code implementation agent writes co
 
 ### Code Review Agent Prompt Structure:
 1. Receive phase requirements and changes
-2. Use Codex to analyze code with Azure models
+2. Use Codex to analyze code with external models
 3. Check against PRD requirements
 4. Evaluate code quality
 5. Generate structured feedback
@@ -144,7 +144,7 @@ Create an automated code review flow where a code implementation agent writes co
 
 ## Success Criteria:
 1. Implementation agent can execute PRD phases with automatic review gates
-2. Review agent provides consistent, actionable feedback using Azure models via Codex
+2. Review agent provides consistent, actionable feedback using external models via Codex
 3. Feedback loop successfully drives code improvements
 4. System handles iteration limits and escalation appropriately
 5. All changes are tracked and auditable
