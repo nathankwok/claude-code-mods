@@ -100,9 +100,18 @@ This approach ensures your hooks remain functional across different environments
   - `utils/` - Intelligent TTS and LLM utility scripts
     - `tts/` - Text-to-speech providers (ElevenLabs, OpenAI, pyttsx3)
     - `llm/` - Language model integrations (OpenAI, Anthropic)
+  - `scripts/bitbucket/` - Bitbucket API integration scripts
+    - `bitbucket_utils.py` - Core utilities with authentication, caching, and retry logic
+    - `bitbucket_pr_api.py` - PR creation workflow with branch management
+    - `pr_status_api.py` - PR status monitoring and review tracking
+    - `jira_code_review.py` - Jira code review ticket preparation
 - `.claude/commands/` - Custom slash commands for streamlined workflows
   - `bitbucket-pr.md` - Automated Bitbucket PR creation with Jira code review ticket integration
+  - `create-code-review-ticket.md` - Standalone Jira code review ticket creation
   - `pr-status.md` - Check PR status, reviews, comments, and linked Jira tickets
+  - `bitbucket-pr-api.md` - Hybrid PR creation using direct API
+  - `pr-status-api.md` - Hybrid PR status monitoring
+  - `jira-code-review.md` - Hybrid Jira ticket creation for existing PRs
 - `logs/` - JSON logs of all hook executions
   - `user_prompt_submit.json` - User prompt submissions with validation
   - `pre_tool_use.json` - Tool use events with security blocking
@@ -126,6 +135,8 @@ Hooks provide deterministic control over Claude Code behavior without relying on
 - Automatic transcript conversion  
 - Permission-based tool access control
 - Error handling in hook execution
+- **Automated Bitbucket workflows** - Streamlined PR creation with proper branch naming
+- **Code review ticket integration** - Automated ticket generation for production branches
 
 Run any Claude Code command to see hooks in action via the `logs/` files.
 
@@ -150,6 +161,21 @@ Run any Claude Code command to see hooks in action via the `logs/` files.
   - Description: Link to PR
 - Comprehensive status reporting with PR and Jira ticket URLs
 
+#### `/create-code-review-ticket` - Standalone Jira Ticket Creation
+```bash
+# Usage examples:
+/create-code-review-ticket https://bitbucket.org/workspace/repo/pull-requests/123
+/create-code-review-ticket https://bitbucket.org/workspace/repo/pull-requests/123 development-456 --jira-project PROJ
+/create-code-review-ticket https://bitbucket.org/workspace/repo/pull-requests/123 --assignee john.doe@company.com
+```
+
+**Features:**
+- Create Jira code review tickets for existing PRs
+- Follows exact ticket format specifications
+- Auto-detects repository and branch information
+- Optional assignee and project specification
+- Error handling with manual creation fallback
+
 #### `/pr-status` - Check Pull Request Status with Jira Integration
 ```bash
 # Usage examples:
@@ -166,6 +192,77 @@ Run any Claude Code command to see hooks in action via the `logs/` files.
 - **🎫 Jira ticket integration** - Shows linked code review tickets
 - Branch relationship detection
 - Formatted status output with actionable insights
+
+### New Hybrid API Commands (Phase 3-4 Implementation)
+
+These commands use the Bitbucket API directly (via Python scripts) while maintaining Atlassian MCP server integration for Jira operations, providing better performance and reliability.
+
+#### `/bitbucket-pr-api` - Enhanced PR Creation with Direct API
+```bash
+# Usage examples:
+/bitbucket-pr-api development 123 @reviewer1,@reviewer2
+/bitbucket-pr-api main 456 --draft --title "Custom Title"
+/bitbucket-pr-api release 789 --jira-project PROJ
+```
+
+**Features:**
+- **Direct Bitbucket API integration** - No MCP server dependency for Bitbucket
+- **API token priority** - Prefers API tokens over app passwords
+- Automatic branch creation and management
+- Custom PR titles and draft PR support
+- **Hybrid Jira integration** - Uses MCP for code review tickets on production branches
+
+#### `/pr-status-api` - Enhanced PR Status Monitoring
+```bash
+# Usage examples:
+/pr-status-api                    # List all open PRs
+/pr-status-api 123                # Check specific PR
+/pr-status-api 123 --comments     # Include comments
+/pr-status-api --jira             # Search for linked Jira tickets
+/pr-status-api --all              # Show all PR states
+```
+
+**Features:**
+- **Direct API access** - Faster response times
+- Comprehensive PR listing with review status
+- Detailed PR view with participant information
+- Comment retrieval and formatting
+- **Optional Jira search** - Uses MCP to find linked tickets
+- Multiple PR state filtering
+
+#### `/jira-code-review` - Standalone Code Review Ticket Creation
+```bash
+# Usage examples:
+/jira-code-review https://bitbucket.org/workspace/repo/pull-requests/123
+/jira-code-review <pr-url> --project PROJ --assignee john.doe
+/jira-code-review <pr-url> --branch feature-auth
+```
+
+**Features:**
+- **Standalone ticket creation** - Create code review tickets for existing PRs
+- Automatic PR information extraction
+- Standard ticket format (Task, Code Review component, 1 story point)
+- **MCP-based Jira integration** - Full Atlassian server capabilities
+- Assignee lookup and assignment
+
+### Bitbucket API Configuration
+
+The hybrid commands require Bitbucket API credentials in your `.env` file:
+
+```bash
+# Bitbucket API Configuration (for hybrid commands)
+BITBUCKET_USERNAME=your_username
+BITBUCKET_WORKSPACE=your_workspace
+
+# Authentication (API token preferred, app password as fallback)
+BITBUCKET_API_TOKEN=your_api_token_here      # Recommended
+BITBUCKET_APP_PASSWORD=your_app_password_here # Fallback option
+```
+
+**Authentication Priority:**
+1. API Token (if `BITBUCKET_API_TOKEN` is set)
+2. App Password (if `BITBUCKET_APP_PASSWORD` is set)
+3. Error if neither is configured
 
 ## Hook Error Codes & Flow Control
 
