@@ -47,6 +47,8 @@ After completing all tasks in a phase:
   - Any notes about decisions made during implementation
 
 #### 2.4 Automatic Code Review Integration
+- You **MUST** use the code-review-agent after implementing each phase
+- This is the start of each implementation + code review iteration. Each iteration finishes after the code-review-agent gives its feedback.
 - Use Task tool to invoke the code-review-agent with the unified structured format:
 
 **Phase Completion Message to Review Agent:**
@@ -81,7 +83,9 @@ Please analyze this implementation against the phase requirements and provide yo
 - Include previous_feedback if this is a re-review (iteration > 1)
 
 #### 2.5 Process Review Feedback with Iteration Control
-- Receive structured feedback from code-review-agent
+- You **MUST** take in and review the structured feedback from the code-review-agent 
+- You **MUST** change, fix, or implement each critical issue feedback
+- You **MUST** consider and evaluate each major issue
 - Load current iteration state from `.claude/state/prd-execution-state.json`
 - Process feedback based on status:
 
