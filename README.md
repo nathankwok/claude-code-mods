@@ -100,6 +100,9 @@ This approach ensures your hooks remain functional across different environments
   - `utils/` - Intelligent TTS and LLM utility scripts
     - `tts/` - Text-to-speech providers (ElevenLabs, OpenAI, pyttsx3)
     - `llm/` - Language model integrations (OpenAI, Anthropic)
+- `.claude/commands/` - Custom slash commands for streamlined workflows
+  - `bitbucket-pr.md` - Automated Bitbucket PR creation with Jira code review ticket integration
+  - `pr-status.md` - Check PR status, reviews, comments, and linked Jira tickets
 - `logs/` - JSON logs of all hook executions
   - `user_prompt_submit.json` - User prompt submissions with validation
   - `pre_tool_use.json` - Tool use events with security blocking
@@ -125,6 +128,44 @@ Hooks provide deterministic control over Claude Code behavior without relying on
 - Error handling in hook execution
 
 Run any Claude Code command to see hooks in action via the `logs/` files.
+
+### New Bitbucket Workflow Commands
+
+#### `/bitbucket-pr` - Create Pull Requests with Automated Jira Code Review Tickets
+```bash
+# Usage examples:
+/bitbucket-pr development 123 @reviewer1,@reviewer2
+/bitbucket-pr main 456 --jira-project PROJ              # With specific Jira project
+/bitbucket-pr feature-branch 789 @team                  # Team review
+```
+
+**Features:**
+- Automatic branch naming (`{destination}-{ticket-number}`)
+- Git status and diff collection
+- PR creation with proper metadata and reviewer assignment
+- **🎫 Automated Jira code review ticket creation** for production branches
+- Ticket follows exact specifications:
+  - Type: Task, Component: Code Review, Story Points: 1
+  - Title: `{repo} {branch-name} Code Review`
+  - Description: Link to PR
+- Comprehensive status reporting with PR and Jira ticket URLs
+
+#### `/pr-status` - Check Pull Request Status with Jira Integration
+```bash
+# Usage examples:
+/pr-status                    # List recent PRs
+/pr-status 123               # Check specific PR
+/pr-status 123 --comments    # Include comments
+/pr-status 123 --jira        # Include linked Jira tickets
+```
+
+**Features:**
+- PR status and review progress with visual indicators
+- Reviewer status tracking
+- Comment threading and organization
+- **🎫 Jira ticket integration** - Shows linked code review tickets
+- Branch relationship detection
+- Formatted status output with actionable insights
 
 ## Hook Error Codes & Flow Control
 
