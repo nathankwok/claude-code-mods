@@ -129,7 +129,7 @@ if [[ -n "$PROJECT_KEY" ]]; then
 fi
 
 # Prepare ticket data
-TICKET_DATA=$(uv run .claude/scripts/bitbucket/jira_code_review.py prepare-ticket "${PREPARE_ARGS[@]}" 2>&1)
+TICKET_DATA=$(uv run .claude/scripts/bitbucket/create_code_review_ticket.py prepare-ticket "${PREPARE_ARGS[@]}" 2>&1)
 PREPARE_EXIT=$?
 
 if [[ $PREPARE_EXIT -ne 0 ]]; then

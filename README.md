@@ -104,7 +104,7 @@ This approach ensures your hooks remain functional across different environments
     - `bitbucket_utils.py` - Core utilities with authentication, caching, and retry logic
     - `bitbucket_pr_api.py` - PR creation workflow with branch management
     - `pr_status_api.py` - PR status monitoring and review tracking
-    - `jira_code_review.py` - Jira code review ticket preparation
+    - `create_code_review_ticket.py` - Jira code review ticket preparation
 - `.claude/commands/` - Custom slash commands for streamlined workflows
   - `bitbucket-pr.md` - Automated Bitbucket PR creation with Jira code review ticket integration
   - `create-code-review-ticket.md` - Standalone Jira code review ticket creation
