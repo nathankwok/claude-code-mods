@@ -1,0 +1,335 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: dependency-matrix-analysis
+  name: "Dependency Matrix and Parallel Execution Plan Template"
+  version: 1.0
+  output:
+    format: markdown
+    location: "docs/dependency-matrix.md"
+
+sections:
+  - id: matrix-overview
+    title: "Dependency Matrix Overview"
+    instruction: "Provide high-level summary of dependency analysis and parallel execution planning."
+    type: text
+    template: |
+      # Dependency Matrix and Parallel Execution Plan
+      
+      ## Matrix Overview
+      
+      **Analysis Date**: {{analysis_date}}
+      **Total Phases**: {{total_phases}}
+      **Total Tasks**: {{total_tasks}}
+      **Dependency Relationships**: {{total_dependencies}}
+      
+      ### Dependency Summary
+      - **Hard Dependencies**: {{hard_dependencies}} *(must be respected)*
+      - **Soft Dependencies**: {{soft_dependencies}} *(preferential, can be worked around)*
+      - **Resource Dependencies**: {{resource_dependencies}} *(shared files/systems)*
+      - **Circular Dependencies**: {{circular_dependencies}} *(require resolution)*
+      
+      ### Parallelization Overview
+      - **Maximum Parallel Phases**: {{max_parallel_phases}}
+      - **Execution Waves**: {{execution_waves}}
+      - **Critical Path Length**: {{critical_path_length}}
+      - **Parallel Efficiency**: {{parallel_efficiency}}%
+
+  - id: phase-dependency-matrix
+    title: "Phase-Level Dependency Matrix"
+    instruction: "Create comprehensive dependency matrix showing relationships between all phases."
+    type: text
+    template: |
+      ## Phase-Level Dependency Matrix
+      
+      ### Visual Dependency Matrix
+      ```
+      {{phase_dependency_matrix}}
+      ```
+      
+      **Legend**: 
+      - `H` = Hard Dependency (blocking)
+      - `S` = Soft Dependency (preferential)  
+      - `R` = Resource Dependency (file/system conflict)
+      - `I` = Integration Dependency (coordination required)
+      
+      ### Detailed Phase Dependencies
+      {{#phase_relationships}}
+      #### {{source_phase}} → {{target_phase}}
+      - **Dependency Type**: {{dependency_type}}
+      - **Strength**: {{dependency_strength}} *(Critical/High/Medium/Low)*
+      - **Reason**: {{dependency_reason}}
+      - **Components**: {{shared_components}}
+      - **Workaround Available**: {{workaround_possible}}
+      - **Workaround Cost**: {{workaround_cost}}
+      - **Impact if Violated**: {{violation_impact}}
+      {{/phase_relationships}}
+      
+      ### Dependency Clusters
+      {{#dependency_clusters}}
+      #### Cluster {{cluster_id}}: {{cluster_name}}
+      - **Phases**: {{cluster_phases}}
+      - **Internal Dependencies**: {{internal_dependencies}}
+      - **External Dependencies**: {{external_dependencies}}
+      - **Parallelization Potential**: {{parallelization_potential}}
+      - **Recommended Execution**: {{execution_recommendation}}
+      {{/dependency_clusters}}
+
+  - id: task-dependency-matrix
+    title: "Task-Level Dependency Matrix"
+    instruction: "Detailed dependency analysis at the task level for granular parallel planning."
+    type: text
+    template: |
+      ## Task-Level Dependency Matrix
+      
+      ### Task Dependency Overview
+      {{task_dependency_overview}}
+      
+      ### Critical Path Analysis
+      **Critical Path**: {{critical_path_tasks}}
+      **Critical Path Duration**: {{critical_path_duration}}
+      **Buffer Time**: {{buffer_time}}
+      
+      ### Task Dependency Details
+      {{#task_dependencies}}
+      #### {{source_task}} → {{target_task}}
+      - **Source Phase**: {{source_phase}}
+      - **Target Phase**: {{target_phase}}
+      - **Dependency Type**: {{dependency_type}}
+        - Technical: {{technical_dependency}}
+        - Business Logic: {{business_dependency}}
+        - Data Flow: {{data_dependency}}
+        - Resource Conflict: {{resource_conflict}}
+      - **Blocking Level**: {{blocking_level}}
+      - **Alternative Approaches**: {{alternatives}}
+      - **Coordination Requirements**: {{coordination_needs}}
+      {{/task_dependencies}}
+      
+      ### File and Component Dependencies
+      {{#file_dependencies}}
+      #### {{file_path}}
+      - **Modifying Tasks**: {{modifying_tasks}}
+      - **Reading Tasks**: {{reading_tasks}}
+      - **Conflict Potential**: {{conflict_potential}}
+      - **Resolution Strategy**: {{resolution_strategy}}
+      - **Coordination Method**: {{coordination_method}}
+      {{/file_dependencies}}
+      
+      ### Data Flow Dependencies
+      {{#data_flow_dependencies}}
+      #### {{data_flow_name}}
+      - **Producer Task**: {{producer_task}}
+      - **Consumer Tasks**: {{consumer_tasks}}
+      - **Data Type**: {{data_type}}
+      - **Interface Contract**: {{interface_contract}}
+      - **Validation Requirements**: {{validation_requirements}}
+      {{/data_flow_dependencies}}
+
+  - id: parallel-execution-plan
+    title: "Parallel Execution Strategy"
+    instruction: "Define detailed parallel execution plan with waves, teams, and coordination points."
+    type: text
+    template: |
+      ## Parallel Execution Strategy
+      
+      ### Execution Strategy Overview
+      {{execution_strategy}}
+      
+      ### Execution Wave Breakdown
+      {{#execution_waves}}
+      #### Wave {{wave_number}}: {{wave_name}}
+      
+      **Duration**: {{wave_duration}}
+      **Max Concurrent Sessions**: {{max_concurrent_sessions}}
+      **Team Requirements**: {{team_requirements}}
+      
+      **Phases in Wave**:
+      {{#wave_phases}}
+      - **{{phase_name}}** (Session ID: {{session_id}})
+        - Duration: {{phase_duration}}
+        - Team Size: {{team_size}}
+        - Key Skills: {{required_skills}}
+        - Critical Files: {{critical_files}}
+      {{/wave_phases}}
+      
+      **Wave Dependencies**:
+      {{#wave_dependencies}}
+      - Requires completion of: {{prerequisite_waves}}
+      - Provides input to: {{dependent_waves}}
+      {{/wave_dependencies}}
+      
+      **Synchronization Requirements**:
+      {{#synchronization_requirements}}
+      - **{{sync_name}}**: {{sync_description}}
+        - Trigger: {{sync_trigger}}
+        - Duration: {{sync_duration}}
+        - Participants: {{sync_participants}}
+      {{/synchronization_requirements}}
+      
+      ---
+      {{/execution_waves}}
+      
+      ### Session Coordination Plan
+      {{#session_coordination}}
+      #### Session {{session_id}}: {{session_name}}
+      - **Primary Phase**: {{primary_phase}}
+      - **Supporting Phases**: {{supporting_phases}}
+      - **Unique Responsibilities**: {{unique_responsibilities}}
+      - **Shared Responsibilities**: {{shared_responsibilities}}
+      - **Communication Requirements**: {{communication_requirements}}
+      - **Escalation Contacts**: {{escalation_contacts}}
+      {{/session_coordination}}
+
+  - id: conflict-resolution
+    title: "Conflict Detection and Resolution"
+    instruction: "Define conflict detection mechanisms and resolution strategies for parallel execution."
+    type: text
+    template: |
+      ## Conflict Detection and Resolution
+      
+      ### Conflict Detection Strategy
+      {{conflict_detection_overview}}
+      
+      ### File Conflict Management
+      {{#file_conflicts}}
+      #### {{file_path}}
+      - **Conflict Type**: {{conflict_type}} *(edit/create/delete/move)*
+      - **Affected Sessions**: {{affected_sessions}}
+      - **Detection Method**: {{detection_method}}
+      - **Prevention Strategy**: {{prevention_strategy}}
+      - **Resolution Approach**: {{resolution_approach}}
+      - **Escalation Threshold**: {{escalation_threshold}}
+      {{/file_conflicts}}
+      
+      ### API and Interface Conflicts
+      {{#interface_conflicts}}
+      #### {{interface_name}}
+      - **Interface Type**: {{interface_type}}
+      - **Conflicting Changes**: {{conflicting_changes}}
+      - **Impact Assessment**: {{impact_assessment}}
+      - **Resolution Strategy**: {{resolution_strategy}}
+      - **Version Management**: {{version_management}}
+      {{/interface_conflicts}}
+      
+      ### Database Schema Conflicts
+      {{#schema_conflicts}}
+      #### {{schema_component}}
+      - **Conflict Description**: {{conflict_description}}
+      - **Affected Tables**: {{affected_tables}}
+      - **Migration Strategy**: {{migration_strategy}}
+      - **Rollback Plan**: {{rollback_plan}}
+      - **Data Preservation**: {{data_preservation}}
+      {{/schema_conflicts}}
+      
+      ### Conflict Resolution Procedures
+      {{#resolution_procedures}}
+      #### {{conflict_category}}
+      - **Detection Triggers**: {{detection_triggers}}
+      - **Initial Response**: {{initial_response}}
+      - **Escalation Path**: {{escalation_path}}
+      - **Resolution Timeline**: {{resolution_timeline}}
+      - **Communication Protocol**: {{communication_protocol}}
+      - **Documentation Requirements**: {{documentation_requirements}}
+      {{/resolution_procedures}}
+
+  - id: coordination-protocols
+    title: "Coordination Protocols and Communication"
+    instruction: "Define communication protocols, meeting schedules, and coordination mechanisms."
+    type: text
+    template: |
+      ## Coordination Protocols and Communication
+      
+      ### Communication Framework
+      {{communication_framework}}
+      
+      ### Regular Coordination Schedule
+      {{#coordination_meetings}}
+      #### {{meeting_type}}
+      - **Frequency**: {{meeting_frequency}}
+      - **Duration**: {{meeting_duration}}
+      - **Participants**: {{meeting_participants}}
+      - **Agenda Template**: {{agenda_template}}
+      - **Decision Authority**: {{decision_authority}}
+      - **Follow-up Requirements**: {{followup_requirements}}
+      {{/coordination_meetings}}
+      
+      ### Synchronization Points
+      {{#synchronization_points}}
+      #### {{sync_point_name}}
+      - **Trigger Conditions**: {{trigger_conditions}}
+      - **Required Participants**: {{required_participants}}
+      - **Success Criteria**: {{success_criteria}}
+      - **Duration**: {{sync_duration}}
+      - **Preparation Requirements**: {{preparation_requirements}}
+      - **Deliverables**: {{sync_deliverables}}
+      - **Next Steps Process**: {{next_steps_process}}
+      {{/synchronization_points}}
+      
+      ### Communication Channels
+      {{#communication_channels}}
+      - **Channel**: {{channel_name}}
+        - **Purpose**: {{channel_purpose}}
+        - **Participants**: {{channel_participants}}
+        - **Response Time SLA**: {{response_time}}
+        - **Escalation Trigger**: {{escalation_trigger}}
+      {{/communication_channels}}
+      
+      ### Status Reporting
+      - **Reporting Frequency**: {{reporting_frequency}}
+      - **Status Template**: {{status_template}}
+      - **Metrics Included**: {{status_metrics}}
+      - **Distribution List**: {{distribution_list}}
+      - **Escalation Criteria**: {{escalation_criteria}}
+
+  - id: monitoring-metrics
+    title: "Monitoring and Success Metrics"
+    instruction: "Define metrics for tracking parallel execution success and identifying issues early."
+    type: bullet-list
+    template: |
+      ## Monitoring and Success Metrics
+      
+      ### Execution Performance Metrics
+      {{#performance_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Warning Threshold: {{warning_threshold}}
+        - Critical Threshold: {{critical_threshold}}
+        - Measurement Method: {{measurement_method}}
+        - Review Frequency: {{review_frequency}}
+      {{/performance_metrics}}
+      
+      ### Coordination Effectiveness Metrics
+      {{#coordination_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Measurement: {{measurement_method}}
+        - Review Trigger: {{review_trigger}}
+      {{/coordination_metrics}}
+      
+      ### Quality Assurance Metrics
+      {{#quality_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Baseline: {{quality_baseline}}
+        - Target: {{quality_target}}
+        - Measurement: {{quality_measurement}}
+        - Quality Gate: {{quality_gate}}
+      {{/quality_metrics}}
+      
+      ### Risk Indicators
+      {{#risk_indicators}}
+      - **{{indicator_name}}**: {{indicator_description}}
+        - Early Warning Signs: {{warning_signs}}
+        - Escalation Triggers: {{escalation_triggers}}
+        - Mitigation Actions: {{mitigation_actions}}
+      {{/risk_indicators}}
+      
+      ### Success Criteria
+      - **Parallel Execution Success**: {{parallel_success_criteria}}
+      - **Coordination Success**: {{coordination_success_criteria}}
+      - **Quality Maintenance**: {{quality_success_criteria}}
+      - **Timeline Adherence**: {{timeline_success_criteria}}
+      - **Resource Efficiency**: {{resource_efficiency_criteria}}
+
+examples:
+  - "Dependency matrix for microservices architecture with 12 parallel development streams"
+  - "Complex web application with frontend/backend/database parallel development"
+  - "Multi-platform mobile and web application with shared API development"

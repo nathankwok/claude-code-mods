@@ -1,0 +1,477 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: technical-specifications
+  name: "Technical Specifications for Parallel Development Template"
+  version: 1.0
+  output:
+    format: markdown
+    location: "docs/technical-specifications.md"
+
+sections:
+  - id: specifications-overview
+    title: "Technical Specifications Overview"
+    instruction: "Provide high-level overview of technical specifications for parallel development coordination."
+    type: text
+    template: |
+      # Technical Specifications for Parallel Development
+      
+      ## Specifications Overview
+      
+      **Project**: {{project_name}}
+      **Specification Date**: {{specification_date}}
+      **Version**: {{specification_version}}
+      **Parallel Sessions**: {{total_parallel_sessions}}
+      
+      ### Purpose
+      {{specifications_purpose}}
+      
+      ### Scope
+      - **Components Covered**: {{components_covered}}
+      - **Integration Points**: {{integration_points}}
+      - **Parallel Development Streams**: {{parallel_streams}}
+      - **Interface Contracts**: {{interface_contracts}}
+      
+      ### Key Principles
+      {{#key_principles}}
+      - {{.}}
+      {{/key_principles}}
+
+  - id: api-specifications
+    title: "API and Interface Specifications"
+    instruction: "Define all APIs and interfaces that enable independent parallel development."
+    type: text
+    template: |
+      ## API and Interface Specifications
+      
+      ### API Design Principles
+      {{api_design_principles}}
+      
+      ### Core API Specifications
+      {{#api_specifications}}
+      #### {{api_name}} API
+      
+      **Base URL**: `{{base_url}}`
+      **Version**: {{api_version}}
+      **Authentication**: {{authentication_method}}
+      
+      **Endpoints**:
+      {{#endpoints}}
+      ##### {{endpoint_name}}
+      - **Path**: `{{method}} {{path}}`
+      - **Description**: {{description}}
+      - **Authentication Required**: {{auth_required}}
+      
+      **Request Schema**:
+      ```json
+      {{request_schema}}
+      ```
+      
+      **Response Schema**:
+      ```json
+      {{response_schema}}
+      ```
+      
+      **Error Responses**:
+      {{#error_responses}}
+      - `{{status_code}}`: {{error_description}}
+      {{/error_responses}}
+      
+      **Example Usage**:
+      ```bash
+      {{example_request}}
+      ```
+      
+      **Response Example**:
+      ```json
+      {{example_response}}
+      ```
+      
+      ---
+      {{/endpoints}}
+      
+      **Rate Limiting**: {{rate_limiting}}
+      **Versioning Strategy**: {{versioning_strategy}}
+      **Deprecation Policy**: {{deprecation_policy}}
+      
+      ---
+      {{/api_specifications}}
+      
+      ### Inter-Service Communication Contracts
+      {{#service_contracts}}
+      #### {{service_name}} ↔ {{target_service}}
+      - **Communication Type**: {{communication_type}} *(HTTP/gRPC/Message Queue/WebSocket)*
+      - **Data Format**: {{data_format}}
+      - **Protocol**: {{protocol}}
+      - **Service Level Agreement**: {{sla}}
+      - **Fallback Strategy**: {{fallback_strategy}}
+      - **Contract Definition**: 
+        ```yaml
+        {{contract_definition}}
+        ```
+      {{/service_contracts}}
+
+  - id: data-specifications
+    title: "Data Models and Schema Specifications"
+    instruction: "Define data models, database schemas, and data contracts for consistent parallel development."
+    type: text
+    template: |
+      ## Data Models and Schema Specifications
+      
+      ### Data Architecture Overview
+      {{data_architecture_overview}}
+      
+      ### Core Data Models
+      {{#data_models}}
+      #### {{model_name}} Entity
+      
+      **Purpose**: {{model_purpose}}
+      **Lifecycle**: {{model_lifecycle}}
+      **Ownership**: {{model_ownership}}
+      
+      **Schema Definition**:
+      ```json
+      {{schema_definition}}
+      ```
+      
+      **Validation Rules**:
+      {{#validation_rules}}
+      - **{{field_name}}**: {{validation_rule}}
+      {{/validation_rules}}
+      
+      **Relationships**:
+      {{#relationships}}
+      - **{{relationship_type}}** with {{related_entity}}: {{relationship_description}}
+      {{/relationships}}
+      
+      **Indexes**:
+      {{#indexes}}
+      - {{index_definition}} *({{index_purpose}})*
+      {{/indexes}}
+      
+      **Migration Strategy**: {{migration_strategy}}
+      
+      ---
+      {{/data_models}}
+      
+      ### Database Schema Coordination
+      {{#schema_coordination}}
+      #### {{schema_component}}
+      - **Responsible Team**: {{responsible_team}}
+      - **Modification Protocol**: {{modification_protocol}}
+      - **Review Requirements**: {{review_requirements}}
+      - **Migration Coordination**: {{migration_coordination}}
+      - **Rollback Procedures**: {{rollback_procedures}}
+      {{/schema_coordination}}
+      
+      ### Data Access Patterns
+      {{#access_patterns}}
+      - **Pattern**: {{pattern_name}}
+        - **Use Case**: {{use_case}}
+        - **Implementation**: {{implementation}}
+        - **Performance Expectations**: {{performance_expectations}}
+        - **Caching Strategy**: {{caching_strategy}}
+      {{/access_patterns}}
+
+  - id: component-interfaces
+    title: "Component Interface Specifications"
+    instruction: "Define interfaces between system components to enable independent development."
+    type: text
+    template: |
+      ## Component Interface Specifications
+      
+      ### Component Architecture
+      {{component_architecture_overview}}
+      
+      ### Component Interface Contracts
+      {{#component_interfaces}}
+      #### {{component_name}} Interface
+      
+      **Component Type**: {{component_type}} *(Service/Library/Module/UI Component)*
+      **Responsibility**: {{component_responsibility}}
+      **Development Team**: {{development_team}}
+      
+      **Public Interface**:
+      ```typescript
+      {{public_interface}}
+      ```
+      
+      **Configuration Contract**:
+      ```yaml
+      {{configuration_contract}}
+      ```
+      
+      **Dependencies**:
+      {{#dependencies}}
+      - **{{dependency_name}}**: {{dependency_version}} *({{dependency_purpose}})*
+      {{/dependencies}}
+      
+      **Provides to Other Components**:
+      {{#provides}}
+      - **{{provided_interface}}**: {{interface_description}}
+      {{/provides}}
+      
+      **Environment Variables**:
+      {{#environment_variables}}
+      - `{{env_var_name}}`: {{env_var_description}} *({{required_optional}})*
+      {{/environment_variables}}
+      
+      **Health Check Endpoint**:
+      ```
+      {{health_check_specification}}
+      ```
+      
+      **Monitoring Metrics**:
+      {{#monitoring_metrics}}
+      - {{metric_name}}: {{metric_description}}
+      {{/monitoring_metrics}}
+      
+      **Testing Contract**:
+      - **Unit Tests**: {{unit_test_requirements}}
+      - **Integration Tests**: {{integration_test_requirements}}
+      - **Contract Tests**: {{contract_test_requirements}}
+      
+      ---
+      {{/component_interfaces}}
+
+  - id: integration-specifications
+    title: "Integration Points and Coordination"
+    instruction: "Define integration points, coordination mechanisms, and synchronization requirements."
+    type: text
+    template: |
+      ## Integration Points and Coordination
+      
+      ### Integration Strategy
+      {{integration_strategy}}
+      
+      ### Major Integration Points
+      {{#integration_points}}
+      #### {{integration_name}}
+      
+      **Integration Type**: {{integration_type}} *(API/Database/File System/Message Queue)*
+      **Coordinating Teams**: {{coordinating_teams}}
+      **Implementation Timeline**: {{implementation_timeline}}
+      
+      **Integration Requirements**:
+      {{#integration_requirements}}
+      - {{requirement}}
+      {{/integration_requirements}}
+      
+      **Pre-integration Checklist**:
+      {{#preintegration_checklist}}
+      - [ ] {{checklist_item}}
+      {{/preintegration_checklist}}
+      
+      **Integration Testing Plan**:
+      - **Test Environment**: {{test_environment}}
+      - **Test Data Requirements**: {{test_data_requirements}}
+      - **Success Criteria**: {{success_criteria}}
+      - **Rollback Plan**: {{rollback_plan}}
+      
+      **Mock/Stub Strategy**:
+      {{mock_strategy}}
+      
+      **Integration Timeline**:
+      {{integration_timeline}}
+      
+      ---
+      {{/integration_points}}
+      
+      ### Coordination Mechanisms
+      {{#coordination_mechanisms}}
+      #### {{mechanism_name}}
+      - **Purpose**: {{mechanism_purpose}}
+      - **Participants**: {{mechanism_participants}}
+      - **Frequency**: {{mechanism_frequency}}
+      - **Success Metrics**: {{success_metrics}}
+      - **Escalation Process**: {{escalation_process}}
+      {{/coordination_mechanisms}}
+
+  - id: development-standards
+    title: "Development Standards and Guidelines"
+    instruction: "Define coding standards, testing requirements, and quality assurance processes."
+    type: text
+    template: |
+      ## Development Standards and Guidelines
+      
+      ### Code Quality Standards
+      {{code_quality_overview}}
+      
+      ### Language-Specific Standards
+      {{#language_standards}}
+      #### {{language_name}}
+      
+      **Coding Style**: {{coding_style}}
+      **Linting Configuration**: {{linting_config}}
+      **Formatting Rules**: {{formatting_rules}}
+      
+      **Naming Conventions**:
+      {{#naming_conventions}}
+      - **{{naming_category}}**: {{naming_rule}}
+      {{/naming_conventions}}
+      
+      **Best Practices**:
+      {{#best_practices}}
+      - {{practice}}
+      {{/best_practices}}
+      
+      **Prohibited Patterns**:
+      {{#prohibited_patterns}}
+      - {{pattern}}: {{reason}}
+      {{/prohibited_patterns}}
+      
+      ---
+      {{/language_standards}}
+      
+      ### Testing Standards
+      {{#testing_standards}}
+      #### {{test_type}} Testing
+      - **Coverage Requirements**: {{coverage_requirement}}
+      - **Testing Framework**: {{testing_framework}}
+      - **Test Structure**: {{test_structure}}
+      - **Mock/Stub Guidelines**: {{mocking_guidelines}}
+      - **Performance Requirements**: {{performance_requirements}}
+      {{/testing_standards}}
+      
+      ### Code Review Process
+      - **Review Requirements**: {{review_requirements}}
+      - **Approval Process**: {{approval_process}}
+      - **Review Checklist**: {{review_checklist}}
+      - **Automated Checks**: {{automated_checks}}
+      
+      ### Documentation Standards
+      - **Code Documentation**: {{code_documentation_requirements}}
+      - **API Documentation**: {{api_documentation_requirements}}
+      - **Architecture Documentation**: {{architecture_documentation_requirements}}
+      - **Update Procedures**: {{documentation_update_procedures}}
+
+  - id: deployment-specifications
+    title: "Deployment and Infrastructure Specifications"
+    instruction: "Define deployment requirements, infrastructure needs, and operational specifications."
+    type: text
+    template: |
+      ## Deployment and Infrastructure Specifications
+      
+      ### Deployment Strategy
+      {{deployment_strategy}}
+      
+      ### Environment Specifications
+      {{#environment_specs}}
+      #### {{environment_name}} Environment
+      
+      **Purpose**: {{environment_purpose}}
+      **Access Control**: {{access_control}}
+      **Deployment Frequency**: {{deployment_frequency}}
+      
+      **Infrastructure Requirements**:
+      - **Compute**: {{compute_requirements}}
+      - **Memory**: {{memory_requirements}}
+      - **Storage**: {{storage_requirements}}
+      - **Network**: {{network_requirements}}
+      
+      **Configuration Management**:
+      ```yaml
+      {{environment_config}}
+      ```
+      
+      **Monitoring Setup**: {{monitoring_setup}}
+      **Logging Configuration**: {{logging_configuration}}
+      **Backup Procedures**: {{backup_procedures}}
+      
+      ---
+      {{/environment_specs}}
+      
+      ### CI/CD Pipeline Specifications
+      {{#cicd_pipelines}}
+      #### {{pipeline_name}} Pipeline
+      
+      **Trigger Events**: {{trigger_events}}
+      **Pipeline Stages**: {{pipeline_stages}}
+      
+      **Stage Details**:
+      {{#stages}}
+      - **{{stage_name}}**: {{stage_description}}
+        - Duration: {{stage_duration}}
+        - Success Criteria: {{success_criteria}}
+        - Failure Handling: {{failure_handling}}
+      {{/stages}}
+      
+      **Parallel Execution Coordination**:
+      {{parallel_coordination}}
+      
+      **Deployment Approval Process**: {{approval_process}}
+      **Rollback Procedures**: {{rollback_procedures}}
+      
+      ---
+      {{/cicd_pipelines}}
+      
+      ### Infrastructure as Code
+      - **IaC Tool**: {{iac_tool}}
+      - **Template Structure**: {{template_structure}}
+      - **Version Control**: {{version_control}}
+      - **Change Management**: {{change_management}}
+      
+      ### Monitoring and Observability
+      - **Application Monitoring**: {{application_monitoring}}
+      - **Infrastructure Monitoring**: {{infrastructure_monitoring}}
+      - **Log Aggregation**: {{log_aggregation}}
+      - **Alerting Strategy**: {{alerting_strategy}}
+
+  - id: security-specifications
+    title: "Security Requirements and Specifications"
+    instruction: "Define security requirements, authentication, authorization, and compliance specifications."
+    type: bullet-list
+    template: |
+      ## Security Requirements and Specifications
+      
+      ### Security Architecture
+      {{security_architecture_overview}}
+      
+      ### Authentication and Authorization
+      {{#auth_specifications}}
+      - **Authentication Method**: {{auth_method}}
+        - Implementation: {{auth_implementation}}
+        - Token Lifecycle: {{token_lifecycle}}
+        - Session Management: {{session_management}}
+      - **Authorization Model**: {{authz_model}}
+        - Role Definitions: {{role_definitions}}
+        - Permission Matrix: {{permission_matrix}}
+        - Access Control Implementation: {{access_control}}
+      {{/auth_specifications}}
+      
+      ### Data Protection
+      {{#data_protection}}
+      - **Encryption Requirements**:
+        - At Rest: {{encryption_at_rest}}
+        - In Transit: {{encryption_in_transit}}
+        - Key Management: {{key_management}}
+      - **Data Classification**: {{data_classification}}
+      - **PII Handling**: {{pii_handling}}
+      - **Data Retention**: {{data_retention}}
+      {{/data_protection}}
+      
+      ### Security Testing
+      {{#security_testing}}
+      - **Static Analysis**: {{static_analysis_requirements}}
+      - **Dynamic Testing**: {{dynamic_testing_requirements}}
+      - **Penetration Testing**: {{penetration_testing_requirements}}
+      - **Vulnerability Scanning**: {{vulnerability_scanning}}
+      {{/security_testing}}
+      
+      ### Compliance Requirements
+      {{#compliance_requirements}}
+      - **{{compliance_standard}}**: {{compliance_description}}
+        - Requirements: {{compliance_requirements}}
+        - Verification: {{compliance_verification}}
+        - Reporting: {{compliance_reporting}}
+      {{/compliance_requirements}}
+      
+      ### Security Coordination
+      - **Security Review Process**: {{security_review_process}}
+      - **Incident Response**: {{incident_response_plan}}
+      - **Security Training**: {{security_training_requirements}}
+      - **Third-party Security**: {{third_party_security}}
+
+examples:
+  - "Technical specifications for microservices architecture with 8 parallel development teams"
+  - "Full-stack web application with separate frontend/backend/database development streams"
+  - "Mobile and web platform development with shared API specifications"

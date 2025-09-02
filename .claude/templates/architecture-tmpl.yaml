@@ -1,0 +1,465 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: architecture-system-design
+  name: "System Architecture Design Template"
+  version: 1.0
+  output:
+    format: markdown
+    location: "docs/system-architecture.md"
+
+sections:
+  - id: executive-summary
+    title: "Executive Summary"
+    instruction: "Provide a high-level overview of the system architecture, key design decisions, and business value. Keep this accessible to non-technical stakeholders."
+    type: text
+    template: |
+      ## Executive Summary
+      
+      **System Overview**: {{system_description}}
+      
+      **Key Business Value**: {{business_value}}
+      
+      **Architecture Approach**: {{architecture_approach}}
+      
+      **Technology Stack**: {{primary_technologies}}
+      
+      **Expected Outcomes**: 
+      {{#expected_outcomes}}
+      - {{.}}
+      {{/expected_outcomes}}
+
+  - id: brainstorming-context
+    title: "Brainstorming Context Integration"
+    instruction: "Document how brainstorming session outputs (market analysis, competitive insights, stakeholder feedback) influence architectural decisions. Include integration status and missing context."
+    type: text
+    template: |
+      ## Brainstorming Context Integration
+      
+      ### Integration Status
+      - **Brainstorming Sessions Found**: {{brainstorming_sessions_count}}
+      - **Context Integration Level**: {{integration_status}}
+      - **Missing Context**: {{#missing_context_items}}{{.}}, {{/missing_context_items}}
+      
+      ### Market Analysis Insights
+      {{#market_analysis_available}}
+      - **Market Positioning Requirements**: {{market_positioning_technical_implications}}
+      - **Scalability Projections**: {{market_growth_technical_requirements}}
+      - **Technology Trends Impact**: {{market_technology_trends}}
+      - **Competitive Technical Advantages**: {{required_technical_differentiators}}
+      {{/market_analysis_available}}
+      {{#market_analysis_missing}}
+      - **Note**: Market analysis not available - architecture proceeds with PRD requirements only
+      - **Assumptions**: {{market_assumptions_made}}
+      {{/market_analysis_missing}}
+      
+      ### Competitive Analysis Integration
+      {{#competitive_analysis_available}}
+      - **Technical Differentiation Requirements**: {{competitive_technical_advantages}}
+      - **Performance Benchmarks**: {{competitive_performance_requirements}}
+      - **Feature Parity Requirements**: {{competitive_feature_requirements}}
+      - **Technology Stack Considerations**: {{competitive_technology_insights}}
+      {{/competitive_analysis_available}}
+      {{#competitive_analysis_missing}}
+      - **Note**: Competitive analysis not available - standard industry practices assumed
+      {{/competitive_analysis_missing}}
+      
+      ### Stakeholder Requirements Integration
+      {{#stakeholder_insights_available}}
+      - **User Experience Requirements**: {{stakeholder_ux_requirements}}
+      - **Performance Expectations**: {{stakeholder_performance_needs}}
+      - **Integration Requirements**: {{stakeholder_integration_needs}}
+      - **Technology Preferences**: {{stakeholder_technology_preferences}}
+      {{/stakeholder_insights_available}}
+      {{#stakeholder_insights_missing}}
+      - **Note**: Stakeholder insights not available - standard user requirements assumed
+      {{/stakeholder_insights_missing}}
+
+  - id: requirements-analysis
+    title: "Requirements Analysis"
+    instruction: "Document functional and non-functional requirements extracted from PRD and brainstorming context. Include acceptance criteria and success metrics."
+    type: text
+    template: |
+      ## Requirements Analysis
+      
+      ### Functional Requirements
+      {{#functional_requirements}}
+      - **{{requirement_id}}**: {{description}}
+        - Acceptance Criteria: {{acceptance_criteria}}
+        - Source: {{requirement_source}} <!-- PRD, brainstorming, stakeholder feedback -->
+      {{/functional_requirements}}
+      
+      ### Non-Functional Requirements
+      - **Performance**: {{performance_requirements}}
+        - Market-driven: {{market_performance_requirements}}
+        - Competitive benchmarks: {{competitive_performance_targets}}
+      - **Scalability**: {{scalability_requirements}}
+        - Growth projections: {{market_growth_scalability_needs}}
+      - **Reliability**: {{reliability_requirements}}
+      - **Security**: {{security_requirements}}
+        - Competitive advantages: {{security_differentiators}}
+      - **Usability**: {{usability_requirements}}
+        - Stakeholder preferences: {{stakeholder_usability_insights}}
+      
+      ### Constraints
+      - **Technical**: {{technical_constraints}}
+      - **Business**: {{business_constraints}}
+        - Market positioning: {{market_positioning_constraints}}
+      - **Regulatory**: {{regulatory_constraints}}
+      - **Competitive**: {{competitive_constraints}}
+
+  - id: system-overview
+    title: "System Architecture Overview"
+    instruction: "Provide high-level system architecture diagram and component relationships. Focus on major components and data flow."
+    type: text
+    template: |
+      ## System Architecture Overview
+      
+      ### High-Level Architecture
+      ```
+      {{architecture_diagram}}
+      ```
+      
+      ### Core Components
+      {{#core_components}}
+      - **{{component_name}}**: {{component_description}}
+        - Responsibilities: {{responsibilities}}
+        - Key Interfaces: {{interfaces}}
+      {{/core_components}}
+      
+      ### System Boundaries
+      - **Internal Systems**: {{internal_systems}}
+      - **External Dependencies**: {{external_dependencies}}
+      - **Third-party Integrations**: {{third_party_integrations}}
+
+  - id: technology-stack
+    title: "Technology Stack and Decisions"
+    instruction: "Document technology choices with rationale. Include decision records for key technology selections with brainstorming context integration."
+    type: text
+    template: |
+      ## Technology Stack and Decisions
+      
+      ### Primary Technology Stack
+      - **Frontend**: {{frontend_technologies}}
+        - Market positioning influence: {{frontend_market_considerations}}
+      - **Backend**: {{backend_technologies}}
+        - Competitive advantage factors: {{backend_competitive_factors}}
+      - **Database**: {{database_technologies}}
+        - Scalability considerations: {{database_scalability_factors}}
+      - **Infrastructure**: {{infrastructure_technologies}}
+        - Growth projection alignment: {{infrastructure_growth_alignment}}
+      - **DevOps**: {{devops_technologies}}
+        - Market deployment requirements: {{devops_market_requirements}}
+      
+      ### Technology Decision Records (TDRs) with Brainstorming Context
+      {{#technology_decisions}}
+      #### TDR-{{decision_id}}: {{decision_title}}
+      - **Context**: {{decision_context}}
+      - **Market Analysis Influence**: {{market_analysis_impact}}
+      - **Competitive Considerations**: {{competitive_analysis_factors}}
+      - **Stakeholder Preferences**: {{stakeholder_technology_input}}
+      - **Options Considered**: {{options_considered}}
+      - **Decision**: {{decision_made}}
+      - **Rationale**: {{decision_rationale}}
+        - **Market factors**: {{market_decision_factors}}
+        - **Competitive advantages**: {{competitive_decision_advantages}}
+        - **Stakeholder alignment**: {{stakeholder_decision_alignment}}
+      - **Consequences**: {{decision_consequences}}
+      {{/technology_decisions}}
+      
+      ### Alternative Considerations
+      {{#alternatives_considered}}
+      - **{{alternative_name}}**: {{why_not_selected}}
+        - Market positioning impact: {{alternative_market_impact}}
+        - Competitive implications: {{alternative_competitive_impact}}
+      {{/alternatives_considered}}
+
+  - id: component-design
+    title: "Detailed Component Design"
+    instruction: "Provide detailed design for each major system component. Include internal structure, interfaces, and dependencies."
+    type: text
+    template: |
+      ## Detailed Component Design
+      
+      {{#components}}
+      ### {{component_name}}
+      
+      **Purpose**: {{component_purpose}}
+      
+      **Internal Architecture**:
+      {{component_internal_architecture}}
+      
+      **Key Responsibilities**:
+      {{#responsibilities}}
+      - {{.}}
+      {{/responsibilities}}
+      
+      **External Interfaces**:
+      {{#external_interfaces}}
+      - **{{interface_name}}**: {{interface_description}}
+        - Protocol: {{protocol}}
+        - Data Format: {{data_format}}
+      {{/external_interfaces}}
+      
+      **Dependencies**:
+      {{#dependencies}}
+      - {{dependency_name}}: {{dependency_purpose}}
+      {{/dependencies}}
+      
+      **Data Storage**:
+      {{data_storage_requirements}}
+      
+      **Performance Considerations**:
+      {{performance_considerations}}
+      
+      ---
+      {{/components}}
+
+  - id: data-architecture
+    title: "Data Architecture"
+    instruction: "Design database schema, data flow, and storage strategies. Include entity relationships and data governance."
+    type: text
+    template: |
+      ## Data Architecture
+      
+      ### Data Model Overview
+      {{data_model_overview}}
+      
+      ### Entity Relationship Design
+      ```
+      {{entity_relationship_diagram}}
+      ```
+      
+      ### Core Entities
+      {{#core_entities}}
+      #### {{entity_name}}
+      - **Purpose**: {{entity_purpose}}
+      - **Key Attributes**: {{key_attributes}}
+      - **Relationships**: {{entity_relationships}}
+      - **Constraints**: {{entity_constraints}}
+      {{/core_entities}}
+      
+      ### Data Flow Architecture
+      {{#data_flows}}
+      - **{{flow_name}}**: {{flow_description}}
+        - Source: {{data_source}}
+        - Destination: {{data_destination}}
+        - Transformation: {{data_transformation}}
+        - Volume: {{data_volume}}
+      {{/data_flows}}
+      
+      ### Storage Strategy
+      - **Primary Database**: {{primary_database_strategy}}
+      - **Caching Layer**: {{caching_strategy}}
+      - **Data Archival**: {{archival_strategy}}
+      - **Backup and Recovery**: {{backup_strategy}}
+      
+      ### Data Governance
+      - **Data Privacy**: {{data_privacy_requirements}}
+      - **Data Retention**: {{data_retention_policy}}
+      - **Compliance**: {{compliance_requirements}}
+
+  - id: api-design
+    title: "API and Interface Design"
+    instruction: "Specify all APIs, communication protocols, and integration interfaces. Include authentication and error handling."
+    type: text
+    template: |
+      ## API and Interface Design
+      
+      ### API Strategy
+      - **API Style**: {{api_style}}
+      - **Versioning Strategy**: {{versioning_strategy}}
+      - **Authentication Method**: {{authentication_method}}
+      - **Rate Limiting**: {{rate_limiting_strategy}}
+      
+      ### Core API Endpoints
+      {{#api_endpoints}}
+      #### {{endpoint_name}}
+      - **Path**: `{{endpoint_path}}`
+      - **Method**: {{http_method}}
+      - **Purpose**: {{endpoint_purpose}}
+      - **Request Schema**: 
+        ```json
+        {{request_schema}}
+        ```
+      - **Response Schema**:
+        ```json
+        {{response_schema}}
+        ```
+      - **Error Responses**: {{error_responses}}
+      - **Authentication Required**: {{auth_required}}
+      {{/api_endpoints}}
+      
+      ### Integration Interfaces
+      {{#integration_interfaces}}
+      - **{{integration_name}}**: {{integration_description}}
+        - Protocol: {{integration_protocol}}
+        - Authentication: {{integration_auth}}
+        - Data Format: {{integration_data_format}}
+        - Error Handling: {{integration_error_handling}}
+      {{/integration_interfaces}}
+      
+      ### Event-Driven Communication
+      {{#events}}
+      - **{{event_name}}**: {{event_description}}
+        - Publisher: {{event_publisher}}
+        - Consumers: {{event_consumers}}
+        - Schema: {{event_schema}}
+      {{/events}}
+
+  - id: infrastructure-architecture
+    title: "Infrastructure and Deployment Architecture"
+    instruction: "Design deployment infrastructure, scaling strategy, and operational considerations."
+    type: text
+    template: |
+      ## Infrastructure and Deployment Architecture
+      
+      ### Deployment Architecture
+      {{deployment_architecture_overview}}
+      
+      ### Environment Strategy
+      - **Development**: {{dev_environment}}
+      - **Staging**: {{staging_environment}}
+      - **Production**: {{production_environment}}
+      
+      ### Infrastructure Components
+      {{#infrastructure_components}}
+      - **{{component_name}}**: {{component_description}}
+        - Technology: {{component_technology}}
+        - Scaling Strategy: {{scaling_strategy}}
+        - Monitoring: {{monitoring_approach}}
+      {{/infrastructure_components}}
+      
+      ### CI/CD Pipeline
+      ```
+      {{cicd_pipeline_diagram}}
+      ```
+      
+      **Pipeline Stages**:
+      {{#cicd_stages}}
+      - **{{stage_name}}**: {{stage_description}}
+        - Tools: {{stage_tools}}
+        - Quality Gates: {{quality_gates}}
+      {{/cicd_stages}}
+      
+      ### Scalability and Performance
+      - **Auto-scaling Strategy**: {{autoscaling_strategy}}
+      - **Load Balancing**: {{load_balancing_approach}}
+      - **Caching Strategy**: {{caching_approach}}
+      - **Performance Monitoring**: {{performance_monitoring}}
+      
+      ### Security Architecture
+      - **Authentication & Authorization**: {{auth_architecture}}
+      - **Data Encryption**: {{encryption_strategy}}
+      - **Network Security**: {{network_security}}
+      - **Compliance**: {{security_compliance}}
+
+  - id: risk-assessment
+    title: "Risk Assessment and Mitigation"
+    instruction: "Identify architectural risks and mitigation strategies. Include technical debt and scalability risks."
+    type: bullet-list
+    template: |
+      ## Risk Assessment and Mitigation
+      
+      ### Technical Risks
+      {{#technical_risks}}
+      - **Risk**: {{risk_description}}
+        - **Probability**: {{risk_probability}}
+        - **Impact**: {{risk_impact}}
+        - **Mitigation**: {{risk_mitigation}}
+      {{/technical_risks}}
+      
+      ### Scalability Risks
+      {{#scalability_risks}}
+      - **Risk**: {{risk_description}}
+        - **Threshold**: {{risk_threshold}}
+        - **Mitigation**: {{risk_mitigation}}
+      {{/scalability_risks}}
+      
+      ### Security Risks
+      {{#security_risks}}
+      - **Risk**: {{risk_description}}
+        - **Threat Model**: {{threat_model}}
+        - **Mitigation**: {{risk_mitigation}}
+      {{/security_risks}}
+      
+      ### Operational Risks
+      {{#operational_risks}}
+      - **Risk**: {{risk_description}}
+        - **Impact**: {{operational_impact}}
+        - **Mitigation**: {{risk_mitigation}}
+      {{/operational_risks}}
+
+  - id: implementation-roadmap
+    title: "Implementation Roadmap and Phasing"
+    instruction: "Provide implementation phases aligned with PRD phases. Include dependencies and parallelization opportunities."
+    type: text
+    template: |
+      ## Implementation Roadmap and Phasing
+      
+      ### Implementation Strategy
+      {{implementation_strategy_overview}}
+      
+      ### Phase Breakdown
+      {{#implementation_phases}}
+      #### Phase {{phase_number}}: {{phase_name}}
+      - **Objective**: {{phase_objective}}
+      - **Duration**: {{phase_duration}}
+      - **Team Size**: {{team_size}}
+      - **Dependencies**: {{phase_dependencies}}
+      - **Deliverables**: {{phase_deliverables}}
+      - **Success Criteria**: {{success_criteria}}
+      - **Risks**: {{phase_risks}}
+      {{/implementation_phases}}
+      
+      ### Parallelization Opportunities
+      {{#parallel_opportunities}}
+      - **Work Stream**: {{work_stream_name}}
+        - **Components**: {{parallel_components}}
+        - **Team Requirements**: {{team_requirements}}
+        - **Dependencies**: {{work_stream_dependencies}}
+        - **Coordination Points**: {{coordination_points}}
+      {{/parallel_opportunities}}
+      
+      ### Critical Path Analysis
+      - **Critical Path**: {{critical_path}}
+      - **Bottlenecks**: {{potential_bottlenecks}}
+      - **Risk Mitigation**: {{critical_path_risks}}
+
+  - id: success-metrics
+    title: "Success Metrics and Validation"
+    instruction: "Define measurable success criteria and validation approaches for the architecture."
+    type: bullet-list
+    template: |
+      ## Success Metrics and Validation
+      
+      ### Technical Success Metrics
+      {{#technical_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Measurement Method: {{measurement_method}}
+      {{/technical_metrics}}
+      
+      ### Business Success Metrics
+      {{#business_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Measurement Method: {{measurement_method}}
+      {{/business_metrics}}
+      
+      ### Validation Approach
+      - **Architecture Reviews**: {{architecture_review_process}}
+      - **Prototype Validation**: {{prototype_validation_approach}}
+      - **Performance Testing**: {{performance_testing_strategy}}
+      - **Security Testing**: {{security_testing_approach}}
+      
+      ### Quality Gates
+      {{#quality_gates}}
+      - **Gate**: {{gate_name}}
+        - Criteria: {{gate_criteria}}
+        - Validation Method: {{validation_method}}
+      {{/quality_gates}}
+
+examples:
+  - "System architecture for e-commerce platform with microservices"
+  - "Technical architecture for data analytics pipeline"
+  - "Full-stack web application architecture with real-time features"

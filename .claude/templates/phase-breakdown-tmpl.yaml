@@ -1,0 +1,349 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: prd-phase-breakdown
+  name: "PRD Phase Analysis and Breakdown Template"
+  version: 1.0
+  output:
+    format: markdown
+    location: "docs/prd-phase-breakdown.md"
+
+sections:
+  - id: analysis-overview
+    title: "PRD Analysis Overview"
+    instruction: "Provide high-level summary of PRD analysis, total phases identified, and parallelization potential."
+    type: text
+    template: |
+      # PRD Phase Analysis and Breakdown
+      
+      ## Analysis Overview
+      
+      **PRD Source**: {{prd_file_path}}
+      **Analysis Date**: {{analysis_date}}
+      **Total Phases Identified**: {{total_phases}}
+      **Parallelizable Phases**: {{parallelizable_phases}}
+      **Sequential Phases**: {{sequential_phases}}
+      
+      ### Executive Summary
+      {{analysis_summary}}
+      
+      ### Parallelization Potential
+      - **Maximum Parallel Streams**: {{max_parallel_streams}}
+      - **Estimated Time Savings**: {{estimated_time_savings}}
+      - **Critical Path Length**: {{critical_path_length}}
+      - **Coordination Overhead**: {{coordination_overhead}}
+
+  - id: phase-inventory
+    title: "Complete Phase Inventory"
+    instruction: "List all phases identified in the PRD with basic metadata and classification."
+    type: text
+    template: |
+      ## Complete Phase Inventory
+      
+      {{#phases}}
+      ### Phase {{phase_number}}: {{phase_name}}
+      - **Phase ID**: `{{phase_id}}`
+      - **Objective**: {{phase_objective}}
+      - **Type**: {{phase_type}} *(foundation/parallel/integration/sequential)*
+      - **Complexity Score**: {{complexity_score}}/10
+      - **Estimated Effort**: {{estimated_effort}}
+      - **Team Requirements**: {{team_requirements}}
+      - **Parallelization Status**: {{parallelization_status}}
+      
+      **Key Tasks**:
+      {{#tasks}}
+      - {{task_name}} ({{task_type}})
+      {{/tasks}}
+      
+      **Dependencies**: {{phase_dependencies}}
+      **Blocks**: {{blocks_phases}}
+      
+      ---
+      {{/phases}}
+
+  - id: dependency-analysis
+    title: "Detailed Dependency Analysis"
+    instruction: "Analyze all dependencies between phases and tasks. Include dependency types and strength."
+    type: text
+    template: |
+      ## Detailed Dependency Analysis
+      
+      ### Dependency Overview
+      {{dependency_overview}}
+      
+      ### Phase-Level Dependencies
+      {{#phase_dependencies}}
+      #### {{dependent_phase}} → {{dependency_phase}}
+      - **Dependency Type**: {{dependency_type}} *(technical/business/resource/data)*
+      - **Strength**: {{dependency_strength}} *(hard/soft/preference)*
+      - **Description**: {{dependency_description}}
+      - **Impact if Violated**: {{violation_impact}}
+      - **Alternative Approaches**: {{alternatives}}
+      {{/phase_dependencies}}
+      
+      ### Task-Level Dependencies
+      {{#task_dependencies}}
+      #### {{dependent_task}} → {{dependency_task}}
+      - **Phases**: {{dependent_phase}} → {{dependency_phase}}
+      - **Type**: {{dependency_type}}
+      - **Reason**: {{dependency_reason}}
+      - **Files/Components**: {{shared_components}}
+      - **Workaround Possible**: {{workaround_available}}
+      {{/task_dependencies}}
+      
+      ### Critical Path Analysis
+      **Critical Path**: {{critical_path}}
+      **Critical Path Duration**: {{critical_path_duration}}
+      **Critical Path Tasks**: {{critical_path_tasks}}
+      
+      ### Dependency Bottlenecks
+      {{#dependency_bottlenecks}}
+      - **Bottleneck**: {{bottleneck_name}}
+        - **Affected Phases**: {{affected_phases}}
+        - **Impact**: {{bottleneck_impact}}
+        - **Mitigation**: {{bottleneck_mitigation}}
+      {{/dependency_bottlenecks}}
+
+  - id: parallelization-analysis
+    title: "Parallelization Opportunities"
+    instruction: "Identify phases and tasks that can be executed in parallel. Group into execution waves."
+    type: text
+    template: |
+      ## Parallelization Opportunities
+      
+      ### Parallelization Strategy
+      {{parallelization_strategy}}
+      
+      ### Independent Work Streams
+      {{#work_streams}}
+      #### Work Stream {{stream_number}}: {{stream_name}}
+      - **Focus Area**: {{stream_focus}}
+      - **Phases Included**: {{stream_phases}}
+      - **Team Requirements**: {{stream_team_requirements}}
+      - **Duration**: {{stream_duration}}
+      - **Dependencies on Other Streams**: {{external_dependencies}}
+      - **Deliverables**: {{stream_deliverables}}
+      - **Integration Points**: {{integration_points}}
+      {{/work_streams}}
+      
+      ### Execution Wave Analysis
+      {{#execution_waves}}
+      #### Wave {{wave_number}}: {{wave_name}}
+      **Duration**: {{wave_duration}}
+      **Max Concurrent Teams**: {{max_concurrent_teams}}
+      
+      **Phases in Wave**:
+      {{#wave_phases}}
+      - {{phase_name}} ({{team_assignment}})
+      {{/wave_phases}}
+      
+      **Wave Dependencies**: {{wave_dependencies}}
+      **Synchronization Points**: {{synchronization_points}}
+      **Integration Requirements**: {{integration_requirements}}
+      {{/execution_waves}}
+      
+      ### Parallel Execution Constraints
+      {{#parallel_constraints}}
+      - **Constraint**: {{constraint_name}}
+        - **Description**: {{constraint_description}}
+        - **Affected Phases**: {{affected_phases}}
+        - **Mitigation**: {{constraint_mitigation}}
+      {{/parallel_constraints}}
+
+  - id: coordination-requirements
+    title: "Coordination and Synchronization Requirements"
+    instruction: "Define coordination needs, communication protocols, and synchronization points for parallel execution."
+    type: text
+    template: |
+      ## Coordination and Synchronization Requirements
+      
+      ### Coordination Overview
+      {{coordination_overview}}
+      
+      ### Synchronization Points
+      {{#synchronization_points}}
+      #### {{sync_point_name}}
+      - **Trigger**: {{sync_trigger}}
+      - **Participating Phases**: {{participating_phases}}
+      - **Coordination Type**: {{coordination_type}} *(integration/review/merge/handoff)*
+      - **Success Criteria**: {{sync_success_criteria}}
+      - **Duration**: {{sync_duration}}
+      - **Rollback Plan**: {{rollback_plan}}
+      {{/synchronization_points}}
+      
+      ### Inter-Team Communication Requirements
+      {{#communication_requirements}}
+      - **Communication Type**: {{communication_type}}
+        - **Frequency**: {{communication_frequency}}
+        - **Participants**: {{communication_participants}}
+        - **Medium**: {{communication_medium}}
+        - **Agenda Topics**: {{communication_topics}}
+      {{/communication_requirements}}
+      
+      ### Shared Resource Management
+      {{#shared_resources}}
+      - **Resource**: {{resource_name}}
+        - **Type**: {{resource_type}} *(file/database/api/environment)*
+        - **Access Pattern**: {{access_pattern}}
+        - **Conflict Resolution**: {{conflict_resolution}}
+        - **Coordination Method**: {{coordination_method}}
+      {{/shared_resources}}
+      
+      ### Integration Checkpoints
+      {{#integration_checkpoints}}
+      #### {{checkpoint_name}}
+      - **Milestone**: {{checkpoint_milestone}}
+      - **Integration Scope**: {{integration_scope}}
+      - **Validation Criteria**: {{validation_criteria}}
+      - **Responsible Teams**: {{responsible_teams}}
+      - **Contingency Plan**: {{contingency_plan}}
+      {{/integration_checkpoints}}
+
+  - id: risk-analysis
+    title: "Parallel Execution Risk Analysis"
+    instruction: "Identify risks specific to parallel execution and provide mitigation strategies."
+    type: text
+    template: |
+      ## Parallel Execution Risk Analysis
+      
+      ### Risk Assessment Overview
+      {{risk_assessment_overview}}
+      
+      ### Coordination Risks
+      {{#coordination_risks}}
+      - **Risk**: {{risk_name}}
+        - **Description**: {{risk_description}}
+        - **Probability**: {{risk_probability}} *(High/Medium/Low)*
+        - **Impact**: {{risk_impact}} *(High/Medium/Low)*
+        - **Affected Phases**: {{affected_phases}}
+        - **Mitigation Strategy**: {{mitigation_strategy}}
+        - **Contingency Plan**: {{contingency_plan}}
+      {{/coordination_risks}}
+      
+      ### Technical Integration Risks
+      {{#integration_risks}}
+      - **Risk**: {{risk_name}}
+        - **Technical Area**: {{technical_area}}
+        - **Risk Description**: {{risk_description}}
+        - **Detection Method**: {{detection_method}}
+        - **Prevention Strategy**: {{prevention_strategy}}
+        - **Recovery Plan**: {{recovery_plan}}
+      {{/integration_risks}}
+      
+      ### Resource Conflict Risks
+      {{#resource_risks}}
+      - **Resource**: {{resource_name}}
+        - **Conflict Type**: {{conflict_type}}
+        - **Probability**: {{risk_probability}}
+        - **Impact**: {{conflict_impact}}
+        - **Prevention**: {{conflict_prevention}}
+        - **Resolution Process**: {{resolution_process}}
+      {{/resource_risks}}
+      
+      ### Communication and Coordination Risks
+      {{#communication_risks}}
+      - **Risk**: {{risk_name}}
+        - **Communication Gap**: {{communication_gap}}
+        - **Potential Impact**: {{potential_impact}}
+        - **Early Warning Signs**: {{warning_signs}}
+        - **Mitigation**: {{risk_mitigation}}
+      {{/communication_risks}}
+
+  - id: team-allocation
+    title: "Team Allocation and Skill Requirements"
+    instruction: "Define team structure, skill requirements, and resource allocation for parallel execution."
+    type: text
+    template: |
+      ## Team Allocation and Skill Requirements
+      
+      ### Team Structure Overview
+      {{team_structure_overview}}
+      
+      ### Team Assignments by Phase
+      {{#team_assignments}}
+      #### Team {{team_id}}: {{team_name}}
+      - **Primary Focus**: {{team_focus}}
+      - **Assigned Phases**: {{assigned_phases}}
+      - **Team Size**: {{team_size}}
+      - **Duration**: {{team_duration}}
+      - **Key Skills Required**: {{required_skills}}
+      - **Skill Gaps**: {{skill_gaps}}
+      - **Dependencies on Other Teams**: {{team_dependencies}}
+      {{/team_assignments}}
+      
+      ### Skill Requirements Matrix
+      {{#skill_requirements}}
+      - **Skill**: {{skill_name}}
+        - **Proficiency Level**: {{proficiency_level}}
+        - **Required for Phases**: {{required_phases}}
+        - **Number of People**: {{people_required}}
+        - **Availability**: {{skill_availability}}
+        - **Training Needs**: {{training_needs}}
+      {{/skill_requirements}}
+      
+      ### Cross-Team Collaboration
+      {{#collaboration_requirements}}
+      - **Collaboration**: {{collaboration_name}}
+        - **Teams Involved**: {{involved_teams}}
+        - **Collaboration Type**: {{collaboration_type}}
+        - **Frequency**: {{collaboration_frequency}}
+        - **Deliverables**: {{collaboration_deliverables}}
+      {{/collaboration_requirements}}
+      
+      ### Resource Optimization Opportunities
+      {{#optimization_opportunities}}
+      - **Opportunity**: {{optimization_name}}
+        - **Description**: {{optimization_description}}
+        - **Potential Savings**: {{potential_savings}}
+        - **Implementation**: {{optimization_implementation}}
+      {{/optimization_opportunities}}
+
+  - id: success-metrics
+    title: "Success Metrics and Validation"
+    instruction: "Define success criteria, metrics, and validation approaches for parallel execution."
+    type: bullet-list
+    template: |
+      ## Success Metrics and Validation
+      
+      ### Execution Success Metrics
+      {{#execution_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Measurement: {{measurement_method}}
+        - Frequency: {{measurement_frequency}}
+      {{/execution_metrics}}
+      
+      ### Coordination Success Metrics
+      {{#coordination_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Measurement: {{measurement_method}}
+        - Warning Threshold: {{warning_threshold}}
+      {{/coordination_metrics}}
+      
+      ### Quality Metrics
+      {{#quality_metrics}}
+      - **{{metric_name}}**: {{metric_description}}
+        - Target: {{metric_target}}
+        - Measurement: {{measurement_method}}
+        - Quality Gate: {{quality_gate}}
+      {{/quality_metrics}}
+      
+      ### Validation Checkpoints
+      {{#validation_checkpoints}}
+      - **Checkpoint**: {{checkpoint_name}}
+        - **Timing**: {{checkpoint_timing}}
+        - **Validation Criteria**: {{validation_criteria}}
+        - **Success Threshold**: {{success_threshold}}
+        - **Escalation Process**: {{escalation_process}}
+      {{/validation_checkpoints}}
+      
+      ### Performance Benchmarks
+      - **Sequential Execution Baseline**: {{sequential_baseline}}
+      - **Parallel Execution Target**: {{parallel_target}}
+      - **Minimum Acceptable Improvement**: {{minimum_improvement}}
+      - **Coordination Overhead Budget**: {{overhead_budget}}
+
+examples:
+  - "PRD phase breakdown for e-commerce platform with 8 parallel work streams"
+  - "Complex system integration with sequential foundation and parallel feature development"
+  - "Multi-team mobile and web application development with shared backend"
