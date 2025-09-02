@@ -15,6 +15,7 @@
       "Bash(npm:*)",
       "Bash(ls:*)",
       "Bash(cp:*)",
+      "Read(*)",
       "Write",
       "Edit",
       "Bash(chmod:*)",

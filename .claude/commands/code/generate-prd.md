@@ -1,3 +1,9 @@
+---
+description: "Generate comprehensive PRDs with parallelizable phases, dependency mapping, and multi-agent coordination strategy"
+argument-hint: "feature_file_path"
+allowed-tools: ["Read", "Write", "Glob", "Grep", "WebSearch", "Task", "mcp__context7", "mcp__gemini-cli__ask-gemini"]
+---
+
 # Create PRD
 
 ## Feature file: $ARGUMENTS
@@ -36,9 +42,78 @@ The AI agent only gets the context you are appending to the PRD and training dat
 - Start with pseudocode showing approach
 - Reference real files for patterns
 - Include error handling strategy
-- When writing a PRD for implementing a feature, break the implementation into phases with tasks within each phase.
-- List the phases and tasks to be completed to fulfill the PRD in the order they should be completed.
-- Consider how each phase would affect or depend on the previous phase.
+- Ensure code is properly documented using docstrings, inline comments, and updating README files
+
+#### Phase-Based Implementation Strategy
+- **Break down PRD into phases** with clearly defined deliverables
+- **Identify parallelizable work** within and across phases
+- **Create dependency graph** showing phase relationships
+- **Design for multi-agent execution** where phases/tasks can be distributed to separate agents
+- **Define clear handoff points** between phases with validation checkpoints
+
+#### Phase Structure Template
+Each phase should include:
+- **Phase Name & Goal**: Clear objective and deliverable
+- **Dependencies**: Which phases must complete before this one starts
+- **Parallelization Opportunities**: Tasks within phase that can run concurrently
+- **Agent Assignment Strategy**: How work could be distributed across multiple agents
+- **Validation Criteria**: How to verify phase completion
+- **Handoff Artifacts**: What gets passed to dependent phases
+
+#### Dependency Graph Format
+Include a visual dependency graph using Mermaid syntax:
+```mermaid
+graph TD
+    A[Phase 1: Foundation] --> B[Phase 2: Core Logic]
+    A --> C[Phase 2: UI Components] 
+    B --> D[Phase 3: Integration]
+    C --> D
+    D --> E[Phase 4: Testing & Polish]
+    
+    %% Parallel work within phases
+    B1[Task: API Design] --> B2[Task: Data Models]
+    B3[Task: Business Logic] 
+    B1 --> B3
+    B2 --> B3
+```
+
+#### Implementation Phases Template
+```markdown
+## Implementation Phases
+
+### Phase 1: [Phase Name]
+**Goal**: [Clear deliverable description]
+**Dependencies**: None | [Previous phase names]
+**Estimated Effort**: [Agent-days]
+**Agent Assignment**: [Single/Multiple agents]
+
+**Tasks**:
+- [ ] **Task 1.1** (Parallelizable: Yes/No) - [Description]
+- [ ] **Task 1.2** (Parallelizable: Yes/No) - [Description]
+- [ ] **Task 1.3** (Parallelizable: Yes/No) - [Description]
+
+**Parallelization Strategy**:
+- Agent A: Tasks 1.1, 1.3
+- Agent B: Task 1.2
+
+**Validation Criteria**:
+- [ ] [Specific check 1]
+- [ ] [Specific check 2]
+
+**Handoff Artifacts**:
+- [File/component/interface descriptions]
+- [Documentation updates]
+
+---
+[Repeat for each phase]
+```
+
+#### Multi-Agent Coordination Guidelines
+- **Phase-level parallelization**: Independent phases can be assigned to different agents
+- **Task-level parallelization**: Within a phase, independent tasks can be distributed
+- **Synchronization points**: Clear checkpoints where agents must coordinate
+- **Conflict resolution**: Strategy for handling overlapping file modifications
+- **Communication protocol**: How agents share progress and coordinate handoffs
 
 ## Anti-Patterns to Avoid
 - Don't create new patterns when existing ones work
@@ -56,10 +131,17 @@ uv run pytest tests/ -v
 
 *** CRITICAL AFTER YOU ARE DONE RESEARCHING AND EXPLORING THE CODEBASE BEFORE YOU START WRITING THE PRD ***
 
-*** ULTRATHINK ABOUT THE PRD AND PLAN YOUR APPROACH THEN START WRITING THE PRD. BREAK DOWN THE PRD INTO MANAGEABLE PHASES WITH A TASK LIST FOR EACH PHASE. ***
+*** ULTRATHINK ABOUT THE PRD AND PLAN YOUR APPROACH THEN START WRITING THE PRD. BREAK DOWN THE PRD INTO PARALLELIZABLE PHASES WITH DEPENDENCY MAPPING. ***
+
+**Key Planning Requirements**:
+1. **Identify parallelizable work** - Which phases and tasks can run concurrently?
+2. **Map dependencies clearly** - What must complete before other work can begin?
+3. **Design for multi-agent execution** - How can the work be distributed across agents?
+4. **Create visual dependency graph** - Use Mermaid syntax to show relationships
+5. **Define coordination points** - Where do agents need to synchronize?
 
 ## Output
-Save as: `prds/{feature_name}.md`, making the directory `prds/` if it does not exist.
+Save as: `prds/{next_highest_integer}_{feature_name}.md`, making the directory `prds/` if it does not exist.
 
 ## Quality Checklist
 - [ ] All necessary context included
@@ -67,6 +149,12 @@ Save as: `prds/{feature_name}.md`, making the directory `prds/` if it does not e
 - [ ] References existing patterns
 - [ ] Clear implementation path
 - [ ] Error handling documented
+- [ ] **Dependency graph included** with Mermaid visualization
+- [ ] **Phases clearly defined** with specific goals and deliverables
+- [ ] **Parallelization opportunities identified** at phase and task level
+- [ ] **Multi-agent coordination strategy** documented
+- [ ] **Handoff artifacts specified** for each phase
+- [ ] **Synchronization points defined** where coordination is needed
 
 Score the PRD on a scale of 1-10 (confidence level to succeed in one-pass implementation using claude codes)
 

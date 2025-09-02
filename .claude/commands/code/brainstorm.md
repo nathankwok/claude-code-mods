@@ -1,8 +1,8 @@
 ---
-allowed-tools: Task
+allowed-tools: Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
 description: Interactive BMAD-inspired brainstorming session with structured elicitation techniques
 argument-hint: [project-context] | "resume_session" | "list_sessions"
-model: sonnet
+model: opus
 ---
 
 # Interactive Brainstorming Session

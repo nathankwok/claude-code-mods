@@ -92,13 +92,13 @@ Create an automated code review flow where a code implementation agent writes co
 ### Phase 4: Create Supporting Commands
 
 #### Task 4.1: PRD Execution Command
-**File:** Update `.claude/commands/execute-prd.md`
+**File:** Update `.claude/commands/code/execute-prd.md`
 - Modify to use the new implementation agent
 - Add phase-by-phase execution with review gates
 - Include review status in progress reporting
 
 #### Task 4.2: Manual Review Command
-**File:** `.claude/commands/review-prd-phase.md`
+**File:** `.claude/commands/code/code-review.md`
 - Allow manual triggering of code review for specific phase
 - Useful for debugging and manual intervention
 

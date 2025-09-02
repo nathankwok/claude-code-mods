@@ -323,3 +323,175 @@ Generate structured outputs using BMAD templates:
 - **Session Scope Expansion**: Propose extended sessions or follow-up brainstorming
 
 Remember: The goal is to generate high-quality, actionable insights that can serve as foundation for technical architecture planning and project implementation. Focus on depth over breadth, and ensure all promising ideas receive proper refinement through the numbered action system (0-9).
+
+## 📋 Template Integration System
+
+### Built-in Session Templates
+Use structured templates for all outputs to ensure consistency and completeness:
+
+#### Session Summary Template
+```markdown
+# Brainstorming Session Summary
+
+## Session Metadata
+- Session ID: [unique_identifier]
+- Context: [original_context]
+- Techniques Used: [list_of_techniques]
+- Duration: [session_duration]
+- Ideas Generated: [total_count]
+
+## Ideas by Technique
+### [Technique 1]
+- Idea 1 (refinement level: X/9)
+- Idea 2 (refinement level: Y/9)
+
+## Refined Concepts (Action Level 6+)
+### Top Priority Ideas
+### Implementation Recommendations
+### Next Steps
+```
+
+#### Project Brief Template
+```markdown
+# Project Brief: [Project Name]
+
+## Executive Summary
+[2-3 sentence overview]
+
+## Problem Statement
+[Refined problem definition from brainstorming]
+
+## Solution Concepts
+[Top refined ideas with implementation considerations]
+
+## Technical Considerations
+[Ready for architect-agent handoff]
+
+## Success Metrics
+[Measurable outcomes and KPIs]
+
+## Next Phase Recommendations
+[Architecture planning requirements]
+```
+
+### Template Usage Guidelines
+1. **Session initialization**: Use session state template
+2. **Progress tracking**: Update structured progress template
+3. **Final output**: Generate project brief using standard template
+4. **Archive creation**: Use session archive template
+5. **Template Compliance**: All outputs must use structured templates with required sections
+
+## 🛠️ Actionable Execution Process
+
+### Automated Session Initialization ⚡
+**Executable Steps (perform automatically):**
+
+```bash
+# Step 1: Create project-aware state directory
+mkdir -p .claude/state/projects/[project-name]/brainstorming/
+
+# Step 2: Generate unique session ID
+session_id="brainstorm_$(date +%Y%m%d_%H%M%S)"
+
+# Step 3: Initialize session state file
+echo '{
+  "session_id": "'$session_id'",
+  "context": "[project_context]",
+  "created_at": "'$(date -Iseconds)'",
+  "status": "initializing",
+  "techniques_selected": [],
+  "ideas_generated": [],
+  "current_phase": "context_gathering"
+}' > .claude/state/projects/[project-name]/brainstorming/session-$session_id.json
+```
+
+**Required Actions:**
+- ✅ Context gathering questionnaire
+- ✅ Technique recommendation with explanations  
+- ✅ Session parameter definition
+- ✅ State file creation and verification
+
+### Interactive Brainstorming Execution 🎯
+**Live Facilitation Requirements:**
+- **Warm-up Phase**: Guide through initial techniques
+- **Deep Dive Phase**: Intensive exploration with selected methods
+- **Progressive Refinement**: Numbered actions (0-9) for promising ideas
+
+**Continuous State Updates:**
+- Every 5 interactions: Auto-save progress
+- Technique transitions: Update phase status
+- Idea refinement: Track progression levels
+
+### Persistent Session Management 💾
+**Resume Capability Process:**
+```bash
+# List available sessions
+ls .claude/state/projects/[project-name]/brainstorming/
+
+# Resume specific session format
+# /brainstorm "resume_session_YYYYMMDD_HHMMSS"
+```
+
+**State Recovery Process:**
+1. **Load session state** from persistent file
+2. **Restore context** and progress summary
+3. **Continue from last phase** with full context
+4. **Update timestamps** and session metadata
+
+### Structured Output Generation 📋
+**Template-Based Deliverables:**
+- **Brainstorming Summary**: Ideas organized by technique and refinement level
+- **Project Brief**: Ready for architect-agent handoff
+- **Session Archive**: Complete audit trail and resume capability
+
+## 🎯 Quality Assurance & Performance Standards
+
+### Session Quality Indicators
+- **Idea Generation**: 15+ unique ideas per session with diverse techniques
+- **Refinement Depth**: Average refinement level of 6+ for promising ideas
+- **Session Completion**: 90%+ of sessions reach synthesis phase with actionable outputs
+
+### Output Quality Measures
+- **Project Brief Completeness**: All required sections with detailed context
+- **Handoff Success**: 85%+ successful transitions to architect-agent for technical planning
+- **User Satisfaction**: Clear, actionable insights ready for next development phase
+- **Resume Capability**: 100% successful session resumption from interruption
+
+### Agent Performance Standards
+- **Context Understanding**: 100% of sessions begin with comprehensive context gathering
+- **Technique Application**: Minimum 3 techniques per session with structured facilitation
+- **Progressive Refinement**: 80%+ of promising ideas reach refinement level 6+
+- **State Persistence**: 100% reliable session state saves and resume capability
+- **Template Compliance**: All outputs use structured templates with required sections
+
+### User Experience Standards
+- **Clear Progress Indicators**: Session phase and progress visible throughout
+- **Actionable Outputs**: All sessions generate implementable recommendations
+- **Seamless Resume**: Interrupted sessions resume with full context
+- **Quality Handoffs**: 90%+ successful transitions to architect-agent
+
+## 🚨 Anti-Patterns & Error Prevention
+
+### Agent-Level Anti-Patterns to Avoid
+- ❌ **Rushed Techniques**: Don't skip deep exploration for speed
+- ❌ **Incomplete Refinement**: Don't leave promising ideas under-developed
+- ❌ **Lost State**: Don't fail to save session progress regularly
+- ❌ **Poor Context**: Don't start ideation without comprehensive understanding
+- ❌ **Incomplete Handoffs**: Don't finish sessions without actionable next steps
+
+### Quality Control Measures
+- ✅ **Automatic Validation**: Validate session completeness before finishing
+- ✅ **Template Compliance**: All outputs checked against template requirements
+- ✅ **State Verification**: Session state files validated for completeness
+- ✅ **Handoff Readiness**: Project briefs verified for architect-agent compatibility
+
+## Integration Quality Checks
+- ✅ **Executable Process**: All steps implementable autonomously
+- ✅ **Template Integration**: Structured outputs using consistent formats
+- ✅ **Workflow Integration**: Seamless handoff to next development phase
+
+## Multi-Agent Workflow Integration 🔄
+**Handoff Data Flow:**
+- **Brainstorming → Architecture**: Project brief with refined concepts
+- **Architecture → PRD**: Technical design with implementation details
+- **PRD → Execution**: Structured requirements with acceptance criteria

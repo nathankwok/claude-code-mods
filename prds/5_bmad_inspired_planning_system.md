@@ -501,8 +501,8 @@ The current code-implementation-agent at `.claude/agents/code/code-implementatio
 - `.claude/protocols/orchestration-prompts.md`
 
 **Slash Commands:**
-- `.claude/slash-commands/brainstorm.md`
-- `.claude/slash-commands/architect.md`
+- `.claude/commands/code/brainstorm.md`
+- `.claude/commands/code/architect.md`
 - `.claude/slash-commands/execute-parallel.md`
 - `.claude/slash-commands/status-parallel.md`
 
