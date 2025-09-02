@@ -1,0 +1,705 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: market-analysis
+  name: "Market Research and Competitive Analysis Template"
+  version: 1.0
+  output:
+    format: markdown
+    location: "docs/market-analysis-report.md"
+
+sections:
+  - id: executive-summary
+    title: "Market Analysis Executive Summary"
+    instruction: "Provide high-level market overview and key findings for stakeholder decision-making"
+    type: "template"
+    template: |
+      # Market Analysis Report: {{project_domain}}
+      
+      ## Executive Summary
+      
+      **Analysis Date**: {{analysis_date}}
+      **Research Scope**: {{research_scope}}
+      **Market Size**: {{market_size_estimate}}
+      **Growth Rate**: {{market_growth_rate}}
+      
+      ### Key Findings
+      {{#each key_findings}}
+      - **{{finding_category}}**: {{finding_description}}
+      {{/each}}
+      
+      ### Strategic Recommendations
+      {{#each strategic_recommendations}}
+      - **{{recommendation_area}}**: {{recommendation_summary}}
+      {{/each}}
+      
+      ### Market Opportunity Assessment
+      - **Opportunity Size**: {{opportunity_size_estimate}}
+      - **Competition Level**: {{competition_intensity}}
+      - **Entry Barriers**: {{entry_barriers_level}}
+      - **Time to Market Window**: {{market_window_assessment}}
+
+  - id: market-landscape
+    title: "Market Landscape Analysis"
+    instruction: "Comprehensive analysis of market size, segments, trends, and dynamics"
+    type: "template"
+    template: |
+      ## Market Landscape
+      
+      ### Market Size and Growth
+      - **Total Addressable Market (TAM)**: {{total_addressable_market}}
+      - **Serviceable Addressable Market (SAM)**: {{serviceable_addressable_market}}
+      - **Serviceable Obtainable Market (SOM)**: {{serviceable_obtainable_market}}
+      - **Historical Growth Rate**: {{historical_growth_rate}}
+      - **Projected Growth Rate**: {{projected_growth_rate}}
+      - **Growth Drivers**: 
+        {{#each growth_drivers}}
+        - {{driver}}
+        {{/each}}
+      
+      ### Market Segments
+      {{#each market_segments}}
+      #### {{segment_name}}
+      - **Size**: {{segment_size}}
+      - **Growth Rate**: {{segment_growth}}
+      - **Characteristics**: {{segment_characteristics}}
+      - **Key Players**: {{segment_key_players}}
+      - **Opportunity Assessment**: {{segment_opportunity}}
+      - **Our Fit**: {{our_segment_fit}}/10
+      
+      {{/each}}
+      
+      ### Market Trends and Dynamics
+      
+      #### Technology Trends
+      {{#each technology_trends}}
+      - **{{trend_name}}**: {{trend_description}}
+        - **Impact Level**: {{impact_level}}
+        - **Timeline**: {{trend_timeline}}
+        - **Opportunity**: {{trend_opportunity}}
+        - **Threat**: {{trend_threat}}
+      {{/each}}
+      
+      #### Consumer Behavior Trends
+      {{#each consumer_trends}}
+      - **{{trend_name}}**: {{trend_description}}
+        - **Adoption Rate**: {{adoption_rate}}
+        - **Target Demographics**: {{target_demographics}}
+        - **Implications**: {{trend_implications}}
+      {{/each}}
+      
+      #### Regulatory and Economic Factors
+      {{#each regulatory_factors}}
+      - **{{factor_name}}**: {{factor_description}}
+        - **Impact**: {{regulatory_impact}}
+        - **Timeline**: {{regulatory_timeline}}
+        - **Compliance Requirements**: {{compliance_needs}}
+      {{/each}}
+
+  - id: competitive-analysis
+    title: "Competitive Landscape Analysis"
+    instruction: "Detailed analysis of direct and indirect competitors with positioning assessment"
+    type: "template"
+    template: |
+      ## Competitive Analysis
+      
+      ### Competitive Landscape Overview
+      - **Market Concentration**: {{market_concentration_level}}
+      - **Competition Intensity**: {{competition_intensity_level}}
+      - **Barriers to Entry**: {{entry_barriers_assessment}}
+      - **Switching Costs**: {{customer_switching_costs}}
+      
+      ### Direct Competitors
+      {{#each direct_competitors}}
+      #### {{competitor_name}}
+      - **Company Profile**: {{company_description}}
+      - **Market Share**: {{market_share}}
+      - **Revenue**: {{estimated_revenue}}
+      - **Funding Status**: {{funding_status}}
+      
+      **Product/Service Offering**:
+      - **Core Features**: 
+        {{#each core_features}}
+        - {{feature}}
+        {{/each}}
+      - **Pricing Model**: {{pricing_model}}
+      - **Target Market**: {{target_market}}
+      - **Value Proposition**: {{value_proposition}}
+      
+      **Strengths**:
+      {{#each strengths}}
+      - {{strength}}
+      {{/each}}
+      
+      **Weaknesses**:
+      {{#each weaknesses}}
+      - {{weakness}}
+      {{/each}}
+      
+      **Market Position**: {{market_position}}
+      **Customer Satisfaction**: {{customer_satisfaction_score}}
+      **Growth Trajectory**: {{growth_assessment}}
+      
+      **Strategic Moves**:
+      {{#each recent_strategic_moves}}
+      - {{move_description}} ({{move_date}})
+      {{/each}}
+      
+      ---
+      {{/each}}
+      
+      ### Indirect Competitors
+      {{#each indirect_competitors}}
+      #### {{competitor_name}}
+      - **Business Model**: {{business_model}}
+      - **Competitive Threat Level**: {{threat_level}}
+      - **Differentiation**: {{key_differentiation}}
+      - **Market Overlap**: {{market_overlap_percentage}}
+      - **Customer Alternatives**: {{alternative_solutions}}
+      - **Threat Timeline**: {{threat_timeline}}
+      
+      {{/each}}
+      
+      ### Emerging Competitors and Threats
+      {{#each emerging_competitors}}
+      #### {{competitor_name}}
+      - **Stage**: {{company_stage}}
+      - **Innovation**: {{innovation_description}}
+      - **Potential Impact**: {{potential_impact}}
+      - **Timeline to Market**: {{timeline_estimate}}
+      - **Funding**: {{funding_status}}
+      - **Watch Priority**: {{watch_priority_level}}
+      
+      {{/each}}
+
+  - id: customer-insights
+    title: "Customer and User Analysis"
+    instruction: "Deep dive into target customers, user behavior, needs, and preferences"
+    type: "template"
+    template: |
+      ## Customer and User Insights
+      
+      ### Target Customer Segments
+      {{#each customer_segments}}
+      #### {{segment_name}}
+      
+      **Demographics**:
+      - **Size**: {{segment_size}}
+      - **Age Range**: {{age_range}}
+      - **Geographic Distribution**: {{geographic_distribution}}
+      - **Income Level**: {{income_characteristics}}
+      - **Industry/Sector**: {{industry_focus}}
+      
+      **Psychographics**:
+      - **Values**: {{core_values}}
+      - **Lifestyle**: {{lifestyle_characteristics}}
+      - **Technology Adoption**: {{tech_adoption_level}}
+      - **Decision-Making Style**: {{decision_making_style}}
+      
+      **Behavioral Patterns**:
+      - **Purchase Behavior**: {{purchase_behavior}}
+      - **Usage Patterns**: {{usage_patterns}}
+      - **Channel Preferences**: {{channel_preferences}}
+      - **Brand Loyalty**: {{brand_loyalty_level}}
+      
+      **Pain Points and Needs**:
+      {{#each pain_points}}
+      - **{{pain_point_category}}**: {{pain_point_description}}
+        - **Severity**: {{pain_severity}}/10
+        - **Current Solutions**: {{current_solutions}}
+        - **Unmet Need**: {{unmet_need_description}}
+      {{/each}}
+      
+      **Value Drivers**:
+      {{#each value_drivers}}
+      - **{{driver_name}}**: {{driver_description}}
+        - **Importance**: {{importance_rating}}/10
+        - **Current Satisfaction**: {{satisfaction_level}}/10
+        - **Opportunity Gap**: {{opportunity_score}}/10
+      {{/each}}
+      
+      ---
+      {{/each}}
+      
+      ### Customer Journey Analysis
+      {{#each customer_journeys}}
+      #### {{journey_name}} Journey
+      
+      **Journey Stages**:
+      {{#each journey_stages}}
+      1. **{{stage_name}}**: {{stage_description}}
+         - **Duration**: {{stage_duration}}
+         - **Key Activities**: {{key_activities}}
+         - **Pain Points**: {{stage_pain_points}}
+         - **Touchpoints**: {{touchpoints}}
+         - **Emotions**: {{emotional_state}}
+         - **Opportunities**: {{improvement_opportunities}}
+      
+      {{/each}}
+      
+      **Journey Insights**:
+      - **Critical Success Factors**: {{critical_success_factors}}
+      - **Drop-off Points**: {{major_drop_off_points}}
+      - **Acceleration Opportunities**: {{acceleration_opportunities}}
+      - **Differentiation Moments**: {{differentiation_moments}}
+      
+      {{/each}}
+      
+      ### User Behavior Insights
+      - **Usage Frequency**: {{average_usage_frequency}}
+      - **Session Duration**: {{average_session_duration}}
+      - **Feature Adoption**: {{feature_adoption_patterns}}
+      - **Support Needs**: {{common_support_issues}}
+      - **Churn Factors**: {{primary_churn_reasons}}
+      - **Retention Drivers**: {{key_retention_factors}}
+
+  - id: market-positioning
+    title: "Market Positioning and Opportunity Assessment"
+    instruction: "Analysis of positioning opportunities and competitive differentiation strategies"
+    type: "template"
+    template: |
+      ## Market Positioning and Opportunities
+      
+      ### Competitive Positioning Map
+      
+      **Primary Positioning Axes**:
+      - **X-Axis**: {{x_axis_attribute}} ({{x_axis_range}})
+      - **Y-Axis**: {{y_axis_attribute}} ({{y_axis_range}})
+      
+      **Competitor Positions**:
+      {{#each competitor_positions}}
+      - **{{competitor_name}}**: ({{x_position}}, {{y_position}})
+        - **Positioning Strategy**: {{positioning_description}}
+      {{/each}}
+      
+      **White Space Opportunities**:
+      {{#each white_space_opportunities}}
+      - **Position**: ({{x_position}}, {{y_position}})
+        - **Opportunity**: {{opportunity_description}}
+        - **Market Size**: {{opportunity_market_size}}
+        - **Accessibility**: {{accessibility_assessment}}
+        - **Defensibility**: {{defensibility_score}}/10
+      {{/each}}
+      
+      ### Differentiation Opportunities
+      {{#each differentiation_opportunities}}
+      #### {{opportunity_name}}
+      - **Differentiation Type**: {{differentiation_type}}
+      - **Description**: {{differentiation_description}}
+      - **Competitive Advantage**: {{competitive_advantage}}
+      - **Sustainability**: {{sustainability_assessment}}
+      - **Implementation Complexity**: {{implementation_complexity}}
+      - **Market Resonance**: {{market_resonance_score}}/10
+      - **Investment Required**: {{investment_level}}
+      
+      **Supporting Evidence**:
+      {{#each supporting_evidence}}
+      - {{evidence}}
+      {{/each}}
+      
+      **Success Metrics**:
+      {{#each success_metrics}}
+      - {{metric}}: {{target_value}}
+      {{/each}}
+      
+      ---
+      {{/each}}
+      
+      ### Market Entry Strategies
+      {{#each entry_strategies}}
+      #### {{strategy_name}}
+      - **Approach**: {{strategy_description}}
+      - **Target Segment**: {{target_segment}}
+      - **Value Proposition**: {{value_proposition}}
+      - **Go-to-Market**: {{gtm_approach}}
+      - **Resource Requirements**: {{resource_needs}}
+      - **Timeline**: {{implementation_timeline}}
+      - **Success Probability**: {{success_probability}}%
+      - **ROI Potential**: {{roi_estimate}}
+      
+      **Advantages**:
+      {{#each strategy_advantages}}
+      - {{advantage}}
+      {{/each}}
+      
+      **Risks**:
+      {{#each strategy_risks}}
+      - {{risk}}: {{mitigation_approach}}
+      {{/each}}
+      
+      {{/each}}
+
+  - id: market-gaps-analysis
+    title: "Market Gaps and Unmet Needs Analysis"
+    instruction: "Identify specific market gaps and unmet customer needs that represent opportunities"
+    type: "template"
+    template: |
+      ## Market Gaps and Unmet Needs
+      
+      ### Identified Market Gaps
+      {{#each market_gaps}}
+      #### {{gap_name}}
+      - **Gap Description**: {{gap_description}}
+      - **Affected Segments**: {{affected_customer_segments}}
+      - **Gap Size**: {{gap_market_size}}
+      - **Current Workarounds**: {{current_solutions}}
+      - **Willingness to Pay**: {{willingness_to_pay}}
+      - **Urgency Level**: {{urgency_assessment}}
+      
+      **Why Gap Exists**:
+      {{#each gap_reasons}}
+      - {{reason}}
+      {{/each}}
+      
+      **Solution Requirements**:
+      {{#each solution_requirements}}
+      - {{requirement}}
+      {{/each}}
+      
+      **Opportunity Assessment**:
+      - **Market Potential**: {{market_potential_score}}/10
+      - **Competition Risk**: {{competition_risk_level}}
+      - **Technical Feasibility**: {{technical_feasibility_score}}/10
+      - **Resource Requirements**: {{resource_requirement_level}}
+      - **Time to Market**: {{time_to_market_estimate}}
+      
+      **Strategic Fit**: {{strategic_fit_assessment}}
+      
+      ---
+      {{/each}}
+      
+      ### Unmet Customer Needs
+      {{#each unmet_needs}}
+      #### {{need_category}}
+      
+      **Need Description**: {{need_description}}
+      **Affected Users**: {{affected_user_percentage}}% of target market
+      **Severity**: {{need_severity}}/10
+      **Frequency**: {{need_frequency}}
+      
+      **Current Alternatives**:
+      {{#each current_alternatives}}
+      - **{{alternative_name}}**: {{alternative_description}}
+        - **Satisfaction Level**: {{satisfaction_score}}/10
+        - **Limitations**: {{limitations}}
+      {{/each}}
+      
+      **Opportunity Characteristics**:
+      - **Monetization Potential**: {{monetization_potential}}
+      - **Viral Potential**: {{viral_potential_score}}/10
+      - **Network Effects**: {{network_effects_potential}}
+      - **Lock-in Potential**: {{customer_lockin_potential}}
+      
+      **Solution Approach Ideas**:
+      {{#each solution_approaches}}
+      - {{approach_description}}
+      {{/each}}
+      
+      {{/each}}
+      
+      ### Technology-Enabled Opportunities
+      {{#each technology_opportunities}}
+      #### {{technology_name}} Opportunity
+      - **Technology**: {{technology_description}}
+      - **Maturity Level**: {{technology_maturity}}
+      - **Market Application**: {{market_application}}
+      - **Competitive Advantage**: {{competitive_advantage_potential}}
+      - **Implementation Complexity**: {{implementation_complexity}}
+      - **Market Readiness**: {{market_readiness_assessment}}
+      
+      **Use Cases**:
+      {{#each use_cases}}
+      - **{{use_case_name}}**: {{use_case_description}}
+        - **Value Created**: {{value_description}}
+        - **Feasibility**: {{feasibility_score}}/10
+      {{/each}}
+      
+      **First-Mover Advantages**:
+      {{#each first_mover_advantages}}
+      - {{advantage}}
+      {{/each}}
+      
+      {{/each}}
+
+  - id: competitive-intelligence
+    title: "Competitive Intelligence and Strategic Insights"
+    instruction: "Strategic insights about competitive dynamics and future market evolution"
+    type: "template"
+    template: |
+      ## Competitive Intelligence
+      
+      ### Competitive Dynamics Analysis
+      
+      **Market Power Structure**:
+      - **Market Leaders**: {{market_leaders}}
+      - **Market Challengers**: {{market_challengers}}
+      - **Market Followers**: {{market_followers}}
+      - **Market Nichers**: {{market_nichers}}
+      
+      **Competitive Intensity Factors**:
+      {{#each intensity_factors}}
+      - **{{factor_name}}**: {{factor_assessment}}
+        - **Impact**: {{impact_level}}
+        - **Trend**: {{trend_direction}}
+      {{/each}}
+      
+      ### Strategic Group Analysis
+      {{#each strategic_groups}}
+      #### {{group_name}}
+      - **Group Characteristics**: {{group_description}}
+      - **Key Players**: {{group_members}}
+      - **Competitive Strategy**: {{competitive_strategy}}
+      - **Performance**: {{group_performance}}
+      - **Mobility Barriers**: {{mobility_barriers}}
+      - **Vulnerability**: {{group_vulnerability}}
+      
+      {{/each}}
+      
+      ### Competitive Response Patterns
+      {{#each response_patterns}}
+      #### {{competitor_name}} Response Pattern
+      - **Typical Response Time**: {{response_time}}
+      - **Response Intensity**: {{response_intensity_level}}
+      - **Response Types**: {{common_response_types}}
+      - **Resource Allocation**: {{resource_allocation_pattern}}
+      - **Decision Making**: {{decision_making_style}}
+      - **Predictability**: {{predictability_score}}/10
+      
+      **Historical Responses**:
+      {{#each historical_responses}}
+      - **Trigger**: {{response_trigger}}
+        - **Response**: {{response_action}}
+        - **Effectiveness**: {{response_effectiveness}}
+        - **Timeline**: {{response_timeline}}
+      {{/each}}
+      
+      {{/each}}
+      
+      ### Future Market Evolution
+      
+      **Market Evolution Scenarios**:
+      {{#each evolution_scenarios}}
+      #### Scenario: {{scenario_name}}
+      - **Probability**: {{scenario_probability}}%
+      - **Timeline**: {{scenario_timeline}}
+      - **Key Drivers**: {{key_drivers}}
+      - **Market Changes**: {{market_changes}}
+      - **Competitive Implications**: {{competitive_implications}}
+      - **Opportunity Impact**: {{opportunity_impact}}
+      - **Strategic Recommendations**: {{strategic_recommendations}}
+      
+      {{/each}}
+      
+      **Disruption Threats**:
+      {{#each disruption_threats}}
+      - **Threat**: {{threat_description}}
+        - **Probability**: {{threat_probability}}%
+        - **Impact**: {{threat_impact_level}}
+        - **Timeline**: {{threat_timeline}}
+        - **Early Warning Signals**: {{warning_signals}}
+        - **Defensive Strategies**: {{defensive_options}}
+      {{/each}}
+
+  - id: strategic-recommendations
+    title: "Strategic Recommendations and Action Plan"
+    instruction: "Synthesize analysis into actionable strategic recommendations with implementation guidance"
+    type: "template"
+    template: |
+      ## Strategic Recommendations
+      
+      ### Priority Recommendations
+      {{#each priority_recommendations}}
+      #### Recommendation {{recommendation_priority}}: {{recommendation_title}}
+      
+      **Strategic Objective**: {{strategic_objective}}
+      **Rationale**: {{recommendation_rationale}}
+      
+      **Market Opportunity**:
+      - **Size**: {{opportunity_size}}
+      - **Timeline**: {{opportunity_timeline}}
+      - **Competitive Window**: {{competitive_window}}
+      - **Success Probability**: {{success_probability}}%
+      
+      **Implementation Approach**:
+      {{#each implementation_steps}}
+      1. **{{step_name}}**: {{step_description}}
+         - **Duration**: {{step_duration}}
+         - **Resources**: {{required_resources}}
+         - **Success Metrics**: {{step_metrics}}
+      {{/each}}
+      
+      **Resource Requirements**:
+      - **Investment**: {{investment_required}}
+      - **Team**: {{team_requirements}}
+      - **Timeline**: {{implementation_timeline}}
+      - **Dependencies**: {{key_dependencies}}
+      
+      **Risk Assessment**:
+      {{#each implementation_risks}}
+      - **Risk**: {{risk_description}}
+        - **Mitigation**: {{mitigation_strategy}}
+        - **Contingency**: {{contingency_plan}}
+      {{/each}}
+      
+      **Expected Outcomes**:
+      {{#each expected_outcomes}}
+      - **{{outcome_category}}**: {{outcome_description}}
+        - **Metric**: {{outcome_metric}}
+        - **Target**: {{target_value}}
+        - **Timeline**: {{achievement_timeline}}
+      {{/each}}
+      
+      ---
+      {{/each}}
+      
+      ### Go-to-Market Strategy
+      
+      **Target Market Selection**:
+      - **Primary Target**: {{primary_target_segment}}
+        - **Rationale**: {{target_selection_rationale}}
+        - **Size**: {{segment_size}}
+        - **Accessibility**: {{segment_accessibility}}
+      
+      **Value Proposition Framework**:
+      - **Core Value**: {{core_value_proposition}}
+      - **Differentiation**: {{key_differentiation}}
+      - **Proof Points**: {{value_proof_points}}
+      - **Messaging**: {{key_messages}}
+      
+      **Channel Strategy**:
+      {{#each channel_recommendations}}
+      - **{{channel_name}}**: {{channel_strategy}}
+        - **Rationale**: {{channel_rationale}}
+        - **Investment**: {{channel_investment}}
+        - **Timeline**: {{channel_timeline}}
+        - **Success Metrics**: {{channel_metrics}}
+      {{/each}}
+      
+      **Pricing Strategy**:
+      - **Pricing Model**: {{recommended_pricing_model}}
+      - **Price Points**: {{price_point_recommendations}}
+      - **Rationale**: {{pricing_rationale}}
+      - **Competitive Position**: {{pricing_competitive_position}}
+      
+      ### Competitive Strategy
+      
+      **Competitive Positioning**:
+      - **Position**: {{recommended_market_position}}
+      - **Differentiation Strategy**: {{differentiation_approach}}
+      - **Competitive Response Plan**: {{competitive_response_strategy}}
+      
+      **Defensive Strategies**:
+      {{#each defensive_strategies}}
+      - **{{strategy_name}}**: {{strategy_description}}
+        - **Trigger Conditions**: {{trigger_conditions}}
+        - **Response Actions**: {{response_actions}}
+        - **Resource Allocation**: {{resource_allocation}}
+      {{/each}}
+      
+      ### Success Metrics and KPIs
+      
+      **Market Success Metrics**:
+      {{#each market_success_metrics}}
+      - **{{metric_name}}**: {{metric_definition}}
+        - **Target**: {{metric_target}}
+        - **Measurement**: {{measurement_method}}
+        - **Frequency**: {{measurement_frequency}}
+      {{/each}}
+      
+      **Competitive Success Metrics**:
+      {{#each competitive_metrics}}
+      - **{{metric_name}}**: {{metric_definition}}
+        - **Benchmark**: {{competitive_benchmark}}
+        - **Target**: {{competitive_target}}
+        - **Monitoring**: {{monitoring_approach}}
+      {{/each}}
+
+  - id: research-methodology
+    title: "Research Methodology and Data Sources"
+    instruction: "Document research approach, data sources, and analysis methodology for transparency and future updates"
+    type: "template"
+    template: |
+      ## Research Methodology and Sources
+      
+      ### Research Approach
+      **Research Methodology**: {{research_methodology}}
+      **Analysis Framework**: {{analysis_framework}}
+      **Research Duration**: {{research_duration}}
+      **Data Collection Period**: {{data_collection_period}}
+      
+      ### Primary Research
+      {{#if primary_research_conducted}}
+      **Primary Research Methods**:
+      {{#each primary_research_methods}}
+      - **{{method_name}}**: {{method_description}}
+        - **Sample Size**: {{sample_size}}
+        - **Response Rate**: {{response_rate}}
+        - **Confidence Level**: {{confidence_level}}
+      {{/each}}
+      
+      **Interview Summary**:
+      - **Stakeholder Interviews**: {{stakeholder_interview_count}}
+      - **Customer Interviews**: {{customer_interview_count}}
+      - **Expert Interviews**: {{expert_interview_count}}
+      - **Total Interview Duration**: {{total_interview_time}}
+      {{/if}}
+      
+      ### Secondary Research Sources
+      {{#each secondary_sources}}
+      #### {{source_category}}
+      {{#each sources_in_category}}
+      - **{{source_name}}**: {{source_description}}
+        - **Reliability**: {{source_reliability_score}}/10
+        - **Recency**: {{source_date}}
+        - **Coverage**: {{source_coverage}}
+      {{/each}}
+      {{/each}}
+      
+      ### Data Analysis Methods
+      {{#each analysis_methods}}
+      - **{{method_name}}**: {{method_description}}
+        - **Application**: {{method_application}}
+        - **Limitations**: {{method_limitations}}
+      {{/each}}
+      
+      ### Research Limitations
+      {{#each research_limitations}}
+      - **{{limitation_area}}**: {{limitation_description}}
+        - **Impact**: {{impact_assessment}}
+        - **Mitigation**: {{mitigation_approach}}
+      {{/each}}
+      
+      ### Data Quality Assessment
+      - **Data Completeness**: {{data_completeness_score}}/10
+      - **Data Accuracy**: {{data_accuracy_assessment}}
+      - **Data Recency**: {{data_recency_assessment}}
+      - **Source Diversity**: {{source_diversity_score}}/10
+      
+      ### Update Recommendations
+      - **Research Update Frequency**: {{update_frequency_recommendation}}
+      - **Key Monitoring Areas**: {{key_monitoring_areas}}
+      - **Trigger Events for Re-analysis**: {{reanalysis_triggers}}
+      
+      ---
+      
+      **Report Version**: {{report_version}}
+      **Analysis Date**: {{analysis_completion_date}}
+      **Next Review Date**: {{next_review_date}}
+      **Research Team**: {{research_team_members}}
+      **Quality Review**: {{quality_reviewer}}
+
+examples:
+  - "SaaS platform market analysis and competitive positioning"
+  - "E-commerce mobile app market research and opportunity assessment"
+  - "AI-powered analytics tools competitive landscape analysis"
+
+variables:
+  project_domain: "The market domain or industry being analyzed"
+  analysis_date: "Date when the market analysis was conducted"
+  research_scope: "Scope and boundaries of the market research"
+  market_size_estimate: "Total addressable market size estimate"
+  market_growth_rate: "Annual market growth rate percentage"
+  direct_competitors: "Array of direct competitor analysis objects"
+  market_segments: "Array of market segment analysis objects"
+  customer_segments: "Array of customer segment profiles with detailed analysis"
+  market_gaps: "Array of identified market gap opportunities"
+  strategic_recommendations: "Array of strategic recommendation objects with implementation details"

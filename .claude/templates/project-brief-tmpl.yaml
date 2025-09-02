@@ -1,0 +1,610 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: project-brief
+  name: "Project Brief Generation Template"
+  version: 1.0
+  output:
+    format: markdown
+    location: "docs/project-brief.md"
+
+sections:
+  - id: executive-summary
+    title: "Executive Summary"
+    instruction: "Create concise 200-300 word overview for executive stakeholders focusing on business value"
+    type: "template"
+    template: |
+      # Project Brief: {{project_name}}
+      
+      ## Executive Summary
+      
+      **Problem**: {{problem_statement_summary}}
+      
+      **Solution**: {{solution_approach_summary}}
+      
+      **Business Value**: {{expected_business_value}}
+      
+      **Investment Required**: {{resource_investment_summary}}
+      
+      **Timeline**: {{high_level_timeline}}
+      
+      **Success Metrics**: {{key_success_metrics}}
+      
+      **Strategic Alignment**: {{strategic_alignment_summary}}
+
+  - id: project-definition
+    title: "Project Definition and Scope"
+    instruction: "Define clear project boundaries, objectives, and scope based on brainstorming synthesis"
+    type: "template"
+    template: |
+      ## Project Definition
+      
+      ### Problem Statement
+      {{detailed_problem_statement}}
+      
+      **Root Causes Identified**:
+      {{#each root_causes}}
+      - {{cause}}: {{description}}
+      {{/each}}
+      
+      **Impact of Current Problem**:
+      - **Business Impact**: {{business_impact}}
+      - **User Impact**: {{user_impact}}
+      - **Technical Impact**: {{technical_impact}}
+      
+      ### Proposed Solution
+      {{solution_description}}
+      
+      **Core Solution Components**:
+      {{#each core_components}}
+      - **{{component_name}}**: {{component_description}}
+      {{/each}}
+      
+      **Solution Approach**: {{solution_methodology}}
+      
+      ### Project Scope
+      
+      #### In Scope
+      {{#each in_scope_items}}
+      - {{item}}
+      {{/each}}
+      
+      #### Out of Scope
+      {{#each out_of_scope_items}}
+      - {{item}} - {{rationale}}
+      {{/each}}
+      
+      #### Key Assumptions
+      {{#each project_assumptions}}
+      - {{assumption}} ({{confidence_level}})
+      {{/each}}
+
+  - id: requirements-synthesis
+    title: "Requirements and Feature Specification"
+    instruction: "Transform brainstorming themes into structured functional and non-functional requirements"
+    type: "template"
+    template: |
+      ## Requirements Specification
+      
+      ### Functional Requirements
+      
+      #### Primary Features (Must Have)
+      {{#each must_have_features}}
+      **{{feature_name}}** - Priority: {{priority_score}}
+      - **User Story**: {{user_story}}
+      - **Acceptance Criteria**: 
+        {{#each acceptance_criteria}}
+        - {{criterion}}
+        {{/each}}
+      - **Source**: {{brainstorming_source}}
+      - **Complexity**: {{complexity_estimate}}
+      
+      {{/each}}
+      
+      #### Secondary Features (Should Have)
+      {{#each should_have_features}}
+      **{{feature_name}}** - Priority: {{priority_score}}
+      - **User Story**: {{user_story}}
+      - **Business Value**: {{business_value}}
+      - **Source**: {{brainstorming_source}}
+      
+      {{/each}}
+      
+      #### Enhancement Features (Could Have)
+      {{#each could_have_features}}
+      **{{feature_name}}** - Priority: {{priority_score}}
+      - **Description**: {{description}}
+      - **Conditions**: {{implementation_conditions}}
+      
+      {{/each}}
+      
+      ### Non-Functional Requirements
+      
+      #### Performance Requirements
+      - **Response Time**: {{response_time_target}}
+      - **Throughput**: {{throughput_target}}
+      - **Concurrent Users**: {{concurrent_users_target}}
+      - **Data Volume**: {{data_volume_capacity}}
+      
+      #### Security Requirements
+      {{#each security_requirements}}
+      - **{{security_area}}**: {{requirement_description}}
+      {{/each}}
+      
+      #### Reliability Requirements
+      - **Uptime**: {{uptime_target}}
+      - **Recovery Time**: {{recovery_time_target}}
+      - **Data Backup**: {{backup_requirements}}
+      
+      #### Usability Requirements
+      - **User Experience Standards**: {{ux_standards}}
+      - **Accessibility**: {{accessibility_requirements}}
+      - **Device Support**: {{device_support}}
+      - **Browser Support**: {{browser_support}}
+      
+      ### Integration Requirements
+      {{#each integration_requirements}}
+      #### {{integration_name}}
+      - **Purpose**: {{integration_purpose}}
+      - **Type**: {{integration_type}}
+      - **Data Flow**: {{data_flow_description}}
+      - **Frequency**: {{integration_frequency}}
+      - **Error Handling**: {{error_handling_approach}}
+      
+      {{/each}}
+
+  - id: stakeholder-analysis
+    title: "Stakeholder Analysis and Requirements Matrix"
+    instruction: "Synthesize stakeholder analysis from elicitation into structured requirements and impact assessment"
+    type: "template"
+    template: |
+      ## Stakeholder Analysis
+      
+      ### Primary Stakeholders
+      {{#each primary_stakeholders}}
+      #### {{stakeholder_name}}
+      - **Role**: {{role_description}}
+      - **Primary Needs**:
+        {{#each primary_needs}}
+        - {{need}}
+        {{/each}}
+      - **Success Criteria**:
+        {{#each success_criteria}}
+        - {{criterion}}
+        {{/each}}
+      - **Current Pain Points**:
+        {{#each pain_points}}
+        - {{pain_point}}
+        {{/each}}
+      - **Solution Benefits**:
+        {{#each solution_benefits}}
+        - {{benefit}}
+        {{/each}}
+      - **Change Impact**: {{change_impact_level}}
+      - **Influence Level**: {{influence_level}}
+      - **Support Level**: {{support_level}}
+      
+      {{/each}}
+      
+      ### Secondary Stakeholders
+      {{#each secondary_stakeholders}}
+      #### {{stakeholder_name}}
+      - **Relationship**: {{relationship_description}}
+      - **Impact**: {{impact_description}}
+      - **Engagement Needs**: {{engagement_requirements}}
+      
+      {{/each}}
+      
+      ### Stakeholder Requirement Conflicts
+      {{#each requirement_conflicts}}
+      #### Conflict: {{conflict_name}}
+      - **Conflicting Parties**: {{conflicting_stakeholders}}
+      - **Conflict Description**: {{conflict_description}}
+      - **Impact**: {{conflict_impact}}
+      - **Resolution Strategy**: {{resolution_approach}}
+      - **Compromise Solution**: {{compromise_description}}
+      - **Success Measures**: {{resolution_success_measures}}
+      
+      {{/each}}
+      
+      ### Communication and Engagement Plan
+      {{#each stakeholder_communication}}
+      - **{{stakeholder_group}}**: {{communication_method}} ({{frequency}})
+        - **Key Messages**: {{key_messages}}
+        - **Feedback Mechanism**: {{feedback_approach}}
+      {{/each}}
+
+  - id: technical-considerations
+    title: "Technical Architecture and Implementation Considerations"
+    instruction: "Provide technical guidance and requirements based on elicitation insights and brainstorming outcomes"
+    type: "template"
+    template: |
+      ## Technical Considerations
+      
+      ### Architecture Principles
+      {{#each architecture_principles}}
+      - **{{principle_name}}**: {{principle_description}}
+        - **Rationale**: {{rationale}}
+        - **Implementation Guidance**: {{implementation_notes}}
+      {{/each}}
+      
+      ### Technology Stack Recommendations
+      
+      #### Programming Languages and Frameworks
+      {{#each language_recommendations}}
+      - **{{technology_name}}**: {{recommendation_rationale}}
+        - **Pros**: {{advantages}}
+        - **Cons**: {{disadvantages}}
+        - **Suitability**: {{suitability_assessment}}
+      {{/each}}
+      
+      #### Database and Storage
+      {{#each database_recommendations}}
+      - **{{database_type}}**: {{recommendation_description}}
+        - **Use Case**: {{use_case}}
+        - **Scalability**: {{scalability_notes}}
+        - **Performance**: {{performance_characteristics}}
+      {{/each}}
+      
+      #### Infrastructure and Deployment
+      - **Hosting Strategy**: {{hosting_recommendation}}
+      - **Deployment Approach**: {{deployment_strategy}}
+      - **Scaling Strategy**: {{scaling_approach}}
+      - **Monitoring and Observability**: {{monitoring_requirements}}
+      
+      ### Design Pattern Recommendations
+      {{#each design_patterns}}
+      #### {{pattern_name}}
+      - **Application**: {{pattern_application}}
+      - **Benefits**: {{pattern_benefits}}
+      - **Implementation Notes**: {{implementation_guidance}}
+      - **Alternatives**: {{alternative_patterns}}
+      
+      {{/each}}
+      
+      ### Security Architecture
+      - **Authentication Strategy**: {{authentication_approach}}
+      - **Authorization Model**: {{authorization_strategy}}
+      - **Data Protection**: {{data_protection_approach}}
+      - **Compliance Requirements**: {{compliance_needs}}
+      - **Security Monitoring**: {{security_monitoring_approach}}
+      
+      ### Integration Architecture
+      {{#each integration_patterns}}
+      - **{{integration_name}}**: {{integration_pattern}}
+        - **Protocol**: {{communication_protocol}}
+        - **Data Format**: {{data_format}}
+        - **Error Handling**: {{error_strategy}}
+        - **Rate Limiting**: {{rate_limiting_approach}}
+      {{/each}}
+
+  - id: implementation-strategy
+    title: "Implementation Strategy and Roadmap"
+    instruction: "Define high-level implementation approach with phases, resources, and timeline guidance"
+    type: "template"
+    template: |
+      ## Implementation Strategy
+      
+      ### Implementation Approach
+      **Overall Strategy**: {{implementation_methodology}}
+      
+      **Key Implementation Principles**:
+      {{#each implementation_principles}}
+      - {{principle}}
+      {{/each}}
+      
+      ### Phase Breakdown Strategy
+      {{#each implementation_phases}}
+      #### Phase {{phase_number}}: {{phase_name}}
+      - **Duration**: {{phase_duration}}
+      - **Objectives**: 
+        {{#each phase_objectives}}
+        - {{objective}}
+        {{/each}}
+      - **Key Deliverables**:
+        {{#each phase_deliverables}}
+        - {{deliverable}}
+        {{/each}}
+      - **Success Criteria**:
+        {{#each phase_success_criteria}}
+        - {{criterion}}
+        {{/each}}
+      - **Dependencies**: {{phase_dependencies}}
+      - **Risks**: {{phase_risks}}
+      - **Team Requirements**: {{team_requirements}}
+      
+      {{/each}}
+      
+      ### Minimum Viable Product (MVP) Definition
+      **MVP Scope**: {{mvp_description}}
+      
+      **Core MVP Features**:
+      {{#each mvp_features}}
+      - {{feature}}: {{feature_rationale}}
+      {{/each}}
+      
+      **MVP Success Metrics**:
+      {{#each mvp_metrics}}
+      - {{metric}}: {{target_value}}
+      {{/each}}
+      
+      **MVP Timeline**: {{mvp_timeline}}
+      
+      ### Resource Requirements
+      
+      #### Team Composition
+      {{#each team_roles}}
+      - **{{role_name}}** ({{time_allocation}}): {{role_responsibilities}}
+        - **Skills Required**: {{required_skills}}
+        - **Experience Level**: {{experience_requirements}}
+      {{/each}}
+      
+      #### External Dependencies
+      {{#each external_dependencies}}
+      - **{{dependency_name}}**: {{dependency_description}}
+        - **Provider**: {{dependency_provider}}
+        - **Timeline Impact**: {{timeline_impact}}
+        - **Risk Level**: {{risk_assessment}}
+      {{/each}}
+      
+      #### Infrastructure Requirements
+      - **Development Environment**: {{dev_environment_needs}}
+      - **Testing Environment**: {{test_environment_needs}}
+      - **Production Environment**: {{prod_environment_needs}}
+      - **Third-party Services**: {{third_party_services}}
+      
+      ### Timeline Framework
+      **Total Estimated Duration**: {{total_timeline}}
+      
+      **Key Milestones**:
+      {{#each key_milestones}}
+      - **{{milestone_name}}** ({{milestone_date}}): {{milestone_description}}
+      {{/each}}
+      
+      **Critical Path**: {{critical_path_description}}
+      
+      **Buffer Time Allocation**: {{buffer_time_percentage}}% for risks and unknowns
+
+  - id: risk-assessment
+    title: "Risk Assessment and Mitigation Strategies"
+    instruction: "Comprehensive risk analysis with mitigation strategies based on elicitation findings"
+    type: "template"
+    template: |
+      ## Risk Assessment and Mitigation
+      
+      ### Risk Categories and Analysis
+      
+      #### Technical Risks
+      {{#each technical_risks}}
+      **{{risk_name}}** - Probability: {{probability}} | Impact: {{impact}}
+      - **Description**: {{risk_description}}
+      - **Indicators**: {{risk_indicators}}
+      - **Mitigation Strategy**: {{mitigation_approach}}
+      - **Contingency Plan**: {{contingency_plan}}
+      - **Monitoring**: {{monitoring_approach}}
+      
+      {{/each}}
+      
+      #### Business Risks
+      {{#each business_risks}}
+      **{{risk_name}}** - Probability: {{probability}} | Impact: {{impact}}
+      - **Description**: {{risk_description}}
+      - **Business Impact**: {{business_impact}}
+      - **Mitigation Strategy**: {{mitigation_approach}}
+      - **Decision Points**: {{decision_criteria}}
+      
+      {{/each}}
+      
+      #### Resource Risks
+      {{#each resource_risks}}
+      **{{risk_name}}** - Probability: {{probability}} | Impact: {{impact}}
+      - **Description**: {{risk_description}}
+      - **Resource Impact**: {{resource_impact}}
+      - **Mitigation Strategy**: {{mitigation_approach}}
+      - **Alternative Resources**: {{alternative_options}}
+      
+      {{/each}}
+      
+      #### External Risks
+      {{#each external_risks}}
+      **{{risk_name}}** - Probability: {{probability}} | Impact: {{impact}}
+      - **Description**: {{risk_description}}
+      - **Control Level**: {{control_assessment}}
+      - **Mitigation Strategy**: {{mitigation_approach}}
+      - **Escalation Criteria**: {{escalation_triggers}}
+      
+      {{/each}}
+      
+      ### Risk Management Framework
+      
+      #### Risk Monitoring
+      - **Review Frequency**: {{risk_review_frequency}}
+      - **Risk Ownership**: {{risk_ownership_model}}
+      - **Reporting Mechanism**: {{risk_reporting_process}}
+      - **Escalation Process**: {{risk_escalation_process}}
+      
+      #### Success Factors
+      {{#each success_factors}}
+      - **{{factor_name}}**: {{factor_description}}
+        - **Measurement**: {{measurement_approach}}
+        - **Responsibility**: {{responsible_party}}
+      {{/each}}
+
+  - id: success-metrics
+    title: "Success Criteria and Validation Strategy"
+    instruction: "Define measurable success criteria and validation approach based on stakeholder requirements"
+    type: "template"
+    template: |
+      ## Success Metrics and Validation
+      
+      ### Business Success Metrics
+      {{#each business_metrics}}
+      #### {{metric_name}}
+      - **Definition**: {{metric_definition}}
+      - **Target Value**: {{target_value}}
+      - **Measurement Method**: {{measurement_approach}}
+      - **Frequency**: {{measurement_frequency}}
+      - **Responsible Party**: {{measurement_owner}}
+      - **Success Threshold**: {{success_threshold}}
+      
+      {{/each}}
+      
+      ### Technical Success Metrics
+      {{#each technical_metrics}}
+      #### {{metric_name}}
+      - **Definition**: {{metric_definition}}
+      - **Target Value**: {{target_value}}
+      - **Measurement Tool**: {{measurement_tool}}
+      - **Baseline**: {{current_baseline}}
+      - **Monitoring**: {{monitoring_approach}}
+      
+      {{/each}}
+      
+      ### User Success Metrics
+      {{#each user_metrics}}
+      #### {{metric_name}}
+      - **Definition**: {{metric_definition}}
+      - **Target Value**: {{target_value}}
+      - **Collection Method**: {{collection_approach}}
+      - **User Segment**: {{target_user_segment}}
+      - **Validation**: {{validation_method}}
+      
+      {{/each}}
+      
+      ### Validation Strategy
+      
+      #### User Validation
+      - **User Acceptance Testing**: {{uat_approach}}
+      - **Beta Testing Strategy**: {{beta_testing_plan}}
+      - **Feedback Collection**: {{feedback_mechanism}}
+      - **Iteration Process**: {{iteration_approach}}
+      
+      #### Technical Validation
+      - **Performance Testing**: {{performance_testing_approach}}
+      - **Security Testing**: {{security_testing_plan}}
+      - **Integration Testing**: {{integration_testing_strategy}}
+      - **Load Testing**: {{load_testing_approach}}
+      
+      #### Business Validation
+      - **ROI Measurement**: {{roi_measurement_approach}}
+      - **Process Improvement Validation**: {{process_validation}}
+      - **Compliance Validation**: {{compliance_validation}}
+      - **Competitive Position Assessment**: {{competitive_assessment}}
+
+  - id: appendices
+    title: "Supporting Documentation and References"
+    instruction: "Include supporting materials from brainstorming and elicitation phases"
+    type: "template"
+    template: |
+      ## Appendices
+      
+      ### Appendix A: Brainstorming Session Summary
+      **Session Details**: {{brainstorming_session_summary}}
+      **Key Techniques Used**: {{brainstorming_techniques}}
+      **Total Ideas Generated**: {{total_ideas_generated}}
+      **Breakthrough Insights**: {{breakthrough_insights_count}}
+      
+      **Link to Full Brainstorming Output**: `{{brainstorming_output_file}}`
+      
+      ### Appendix B: Market Research Findings
+      {{#if market_research_conducted}}
+      **Research Scope**: {{market_research_scope}}
+      **Key Competitors**: {{key_competitors_list}}
+      **Market Gaps**: {{market_gaps_identified}}
+      **Competitive Advantages**: {{competitive_advantages_identified}}
+      
+      **Link to Full Market Analysis**: `{{market_analysis_file}}`
+      {{/if}}
+      
+      ### Appendix C: Technical Analysis Details
+      **Architecture Analysis**: {{architecture_analysis_summary}}
+      **Technology Evaluation**: {{technology_evaluation_summary}}
+      **Integration Complexity**: {{integration_complexity_assessment}}
+      
+      **Link to Technical Deep Dive**: `{{technical_analysis_file}}`
+      
+      ### Appendix D: Stakeholder Elicitation Results
+      **Stakeholders Interviewed**: {{stakeholders_interviewed_count}}
+      **Elicitation Techniques Used**: {{elicitation_techniques}}
+      **Key Requirements Conflicts**: {{requirements_conflicts_count}}
+      
+      **Link to Full Elicitation Report**: `{{elicitation_report_file}}`
+
+  - id: next-steps
+    title: "Immediate Actions and Architecture Requirements"
+    instruction: "Define clear next steps and requirements for technical architecture phase"
+    type: "template"
+    template: |
+      ## Next Steps and Handoff
+      
+      ### Immediate Actions Required
+      {{#each immediate_actions}}
+      1. **{{action_title}}** (Due: {{due_date}})
+         - **Description**: {{action_description}}
+         - **Responsible Party**: {{responsible_party}}
+         - **Dependencies**: {{action_dependencies}}
+         - **Success Criteria**: {{action_success_criteria}}
+      
+      {{/each}}
+      
+      ### Architecture Design Requirements
+      **Architecture Phase Objectives**:
+      {{#each architecture_objectives}}
+      - {{objective}}
+      {{/each}}
+      
+      **Key Architecture Decisions Needed**:
+      {{#each architecture_decisions}}
+      - {{decision_area}}: {{decision_description}}
+      {{/each}}
+      
+      **Architecture Constraints**:
+      {{#each architecture_constraints}}
+      - {{constraint}}: {{constraint_rationale}}
+      {{/each}}
+      
+      ### Resource Acquisition Needs
+      {{#each resource_needs}}
+      - **{{resource_type}}**: {{resource_description}}
+        - **Urgency**: {{urgency_level}}
+        - **Impact**: {{impact_if_delayed}}
+        - **Alternatives**: {{alternative_options}}
+      {{/each}}
+      
+      ### Stakeholder Communication Plan
+      {{#each communication_actions}}
+      - **{{stakeholder_group}}**: {{communication_action}}
+        - **Timeline**: {{communication_timeline}}
+        - **Key Messages**: {{key_messages}}
+        - **Expected Outcome**: {{expected_response}}
+      {{/each}}
+      
+      ### Success Criteria for Next Phase
+      The architecture design phase will be considered successful when:
+      {{#each next_phase_success_criteria}}
+      - {{criterion}}
+      {{/each}}
+      
+      ---
+      
+      **Document Version**: {{document_version}}
+      **Last Updated**: {{last_updated_date}}
+      **Next Review Date**: {{next_review_date}}
+      **Prepared By**: {{prepared_by}}
+      **Approved By**: {{approved_by}}
+
+examples:
+  - "E-commerce platform enhancement project brief"
+  - "AI-powered customer service solution project brief"
+  - "Mobile application development project brief"
+
+variables:
+  project_name: "Name of the project being defined"
+  problem_statement_summary: "Concise summary of the problem being solved"
+  solution_approach_summary: "High-level description of the proposed solution approach"
+  expected_business_value: "Expected business value and ROI from the project"
+  brainstorming_session_summary: "Summary of the brainstorming session that generated this brief"
+  total_ideas_generated: "Total number of ideas generated during brainstorming"
+  must_have_features: "Array of critical features with detailed specifications"
+  primary_stakeholders: "Array of primary stakeholder objects with analysis"
+  technical_risks: "Array of technical risk objects with mitigation strategies"
+  implementation_phases: "Array of implementation phase objects with details"

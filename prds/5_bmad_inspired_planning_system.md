@@ -62,7 +62,7 @@ sections:
 **Dependencies**: None (foundational phase)
 
 **Tasks**:
-1. **Create Brainstorming Agent** (`.claude/agents/planning/brainstorming-agent.md`)
+1. **Create Brainstorming Agent** (`.claude/agents/code/brainstorming-agent.md`)
    - Implement agent based on BMAD analyst.md structure
    - Include 10 structured brainstorming techniques from BMAD research
    - Add progressive refinement with numbered action lists (0-9)
@@ -475,7 +475,7 @@ The current code-implementation-agent at `.claude/agents/code/code-implementatio
 ### Key Implementation Files
 
 **Agents:**
-- `.claude/agents/planning/brainstorming-agent.md`
+- `.claude/agents/code/brainstorming-agent.md`
 - `.claude/agents/planning/architect-agent.md` 
 - `.claude/agents/planning/prd-orchestrator-agent.md`
 - Updated: `.claude/agents/code/code-implementation-agent.md`
