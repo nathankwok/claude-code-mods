@@ -103,7 +103,7 @@ uv run pytest tests/ -v
 *** ULTRATHINK ABOUT THE PRD AND PLAN YOUR APPROACH THEN START WRITING THE PRD ***
 
 ## Output
-Save as: `prds/{feature_name}.md`, making the directory `prds/` if it does not exist.
+Save as: `prds/{next_index_integer}_{feature_name}.md`, making the directory `prds/` if it does not exist.
 
 ## Quality Checklist
 - [ ] All necessary context included
