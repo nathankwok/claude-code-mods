@@ -1,6 +1,6 @@
 ---
 allowed-tools: Task
-description: Interactive BMAD-inspired brainstorming session with structured elicitation techniques and market research
+description: Interactive BMAD-inspired brainstorming session with structured elicitation techniques
 argument-hint: [project-context] | "resume_session" | "list_sessions"
 model: sonnet
 ---
@@ -25,7 +25,6 @@ Instructions for brainstorming-agent:
 2. Gather additional context and clarify objectives  
 3. Recommend appropriate brainstorming techniques
 4. Facilitate interactive brainstorming with progressive refinement
-5. Conduct market research integration when relevant
 6. Generate structured outputs and project briefs
 7. Provide session state management and resume capability
 
@@ -38,7 +37,7 @@ Agent should begin immediately with context gathering and session initialization
 1. **"What If" Scenarios** - Explore hypothetical situations and breakthrough opportunities
 2. **Root Cause Analysis** - Deep dive using "5 Whys" to identify fundamental issues
 3. **Future Visioning** - Envision ideal outcomes and work backward to create roadmaps
-4. **Perspective Shifting** - Multiple stakeholder viewpoints (users, team, executives, competitors)
+4. **Perspective Shifting** - Multiple stakeholder viewpoints (users, team, executives, domain experts)
 5. **Constraint Removal** - Imagine unlimited resources to generate breakthrough ideas
 6. **Analogical Thinking** - Draw parallels from other domains and successful solutions
 7. **Problem Reframing** - Redefine core problems from different angles and scopes
@@ -50,7 +49,6 @@ Agent should begin immediately with context gathering and session initialization
 - **Technique Selection**: Choose appropriate techniques based on project context
 - **Guided Facilitation**: Structured prompts and systematic exploration
 - **Progressive Refinement**: Numbered action system (0-9) for iterative idea development
-- **Market Research Integration**: Competitive analysis and positioning insights
 - **Session State Management**: Save progress and resume interrupted sessions
 
 ### Session Flow
@@ -58,7 +56,6 @@ Agent should begin immediately with context gathering and session initialization
 2. **Technique Recommendation**: AI suggests 3-4 most relevant techniques with explanations
 3. **Interactive Brainstorming**: Guided facilitation through selected techniques
 4. **Progressive Refinement**: Systematic improvement of promising ideas (actions 0-9)
-5. **Market Research**: Competitive analysis and customer insights (optional)
 6. **Session Synthesis**: Organize ideas into themes and actionable concepts
 7. **Output Generation**: Structured summary and project brief creation
 
@@ -76,26 +73,13 @@ The heart of BMAD-inspired ideation with systematic improvement:
 - **Action 1**: Clarify core concept and key elements
 - **Action 2**: Identify key components and relationships
 - **Action 3**: Explore variations and alternative approaches
-- **Action 4**: Evaluate feasibility with market/competitive context
+- **Action 4**: Evaluate feasibility and practical constraints
 - **Action 5**: Refine and improve based on evaluation insights
 - **Action 6**: Add supporting details and implementation considerations
 - **Action 7**: Consider technical and practical implementation aspects
-- **Action 8**: Validate with stakeholder perspectives and market fit
+- **Action 8**: Validate with stakeholder perspectives
 - **Action 9**: Finalize refined concept ready for architecture planning
 
-## Market Research & Competitive Analysis
-
-### Integrated Research Capabilities
-- **Market Landscape Analysis**: Industry trends, growth statistics, key players
-- **Competitive Intelligence**: Feature comparisons, pricing analysis, positioning assessment
-- **Customer Insights**: Target audiences, pain points, usage patterns, value propositions
-- **Gap Analysis**: Unmet needs, market opportunities, competitive advantages
-
-### Research Implementation
-- **Web Search Integration**: Systematic market and competitor research
-- **Data Validation**: Multiple source verification and confidence scoring
-- **Research Cache**: Persistent storage for reuse across sessions
-- **Market-Informed Refinement**: Integrate research findings into progressive refinement actions
 
 ## Session Examples and Use Cases
 
@@ -103,15 +87,13 @@ The heart of BMAD-inspired ideation with systematic improvement:
 ```
 Context: "Mobile app feature for expense tracking"
 Recommended Techniques: Future Visioning, Perspective Shifting, SCAMPER
-Market Research: Expense app competitors, user pain points, feature gaps
-Progressive Refinement: Focus on user experience and competitive differentiation
+Progressive Refinement: Focus on user experience and technical feasibility
 ```
 
 ### Problem Solving
 ```
 Context: "User onboarding completion rates are low"
 Recommended Techniques: Root Cause Analysis, Problem Reframing, "What If" Scenarios
-Market Research: Industry benchmarks, successful onboarding patterns
 Progressive Refinement: Systematic solution development and validation
 ```
 
@@ -119,7 +101,6 @@ Progressive Refinement: Systematic solution development and validation
 ```
 Context: "Next generation of our core product"
 Recommended Techniques: Constraint Removal, Analogical Thinking, Future Visioning
-Market Research: Emerging trends, disruptive technologies, customer evolution
 Progressive Refinement: Breakthrough concept development and feasibility analysis
 ```
 
@@ -158,7 +139,6 @@ echo '{
 - **Warm-up Phase**: Agent guides through initial techniques
 - **Deep Dive Phase**: Intensive exploration with selected methods
 - **Progressive Refinement**: Numbered actions (0-9) for promising ideas
-- **Market Research**: Real-time competitive analysis integration
 
 **Continuous State Updates:**
 - Every 5 interactions: Auto-save progress
@@ -184,7 +164,6 @@ ls .claude/state/projects/[project-name]/brainstorming/
 ### 4. **STRUCTURED Output Generation** 📋
 **Template-Based Deliverables:**
 - **Brainstorming Summary**: Ideas organized by technique and refinement level
-- **Market Analysis Report**: Competitive landscape and positioning
 - **Project Brief**: Ready for architect-agent handoff
 - **Session Archive**: Complete audit trail and resume capability
 
@@ -209,10 +188,6 @@ ls .claude/state/projects/[project-name]/brainstorming/
 - Idea 1 (refinement level: X/9)
 - Idea 2 (refinement level: Y/9)
 
-## Market Research Insights
-### Competitive Analysis
-### Customer Pain Points
-### Market Opportunities
 
 ## Refined Concepts (Action Level 6+)
 ### Top Priority Ideas
@@ -233,8 +208,6 @@ ls .claude/state/projects/[project-name]/brainstorming/
 ## Solution Concepts
 [Top refined ideas with implementation considerations]
 
-## Market Context
-[Competitive positioning and customer insights]
 
 ## Technical Considerations
 [Ready for architect-agent handoff]
@@ -250,7 +223,6 @@ ls .claude/state/projects/[project-name]/brainstorming/
 **brainstorming-agent automatically applies templates:**
 1. **Session initialization**: Uses session state template
 2. **Progress tracking**: Updates structured progress template
-3. **Market research**: Applies competitive analysis template
 4. **Final output**: Generates project brief using standard template
 5. **Archive creation**: Uses session archive template
 
@@ -261,7 +233,6 @@ This command implements complete Phase 1 requirements:
 - ✅ **Brainstorming agent** with 10+ elicitation techniques
 - ✅ **Interactive refinement** with numbered actions (0-9)
 - ✅ **Template-based output** generation with structured formats
-- ✅ **Market research integration** with competitive analysis
 - ✅ **Session state tracking** with resume capability
 - ✅ **Agent invocation** through seamless command-to-agent bridge
 
@@ -293,7 +264,6 @@ This command implements complete Phase 1 requirements:
 # 2. Technique recommendation
 # 3. Interactive session facilitation
 # 4. Progressive refinement guidance
-# 5. Market research integration
 # 6. Structured output generation
 ```
 
@@ -321,12 +291,12 @@ This command implements complete Phase 1 requirements:
 
 ### **Complex Project Context**
 ```bash
-/brainstorm "User onboarding completion rates are low - need solutions that consider mobile UX constraints, API limitations, and competitive positioning"
+/brainstorm "User onboarding completion rates are low - need solutions that consider mobile UX constraints and API limitations"
 
 # Agent will:
 # 1. Parse complex context
 # 2. Recommend Root Cause Analysis + Problem Reframing
-# 3. Conduct competitive UX research
+# 3. Conduct UX pattern research
 # 4. Apply mobile-specific constraints
 # 5. Generate implementation-ready solutions
 ```
@@ -347,9 +317,8 @@ Agent begins with: "I'll facilitate a comprehensive brainstorming session for yo
 brainstorming-agent:
 1. Creates session state: .claude/state/projects/claude-code-mods/brainstorming/session_20240902_143022.json
 2. Conducts context gathering questionnaire
-3. Recommends techniques: "Future Visioning, Competitive Analysis, SCAMPER Method"
+3. Recommends techniques: "Future Visioning, Problem Reframing, SCAMPER Method"
 4. Begins interactive facilitation
-5. Applies market research using Task tool
 6. Guides progressive refinement (actions 0-9)
 ```
 
@@ -368,7 +337,6 @@ User can resume with: /brainstorm "resume_session"
 ```
 brainstorming-agent generates:
 ✓ Brainstorming Summary (themes, refined ideas)
-✓ Market Analysis Report (competitive positioning)
 ✓ Project Brief (ready for architect-agent)
 ✓ Implementation Recommendations
 ```
@@ -378,7 +346,6 @@ brainstorming-agent generates:
 ### Session Quality Indicators
 - **Idea Generation**: 15+ unique ideas per session with diverse techniques
 - **Refinement Depth**: Average refinement level of 6+ for promising ideas
-- **Market Integration**: Research findings incorporated into 70%+ of refined concepts
 - **Session Completion**: 90%+ of sessions reach synthesis phase with actionable outputs
 
 ### Output Quality Measures
@@ -393,7 +360,6 @@ brainstorming-agent generates:
 - **Context Understanding**: 100% of sessions begin with comprehensive context gathering
 - **Technique Application**: Minimum 3 techniques per session with structured facilitation
 - **Progressive Refinement**: 80%+ of promising ideas reach refinement level 6+
-- **Market Integration**: Research findings incorporated into 70%+ of refined concepts
 - **State Persistence**: 100% reliable session state saves and resume capability
 - **Template Compliance**: All outputs use structured templates with required sections
 
@@ -422,7 +388,6 @@ brainstorming-agent generates:
 ### **Agent-Level Anti-Patterns**
 - ❌ **Rushed Techniques**: Don't skip deep exploration for speed
 - ❌ **Incomplete Refinement**: Don't leave promising ideas under-developed
-- ❌ **Ignored Research**: Don't skip market analysis when relevant
 - ❌ **Lost State**: Don't fail to save session progress regularly
 - ❌ **Poor Context**: Don't start ideation without comprehensive understanding
 - ❌ **Incomplete Handoffs**: Don't finish sessions without actionable next steps

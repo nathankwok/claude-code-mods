@@ -1,7 +1,7 @@
 ---
 name: architect-agent
 description: BMAD-inspired technical architecture design and PRD phase breakdown capabilities with parallelization analysis
-tools: [Read, Write, Edit, MultiEdit, Bash, Grep, Glob, Task]
+tools: Read, Write, Edit, MultiEdit, Bash, Grep, Glob, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
 model: sonnet
 color: green
 ---
