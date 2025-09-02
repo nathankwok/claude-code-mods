@@ -1,13 +1,13 @@
 ---
 allowed-tools: Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
-description: Interactive BMAD-inspired brainstorming session with structured elicitation techniques
+description: Interactive brainstorming session with structured elicitation techniques
 argument-hint: [project-context] | "resume_session" | "list_sessions"
 model: opus
 ---
 
 # Interactive Brainstorming Session
 
-Start an interactive BMAD-inspired brainstorming session with structured technique selection and progressive refinement capabilities.
+Start an interactive brainstorming session with structured technique selection and progressive refinement capabilities.
 
 ## Project Context: $ARGUMENTS
 
@@ -16,7 +16,7 @@ Start an interactive BMAD-inspired brainstorming session with structured techniq
 **This command automatically invokes the brainstorming-agent for interactive facilitation:**
 
 ```
-Please invoke the brainstorming-agent for an interactive BMAD-inspired brainstorming session.
+Please invoke the brainstorming-agent for an interactive brainstorming session.
 
 Session Context: "$ARGUMENTS"
 
@@ -68,7 +68,7 @@ Agent should begin immediately with context gathering and session initialization
 
 ## Progressive Refinement System (0-9)
 
-The heart of BMAD-inspired ideation with systematic improvement:
+The heart of ideation with systematic improvement:
 - **Action 0**: Initial idea capture and documentation
 - **Action 1**: Clarify core concept and key elements
 - **Action 2**: Identify key components and relationships
@@ -226,7 +226,7 @@ ls .claude/state/projects/[project-name]/brainstorming/
 4. **Final output**: Generates project brief using standard template
 5. **Archive creation**: Uses session archive template
 
-## 🔗 **Integration with BMAD Enhanced Planning System**
+## 🔗 **Integration with Enhanced Planning System**
 
 ### **Phase 1 Fulfillment** ✅
 This command implements complete Phase 1 requirements:
@@ -400,4 +400,4 @@ brainstorming-agent generates:
 
 ---
 
-**Remember**: This command provides the complete brainstorming experience through automatic agent invocation. Users execute `/brainstorm "context"` and immediately get full interactive facilitation, structured output generation, and seamless integration with the BMAD planning system. The brainstorming-agent handles all execution details, state management, and template application automatically.
+**Remember**: This command provides the complete brainstorming experience through automatic agent invocation. Users execute `/brainstorm "context"` and immediately get full interactive facilitation, structured output generation, and seamless integration with the planning system. The brainstorming-agent handles all execution details, state management, and template application automatically.

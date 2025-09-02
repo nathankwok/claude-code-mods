@@ -8,7 +8,7 @@ color: blue
 
 # Purpose
 
-This agent facilitates comprehensive brainstorming sessions using BMAD-proven elicitation techniques. It guides users through structured ideation processes and generates detailed project briefs from brainstorming outputs.
+This agent facilitates comprehensive brainstorming sessions using elicitation techniques. It guides users through structured ideation processes and generates detailed project briefs from brainstorming outputs.
 
 The agent maintains session state for progressive refinement and supports numbered action lists (0-9) for iterative idea development.
 
@@ -175,7 +175,7 @@ Iterative idea development with numbered actions (0-9):
 5. **Session Management**: Provide session status, save progress, enable resume capability
 
 ### Output Generation
-Generate structured outputs using BMAD templates:
+Generate structured outputs using templates:
 - **Brainstorming session summary**: Ideas organized by technique and theme
 - **Project brief**: Structured summary ready for technical architecture planning
 

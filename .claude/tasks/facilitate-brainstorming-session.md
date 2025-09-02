@@ -1,14 +1,14 @@
 # Task: Facilitate Interactive Brainstorming Session
 
 ## Purpose
-Guide users through structured brainstorming sessions using BMAD-proven elicitation techniques. Facilitate idea generation, progressive refinement, and session state management for optimal creative outcomes.
+Guide users through structured brainstorming sessions using elicitation techniques. Facilitate idea generation, progressive refinement, and session state management for optimal creative outcomes.
 
 ## Task Overview
 This task implements interactive brainstorming facilitation with:
 - Selection and application of appropriate elicitation techniques
 - Progressive refinement using numbered actions (0-9)
 - Session state tracking and resume capability
-- Structured output generation using BMAD templates
+- Structured output generation using templates
 
 ## Prerequisites
 - Clear understanding of project context and objectives
@@ -30,7 +30,7 @@ This task implements interactive brainstorming facilitation with:
    ```
 
 2. **Technique Selection**
-   - Analyze context to recommend 3-4 most relevant techniques from the 10 core BMAD techniques
+   - Analyze context to recommend 3-4 most relevant techniques from the 10 core techniques
    - Consider user preferences and project complexity
    - Explain rationale for each recommended technique
    - Allow user to select final technique mix
@@ -389,5 +389,5 @@ Read tool: .claude/state/projects/ecommerce-platform/brainstorming/session-brain
 ## Integration Points
 - **Input**: User context, project objectives, existing ideas
 - **Output**: Structured brainstorming results ready for architect-agent
-- **Tools**: Uses brainstorming-agent capabilities and BMAD templates
+- **Tools**: Uses brainstorming-agent capabilities and templates
 - **Handoff**: Prepared outputs for technical architecture design phase

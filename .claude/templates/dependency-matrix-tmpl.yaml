@@ -1,4 +1,3 @@
-# <!-- Powered by BMAD™ Core -->
 template:
   id: dependency-matrix-analysis
   name: "Dependency Matrix and Parallel Execution Plan Template"

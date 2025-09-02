@@ -4,7 +4,7 @@
 Apply deep dive elicitation techniques to explore complex problem spaces, uncover hidden requirements, and generate sophisticated insights through systematic analysis and creative exploration.
 
 ## Task Overview
-This task focuses on intensive elicitation using advanced BMAD techniques for:
+This task focuses on intensive elicitation techniques for:
 - Complex problem decomposition and analysis
 - Hidden requirement discovery
 - Stakeholder need clarification
