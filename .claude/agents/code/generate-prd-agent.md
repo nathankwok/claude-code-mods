@@ -126,24 +126,6 @@ graph TD
 - Don't hardcode values that should be configurable - check existing config patterns
 - Don't catch all exceptions - be specific about error handling
 
-## Validation Gates (Must be Executable)
-Include specific, executable commands for validation. Examples:
-
-```bash
-# Python projects
-uv run pytest tests/ -v
-python -m pytest tests/test_feature.py::test_specific_case
-
-# Node.js projects  
-npm test
-npm run lint
-npm run typecheck
-
-# Other common validations
-docker compose up --build
-curl -X POST http://localhost:3000/api/test
-```
-
 ## Critical Pre-Writing Process
 
 Before writing the PRD, you must:
