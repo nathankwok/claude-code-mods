@@ -127,12 +127,13 @@ graph TD
 - Don't catch all exceptions - be specific about error handling
 
 ## Critical Pre-Writing Process
+*** CRITICAL AFTER YOU ARE DONE RESEARCHING AND EXPLORING THE CODEBASE BEFORE YOU START WRITING THE PRD, ULTRATHINK ABOUT THE PRD AND PLAN YOUR APPROACH THEN START WRITING THE PRD ***
 
 Before writing the PRD, you must:
 
 1. **Deep Think with mcp__clear-thought**: Use sequential thinking to plan your approach
 2. **Analyze Dependencies**: Map out what must come before what
-3. **Identify Parallelization**: Find work that can run concurrently
+3. **Identify Parallelization**: ***CRITICAL*** Plan phases and tasks within each phase that can run concurrently
 4. **Plan Multi-Agent Strategy**: Design for distributed execution
 5. **Validate Completeness**: Ensure all context is included
 
@@ -157,7 +158,8 @@ Before completing, verify:
 - [ ] **Synchronization points defined** where coordination is needed
 
 ### Success Scoring
-Score the PRD on a scale of 1-10 for confidence level in one-pass implementation success using Claude Code. Explain your reasoning.
+Score the PRD on a scale of 1-10 for confidence level in one-pass implementation success. Explain your reasoning.
+If the score is 7 or below, then modify, add, or redo the parts that are necessary in order to achieve a higher confidence in a one-pass implementation.
 
 ## Agent Workflow
 
