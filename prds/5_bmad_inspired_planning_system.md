@@ -32,7 +32,7 @@ Current Claude Code lacks:
 - **Sequential Implementation**: Current limitation - stories implemented one at a time
 
 ### Key BMAD Components for Integration
-1. **Brainstorming Agent**: Advanced elicitation with market research capabilities
+1. **Brainstorming Agent**: Advanced elicitation capabilities
 2. **Architect Agent**: Technical architecture and system design
 3. **Structured Templates**: YAML-based templates for consistent outputs
 4. **Communication Protocol**: Structured message formats between agents
@@ -78,7 +78,6 @@ sections:
 3. **Create Template System** (`.claude/templates/`)
    - `brainstorming-output-tmpl.yaml` - Structured brainstorming results
    - `project-brief-tmpl.yaml` - Project brief generation
-   - `market-analysis-tmpl.yaml` - Competitive analysis output
    - Template system compatible with BMAD YAML structure
 
 **Acceptance Criteria**:
@@ -94,7 +93,7 @@ sections:
 **Dependencies**: Phase 1 (uses brainstorming outputs for architecture planning)
 
 **Tasks**:
-1. **Create Architect Agent** (`.claude/agents/planning/architect-agent.md`)
+1. **Create Architect Agent** (`.claude/agents/code/architect-agent.md`)
    - Technical architecture design from PRDs and project briefs
    - PRD phase analysis and breakdown functionality
    - Dependency graph generation between phases and tasks
@@ -126,39 +125,39 @@ sections:
 **Dependencies**: Phase 2 (requires phase breakdown and dependency analysis)
 
 **Tasks**:
-1. **Create PRD Orchestrator Agent** (`.claude/agents/planning/prd-orchestrator-agent.md`)
-   - Parse PRDs with multiple phases and extract parallelizable tasks
-   - Spawn multiple code-implementation-agent instances with unique session IDs
-   - Coordinate review cycles and dependency resolution
-   - Manage state across parallel executions with conflict detection
-   - Aggregate results and handle synchronization points
+1. **Create PRD Orchestrator Agent** (`.claude/agents/code/prd-orchestrator-agent.md`)
+   - Parse PRDs with multiple phases and extract parallelizable tasks through structured prompts
+   - Spawn multiple code-implementation-agent instances with unique session IDs using Task tool
+   - Coordinate review cycles and dependency resolution through agent communication
+   - Manage state across parallel executions with conflict detection via prompts
+   - Aggregate results and handle synchronization points through structured coordination
 
-2. **Create Orchestration Utilities** (`.claude/utils/`)
-   - `prd-parser.js` - Extract phases and tasks from PRDs with dependency analysis
-   - `dependency-analyzer.js` - Build and validate dependency graphs
-   - `parallel-coordinator.js` - Manage parallel agent execution and communication
-   - `state-manager.js` - Track progress across parallel tasks with conflict resolution
-   - `session-manager.js` - Unique session ID generation and management
-
-3. **Create Coordination Protocol** (`.claude/protocols/`)
+2. **Create Coordination Protocol Documentation** (`.claude/protocols/`)
    - `parallel-communication.md` - Structured message format between parallel agents
    - `synchronization-points.md` - Dependency resolution and coordination checkpoints
    - `conflict-resolution.md` - File conflict detection and resolution strategies
    - `state-aggregation.md` - Combining results from parallel executions
+   - `orchestration-prompts.md` - Standardized prompts for coordination tasks
 
-4. **Create State Management System** (`.claude/state/`)
-   - Project-aware state structure: `.claude/state/projects/[project-name]/`
-   - `parallel-execution-state.json` - Track all parallel session states
-   - `dependency-resolution.json` - Track dependency satisfaction across sessions
-   - `conflict-log.json` - Log and resolve file conflicts between parallel agents
-   - `session-registry.json` - Active session tracking and coordination
+3. **Create State Management Templates** (`.claude/templates/`)
+   - `parallel-execution-state-tmpl.yaml` - Template for tracking parallel session states
+   - `dependency-resolution-tmpl.yaml` - Template for dependency satisfaction tracking
+   - `conflict-log-tmpl.yaml` - Template for file conflict logging and resolution
+   - `session-registry-tmpl.yaml` - Template for active session tracking
+
+4. **Create Orchestration Task Templates** (`.claude/tasks/`)
+   - `parse-prd-for-parallel.md` - Extract parallelizable tasks from PRDs using structured analysis
+   - `coordinate-parallel-sessions.md` - Manage multiple agent sessions through communication
+   - `resolve-dependencies.md` - Handle dependency resolution across parallel work
+   - `aggregate-parallel-results.md` - Combine outputs from parallel executions
+   - `manage-session-state.md` - Track and coordinate session states
 
 **Acceptance Criteria**:
-- [ ] Parse PRDs and identify independent parallelizable tasks
-- [ ] Spawn multiple code-implementation-agents with coordinated execution
-- [ ] Manage dependencies and synchronization points
-- [ ] Detect and resolve file conflicts between parallel agents
-- [ ] Aggregate results from parallel executions
+- [ ] Parse PRDs and identify independent parallelizable tasks through prompt-based analysis
+- [ ] Spawn multiple code-implementation-agents with coordinated execution via Task tool
+- [ ] Manage dependencies and synchronization points through structured communication
+- [ ] Detect and resolve file conflicts between parallel agents using templates and prompts
+- [ ] Aggregate results from parallel executions through coordinated workflows
 
 ### Phase 4: Enhanced Code Implementation Agent
 **Objective**: Extend existing code-implementation-agent to support parallel execution and coordination
@@ -200,11 +199,10 @@ sections:
 **Dependencies**: Phase 4 (requires all core functionality implemented)
 
 **Tasks**:
-1. **Create Brainstorming Commands** (`.claude/slash-commands/`)
+1. **Create Brainstorming Commands** (`.claude/commands/`)
    - `/brainstorm` - Start interactive brainstorming session with technique selection
    - `/elicit` - Deep elicitation on current topic using advanced techniques
    - `/brief` - Generate structured project brief from brainstorming session results
-   - `/analyze-market` - Conduct competitive analysis and market research
 
 2. **Create Planning Commands**
    - `/architect` - Generate technical architecture from PRD or project brief
@@ -476,8 +474,8 @@ The current code-implementation-agent at `.claude/agents/code/code-implementatio
 
 **Agents:**
 - `.claude/agents/code/brainstorming-agent.md`
-- `.claude/agents/planning/architect-agent.md` 
-- `.claude/agents/planning/prd-orchestrator-agent.md`
+- `.claude/agents/code/architect-agent.md` 
+- `.claude/agents/code/prd-orchestrator-agent.md`
 - Updated: `.claude/agents/code/code-implementation-agent.md`
 
 **Tasks:**
@@ -495,12 +493,12 @@ The current code-implementation-agent at `.claude/agents/code/code-implementatio
 - `.claude/templates/phase-breakdown-tmpl.yaml`
 - `.claude/templates/dependency-matrix-tmpl.yaml`
 
-**Utilities:**
-- `.claude/utils/prd-parser.js`
-- `.claude/utils/dependency-analyzer.js`
-- `.claude/utils/parallel-coordinator.js`
-- `.claude/utils/state-manager.js`
-- `.claude/utils/session-manager.js`
+**Protocols:**
+- `.claude/protocols/parallel-communication.md`
+- `.claude/protocols/synchronization-points.md`
+- `.claude/protocols/conflict-resolution.md`
+- `.claude/protocols/state-aggregation.md`
+- `.claude/protocols/orchestration-prompts.md`
 
 **Slash Commands:**
 - `.claude/slash-commands/brainstorm.md`
