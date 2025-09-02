@@ -2,7 +2,7 @@
 
 Manually trigger code review for a specific PRD phase. Useful for debugging and manual intervention in the automated review process.
 
-## Usage: review-prd-phase <PRD_FILE> <PHASE_NAME> [FILES...]
+## Usage: code-review <PRD_FILE> <PHASE_NAME> [FILES...]
 
 ## Arguments
 - **PRD_FILE**: Path to the PRD file containing phase requirements
@@ -129,13 +129,13 @@ This command complements the automated review system:
 
 ```bash
 # Review Phase 1 implementation with auto-detected files
-review-prd-phase prds/user-auth-system.md "Phase 1"
+code-review prds/user-auth-system.md "Phase 1"
 
 # Review specific files for Phase 2.1
-review-prd-phase prds/data-pipeline.md "Phase 2.1" src/pipeline.py src/validators.py
+code-review prds/data-pipeline.md "Phase 2.1" src/pipeline.py src/validators.py
 
 # Review current implementation against Phase 3 requirements
-review-prd-phase prds/api-refactor.md "Phase 3" $(git diff --name-only HEAD~1)
+code-review prds/api-refactor.md "Phase 3" $(git diff --name-only HEAD~1)
 ```
 
 ## Notes

@@ -30,7 +30,7 @@ When invoked to review code changes for a PRD phase:
 
 ### 2. Input Format Specification
 
-**CRITICAL:** You will receive input in the following standardized format from both automated (code-implementation-agent) and manual (review-prd-phase command) triggers:
+**CRITICAL:** You will receive input in the following standardized format from both automated (code-implementation-agent) and manual (code-review command) triggers:
 
 ```
 Phase Review Request:
