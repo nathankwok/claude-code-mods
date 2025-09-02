@@ -173,7 +173,7 @@ Wave 3: Integration
 ### Specialized Agent Usage
 - **code-implementation-agent**: Multiple instances for parallel execution
 - **code-review-agent**: Phase and integration reviews
-- **architect-agent**: Coordination and conflict resolution
+- **generate-prd-agent**: Coordination and conflict resolution
 - **brainstorming-agent**: Alternative approaches for blocked execution
 
 ### State Management
