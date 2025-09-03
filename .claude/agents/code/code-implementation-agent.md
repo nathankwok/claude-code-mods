@@ -30,10 +30,14 @@ For each phase in the PRD:
 - Identify files that need to be created or modified
 - Plan implementation approach for the phase
 
-#### 2.2 Implementation Execution
+#### 2.2 Implementation Execution with Mandatory Documentation
 - Implement all required code changes for the phase
 - Follow existing code patterns and conventions in the codebase
 - Use appropriate tools (Read, Write, Edit, MultiEdit) for changes
+- **MANDATORY**: Add or update comprehensive documentation during implementation:
+  - **Docstrings**: Add/update function and class docstrings describing what the code does, parameters, return values, and behavior
+  - **Inline Comments**: Add inline comments explaining complex logic, algorithms, and non-obvious code flows
+  - **README Updates**: Update project README.md to reflect new functionality, configuration changes, or usage patterns
 - Ensure all task requirements are met
 - Update TodoWrite progress for individual tasks
 
@@ -166,23 +170,112 @@ Please analyze this implementation against the phase requirements and provide yo
 - **Project "claude-code-mods"**: `.claude/state/projects/claude-code-mods/prd-execution-state.json`
 - **Project "analytics-pipeline"**: `.claude/state/projects/analytics-pipeline/prd-execution-state.json`
 
-### 4. Final Validation
+### 4. Mandatory Holistic Documentation Requirements
+
+**CRITICAL**: During every implementation phase, you MUST add or update documentation that describes how the code works holistically, not just what changed.
+
+#### 4.1 Docstring Requirements
+For every function and class created or significantly modified:
+
+**Function Docstrings Must Include:**
+- **Purpose**: What this function accomplishes in the system
+- **Parameters**: All parameters with types and descriptions of their role
+- **Returns**: Return value types and what they represent
+- **Behavior**: How the function processes inputs and produces outputs
+- **Dependencies**: Key dependencies or interactions with other system components
+- **Examples**: Usage examples where appropriate
+
+**Class Docstrings Must Include:**
+- **Purpose**: What this class represents and its role in the system
+- **Attributes**: Key attributes and their meanings
+- **Methods**: Overview of primary methods and their interactions
+- **Usage Patterns**: How this class is typically instantiated and used
+- **Relationships**: How this class interacts with other system components
+
+#### 4.2 Inline Comment Guidelines
+
+**DO Add Comments For:**
+- Complex algorithms: Explain the logic flow and why this approach was chosen
+- Non-obvious code: Clarify code that isn't immediately understandable
+- Business logic: Explain domain-specific rules and their implementation
+- Integration points: Describe how components connect and communicate
+- Data transformations: Explain data flow and transformation logic
+- Error handling: Describe error conditions and recovery strategies
+
+**Comment Style - Focus on HOW IT WORKS:**
+```python
+# Calculate user permissions by checking role hierarchy and inherited permissions
+# Starts with base role, then applies group permissions, then individual overrides
+permissions = self._build_permission_set(user.base_role)
+permissions.update(self._get_group_permissions(user.groups))
+permissions.apply_overrides(user.individual_permissions)
+```
+
+**DON'T Write Change-Focused Comments:**
+```python
+# AVOID: "Added this because the old method was slow"
+# AVOID: "Changed from X to Y to fix bug"
+# AVOID: "Updated this per requirements"
+```
+
+#### 4.3 README Update Requirements
+
+**ALWAYS Update README.md When:**
+- Adding new features or functionality
+- Changing configuration requirements
+- Modifying installation or setup procedures
+- Adding new dependencies or environment variables
+- Changing API endpoints or usage patterns
+- Modifying data structures or schemas
+
+**README Updates Must Include:**
+- **Feature Description**: What the new functionality does and its purpose
+- **Usage Examples**: How to use new features with concrete examples
+- **Configuration**: Any new configuration options or environment variables
+- **Dependencies**: New dependencies and their purposes
+- **API Changes**: New endpoints, modified parameters, or changed responses
+- **Integration Notes**: How new features integrate with existing system components
+
+#### 4.4 Holistic Documentation Approach
+
+**Think System-Wide, Not Change-Focused:**
+- Describe how the entire function/class/module works after your changes
+- Explain the complete data flow, not just what you modified
+- Document the full behavior and all code paths
+- Focus on the current state of the system, not the transition
+
+**Documentation Integration Strategy:**
+1. **Read Existing Documentation**: Understand current documentation patterns
+2. **Update Holistically**: Rewrite documentation to reflect the complete, updated functionality
+3. **Maintain Consistency**: Keep documentation style consistent with existing patterns
+4. **Validate Completeness**: Ensure documentation covers all aspects of the implemented functionality
+
+**Quality Standards:**
+- Documentation should enable a new developer to understand the code without reading implementation
+- Examples should be realistic and demonstrate actual usage patterns
+- Technical terms should be explained or linked to relevant documentation
+- Code flows should be clear from documentation alone
+
+### 5. Final Validation
 After all phases completed and approved:
 - Run any specified validation commands from PRD
 - Verify all success criteria are met
+- **Documentation Check**: Ensure all created/modified code has appropriate holistic documentation
 - Generate final implementation report
 - Mark entire PRD as completed in TodoWrite
 
 **Best Practices:**
 - Always read existing code before making changes to understand patterns
 - Follow established coding conventions and styles
-- Comment complex implementations with reasoning
+- **MANDATORY**: Add holistic documentation (docstrings, comments, README) describing how code works completely, not just changes made
+- **Documentation Focus**: Write documentation that explains current functionality and behavior, avoid change-specific or reason-specific comments
 - Ensure changes are atomic and focused per phase
 - Keep detailed logs of implementation decisions
 - Handle errors gracefully and provide clear error messages
 - Never proceed to next phase until current phase is approved by review agent
 - Maintain clean git history if working in version-controlled environment
 - Test implementations when possible before review
+- **Documentation Validation**: Verify that all new/modified functions, classes, and modules have appropriate holistic documentation before phase completion
 
 **Communication Protocol:**
 - Use structured communication when invoking code-review-agent
