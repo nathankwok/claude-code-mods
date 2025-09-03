@@ -185,78 +185,6 @@ sections:
         - **New Opportunities**: {{opportunities_created}}
       {{/each}}
 
-  - id: market-research-integration
-    title: "Market Research and Competitive Analysis"
-    instruction: "Include market insights and competitive analysis if conducted during session"
-    type: "template"
-    template: |
-      {{#if market_research_conducted}}
-      ### Market Landscape Analysis
-      **Research Date**: {{#if research_date}}{{research_date}}{{else}}Not specified{{/if}}
-      **Sources**: {{#if research_sources}}{{research_sources}}{{else}}No sources documented{{/if}}
-      
-      #### Key Market Players
-      {{#if market_players}}
-      {{#each market_players}}
-      - **{{#if player_name}}{{player_name}}{{else}}Unnamed Player{{/if}}**: {{#if description}}{{description}}{{else}}No description available{{/if}}
-        - **Strengths**: {{#if strengths}}{{strengths}}{{else}}Not analyzed{{/if}}
-        - **Weaknesses**: {{#if weaknesses}}{{weaknesses}}{{else}}Not analyzed{{/if}}
-        - **Market Position**: {{#if market_position}}{{market_position}}{{else}}Position unclear{{/if}}
-      {{/each}}
-      {{else}}
-      *No market players identified during research*
-      {{/if}}
-      
-      #### Market Gaps Identified
-      {{#if market_gaps}}
-      {{#each market_gaps}}
-      - **Gap**: {{#if gap_description}}{{gap_description}}{{else}}Gap description missing{{/if}}
-        - **Opportunity Size**: {{#if opportunity_size}}{{opportunity_size}}{{else}}Size not estimated{{/if}}
-        - **Competition Level**: {{#if competition_level}}{{competition_level}}{{else}}Competition level unknown{{/if}}
-        - **Our Ideas Addressing This**: {{#if relevant_ideas}}{{relevant_ideas}}{{else}}No ideas mapped to this gap{{/if}}
-      {{/each}}
-      {{else}}
-      *No specific market gaps identified*
-      {{/if}}
-      
-      #### Competitive Advantage Opportunities
-      {{#if competitive_advantages}}
-      {{#each competitive_advantages}}
-      - **Advantage**: {{#if advantage_description}}{{advantage_description}}{{else}}Advantage description missing{{/if}}
-        - **Differentiation Strategy**: {{#if differentiation}}{{differentiation}}{{else}}Strategy not defined{{/if}}
-        - **Supporting Ideas**: {{#if supporting_ideas}}{{supporting_ideas}}{{else}}No supporting ideas identified{{/if}}
-      {{/each}}
-      {{else}}
-      *No competitive advantages identified*
-      {{/if}}
-      
-      ### Market Validation Insights
-      {{#if validation_insights}}
-      {{#each validation_insights}}
-      - **Insight**: {{#if insight}}{{insight}}{{else}}Insight description missing{{/if}}
-        - **Validation Method**: {{#if validation_method}}{{validation_method}}{{else}}Method not specified{{/if}}
-        - **Confidence Level**: {{#if confidence_level}}{{confidence_level}}{{else}}Confidence not assessed{{/if}}
-      {{/each}}
-      {{else}}
-      *No market validation insights collected*
-      {{/if}}
-      {{else}}
-      ### Market Research Not Conducted
-      **Status**: Market research was not performed during this brainstorming session.
-      
-      **Recommendations for Future Sessions**:
-      - Consider conducting competitive landscape analysis
-      - Research target customer segments and pain points  
-      - Validate market demand for generated ideas
-      - Assess market size and opportunity potential
-      
-      **Next Steps**:
-      - Schedule dedicated market research session
-      - Use Task tool for web-based competitor analysis
-      - Interview target customers or stakeholders
-      - Review industry reports and market data
-      {{/if}}
-
   - id: session-metrics
     title: "Session Metrics and Quality Assessment"
     instruction: "Provide quantitative and qualitative assessment of session effectiveness"
@@ -314,7 +242,6 @@ sections:
       - **Session State File**: `{{session_state_file}}`
       - **Brainstorming Notes**: `{{notes_file}}`
       - **Technique Worksheets**: `{{worksheets_directory}}`
-      - **Market Research Data**: `{{market_data_file}}`
 
   - id: handoff-preparation
     title: "Next Phase Preparation and Handoff"
@@ -340,7 +267,6 @@ sections:
       - Top {{top_ideas_count}} refined ideas with technical requirements
       - Key constraints and non-functional requirements
       - Stakeholder priorities and success criteria
-      - Market positioning and competitive considerations
       
       **Critical Questions to Address in Next Phase**:
       {{#each critical_questions}}
@@ -367,34 +293,3 @@ variables:
   fully_refined_count: "Number of ideas that completed progressive refinement (actions 0-9)"
   breakthrough_count: "Number of breakthrough insights identified"
   themes: "Array of theme objects with analysis and associated ideas"
-  market_research_conducted: "Boolean flag indicating if market research was performed (REQUIRED: must be true/false)"
-
-validation_rules:
-  market_research_section:
-    - "If market_research_conducted is false, provide alternative content with recommendations"
-    - "If market_research_conducted is true, validate that required market data exists or provide fallback values"
-    - "All market research arrays (market_players, market_gaps, etc.) should have fallback messages if empty"
-    - "Individual market research objects should validate required fields and provide defaults"
-
-market_research_variables:
-  market_research_conducted: "Boolean - REQUIRED field that determines section rendering"
-  research_date: "String - Date when research was conducted (fallback: 'Not specified')"
-  research_sources: "String - Sources used for research (fallback: 'No sources documented')"
-  market_players: "Array - List of competitor objects (fallback: message if empty)"
-  market_gaps: "Array - List of market gap objects (fallback: message if empty)"
-  competitive_advantages: "Array - List of advantage objects (fallback: message if empty)"
-  validation_insights: "Array - List of validation insight objects (fallback: message if empty)"
-
-market_player_object_structure:
-  player_name: "String - Name of competitor (fallback: 'Unnamed Player')"
-  description: "String - Player description (fallback: 'No description available')"
-  strengths: "String - Competitor strengths (fallback: 'Not analyzed')"
-  weaknesses: "String - Competitor weaknesses (fallback: 'Not analyzed')"
-  market_position: "String - Market position (fallback: 'Position unclear')"
-
-template_rendering_logic:
-  conditional_sections:
-    - "Market research section uses {{#if market_research_conducted}} to determine content"
-    - "When true: renders full market analysis with validated data and fallbacks"
-    - "When false: renders 'Market Research Not Conducted' section with recommendations"
-    - "All nested data uses individual {{#if}} checks for graceful degradation"

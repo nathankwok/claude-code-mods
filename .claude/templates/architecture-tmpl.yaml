@@ -27,84 +27,52 @@ sections:
       - {{.}}
       {{/expected_outcomes}}
 
-  - id: brainstorming-context
-    title: "Brainstorming Context Integration"
-    instruction: "Document how brainstorming session outputs (market analysis, competitive insights, stakeholder feedback) influence architectural decisions. Include integration status and missing context."
+  - id: codebase-analysis
+    title: "Codebase Analysis and Discovery"
+    instruction: "Document findings from codebase exploration, including project structure, patterns, and existing architectural decisions."
     type: text
     template: |
-      ## Brainstorming Context Integration
+      ## Codebase Analysis and Discovery
       
-      ### Integration Status
-      - **Brainstorming Sessions Found**: {{brainstorming_sessions_count}}
-      - **Context Integration Level**: {{integration_status}}
-      - **Missing Context**: {{#missing_context_items}}{{.}}, {{/missing_context_items}}
+      ### Project Structure Analysis
+      - **Repository Structure**: {{repository_structure}}
+      - **Key Directories**: {{key_directories}}
+      - **Configuration Files**: {{configuration_files}}
+      - **Build System**: {{build_system}}
+      - **Package Management**: {{package_management}}
       
-      ### Market Analysis Insights
-      {{#market_analysis_available}}
-      - **Market Positioning Requirements**: {{market_positioning_technical_implications}}
-      - **Scalability Projections**: {{market_growth_technical_requirements}}
-      - **Technology Trends Impact**: {{market_technology_trends}}
-      - **Competitive Technical Advantages**: {{required_technical_differentiators}}
-      {{/market_analysis_available}}
-      {{#market_analysis_missing}}
-      - **Note**: Market analysis not available - architecture proceeds with PRD requirements only
-      - **Assumptions**: {{market_assumptions_made}}
-      {{/market_analysis_missing}}
+      ### Existing Architectural Patterns
+      {{#architectural_patterns}}
+      - **{{pattern_name}}**: {{pattern_description}}
+        - Implementation: {{pattern_implementation}}
+        - Files/Components: {{pattern_locations}}
+        - Usage Frequency: {{pattern_usage}}
+        - Quality Assessment: {{pattern_quality}}
+      {{/architectural_patterns}}
       
-      ### Competitive Analysis Integration
-      {{#competitive_analysis_available}}
-      - **Technical Differentiation Requirements**: {{competitive_technical_advantages}}
-      - **Performance Benchmarks**: {{competitive_performance_requirements}}
-      - **Feature Parity Requirements**: {{competitive_feature_requirements}}
-      - **Technology Stack Considerations**: {{competitive_technology_insights}}
-      {{/competitive_analysis_available}}
-      {{#competitive_analysis_missing}}
-      - **Note**: Competitive analysis not available - standard industry practices assumed
-      {{/competitive_analysis_missing}}
+      ### Code Quality Assessment
+      - **Code Organization**: {{code_organization_assessment}}
+      - **Naming Conventions**: {{naming_conventions}}
+      - **Documentation Coverage**: {{documentation_coverage}}
+      - **Testing Strategy**: {{testing_strategy}}
+      - **Technical Debt Areas**: {{technical_debt_areas}}
+      - **Code Consistency**: {{code_consistency_notes}}
       
-      ### Stakeholder Requirements Integration
-      {{#stakeholder_insights_available}}
-      - **User Experience Requirements**: {{stakeholder_ux_requirements}}
-      - **Performance Expectations**: {{stakeholder_performance_needs}}
-      - **Integration Requirements**: {{stakeholder_integration_needs}}
-      - **Technology Preferences**: {{stakeholder_technology_preferences}}
-      {{/stakeholder_insights_available}}
-      {{#stakeholder_insights_missing}}
-      - **Note**: Stakeholder insights not available - standard user requirements assumed
-      {{/stakeholder_insights_missing}}
-
-  - id: requirements-analysis
-    title: "Requirements Analysis"
-    instruction: "Document functional and non-functional requirements extracted from PRD and brainstorming context. Include acceptance criteria and success metrics."
-    type: text
-    template: |
-      ## Requirements Analysis
+      ### Existing Integration Patterns
+      {{#existing_integrations}}
+      - **{{integration_name}}**: {{integration_description}}
+        - Implementation Method: {{implementation_method}}
+        - Configuration Location: {{integration_configuration}}
+        - Health Status: {{integration_status}}
+        - Dependencies: {{integration_dependencies}}
+      {{/existing_integrations}}
       
-      ### Functional Requirements
-      {{#functional_requirements}}
-      - **{{requirement_id}}**: {{description}}
-        - Acceptance Criteria: {{acceptance_criteria}}
-        - Source: {{requirement_source}} <!-- PRD, brainstorming, stakeholder feedback -->
-      {{/functional_requirements}}
-      
-      ### Non-Functional Requirements
-      - **Performance**: {{performance_requirements}}
-        - Market-driven: {{market_performance_requirements}}
-        - Competitive benchmarks: {{competitive_performance_targets}}
-      - **Scalability**: {{scalability_requirements}}
-        - Growth projections: {{market_growth_scalability_needs}}
-      - **Reliability**: {{reliability_requirements}}
-      - **Security**: {{security_requirements}}
-        - Competitive advantages: {{security_differentiators}}
-      - **Usability**: {{usability_requirements}}
-        - Stakeholder preferences: {{stakeholder_usability_insights}}
-      
-      ### Constraints
-      - **Technical**: {{technical_constraints}}
-      - **Business**: {{business_constraints}}
-        - Market positioning: {{market_positioning_constraints}}
-      - **Regulatory**: {{regulatory_constraints}}
-      - **Competitive**: {{competitive_constraints}}
+      ### Development Workflow Analysis
+      - **Version Control**: {{version_control_setup}}
+      - **Branching Strategy**: {{branching_strategy}}
+      - **CI/CD Pipeline**: {{cicd_pipeline_status}}
+      - **Deployment Process**: {{deployment_process}}
+      - **Environment Management**: {{environment_setup}}
 
   - id: system-overview
     title: "System Architecture Overview"
@@ -132,44 +100,57 @@ sections:
 
   - id: technology-stack
     title: "Technology Stack and Decisions"
-    instruction: "Document technology choices with rationale. Include decision records for key technology selections with brainstorming context integration."
+    instruction: "Document technology choices with rationale. Include decision records for key technology selections based on codebase analysis."
     type: text
     template: |
       ## Technology Stack and Decisions
       
       ### Primary Technology Stack
       - **Frontend**: {{frontend_technologies}}
-        - Market positioning influence: {{frontend_market_considerations}}
+        - Version: {{frontend_versions}}
+        - Key Features Used: {{frontend_features}}
+        - Implementation Patterns: {{frontend_patterns}}
       - **Backend**: {{backend_technologies}}
-        - Competitive advantage factors: {{backend_competitive_factors}}
+        - Version: {{backend_versions}}
+        - Architecture Pattern: {{backend_architecture}}
+        - Key Libraries: {{backend_libraries}}
       - **Database**: {{database_technologies}}
-        - Scalability considerations: {{database_scalability_factors}}
+        - Version: {{database_versions}}
+        - Schema Complexity: {{database_complexity}}
+        - Performance Characteristics: {{database_performance}}
       - **Infrastructure**: {{infrastructure_technologies}}
-        - Growth projection alignment: {{infrastructure_growth_alignment}}
+        - Deployment Method: {{deployment_method}}
+        - Environment Management: {{environment_management}}
+        - Resource Configuration: {{resource_configuration}}
       - **DevOps**: {{devops_technologies}}
-        - Market deployment requirements: {{devops_market_requirements}}
+        - CI/CD Implementation: {{cicd_implementation}}
+        - Automation Level: {{automation_level}}
+        - Monitoring Tools: {{monitoring_tools}}
       
-      ### Technology Decision Records (TDRs) with Brainstorming Context
+      ### Technology Decision Records (TDRs)
       {{#technology_decisions}}
       #### TDR-{{decision_id}}: {{decision_title}}
       - **Context**: {{decision_context}}
-      - **Market Analysis Influence**: {{market_analysis_impact}}
-      - **Competitive Considerations**: {{competitive_analysis_factors}}
-      - **Stakeholder Preferences**: {{stakeholder_technology_input}}
+      - **Current Implementation**: {{current_implementation}}
       - **Options Considered**: {{options_considered}}
       - **Decision**: {{decision_made}}
-      - **Rationale**: {{decision_rationale}}
-        - **Market factors**: {{market_decision_factors}}
-        - **Competitive advantages**: {{competitive_decision_advantages}}
-        - **Stakeholder alignment**: {{stakeholder_decision_alignment}}
-      - **Consequences**: {{decision_consequences}}
+      - **Technical Rationale**: {{decision_rationale}}
+        - **Performance factors**: {{performance_factors}}
+        - **Maintainability**: {{maintainability_factors}}
+        - **Ecosystem compatibility**: {{ecosystem_compatibility}}
+        - **Team expertise**: {{team_expertise_factors}}
+      - **Trade-offs**: {{decision_tradeoffs}}
+      - **Implementation Notes**: {{implementation_notes}}
+      - **Future Considerations**: {{future_considerations}}
       {{/technology_decisions}}
       
       ### Alternative Considerations
       {{#alternatives_considered}}
       - **{{alternative_name}}**: {{why_not_selected}}
-        - Market positioning impact: {{alternative_market_impact}}
-        - Competitive implications: {{alternative_competitive_impact}}
+        - Technical limitations: {{technical_limitations}}
+        - Integration complexity: {{integration_complexity}}
+        - Migration effort: {{migration_effort}}
+        - Resource requirements: {{resource_requirements}}
       {{/alternatives_considered}}
 
   - id: component-design
@@ -390,7 +371,7 @@ sections:
 
   - id: implementation-roadmap
     title: "Implementation Roadmap and Phasing"
-    instruction: "Provide implementation phases aligned with PRD phases. Include dependencies and parallelization opportunities."
+    instruction: "Provide implementation phases based on architectural analysis. Include dependencies and parallelization opportunities."
     type: text
     template: |
       ## Implementation Roadmap and Phasing
@@ -438,12 +419,13 @@ sections:
         - Measurement Method: {{measurement_method}}
       {{/technical_metrics}}
       
-      ### Business Success Metrics
-      {{#business_metrics}}
+      ### Architectural Success Metrics
+      {{#architectural_metrics}}
       - **{{metric_name}}**: {{metric_description}}
         - Target: {{metric_target}}
         - Measurement Method: {{measurement_method}}
-      {{/business_metrics}}
+        - Success Indicator: {{success_indicator}}
+      {{/architectural_metrics}}
       
       ### Validation Approach
       - **Architecture Reviews**: {{architecture_review_process}}
