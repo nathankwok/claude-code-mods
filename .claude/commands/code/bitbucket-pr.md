@@ -2,7 +2,7 @@
 allowed-tools: Bash(git:*), mcp__bitbucket__bb_add_pr, mcp__bitbucket__bb_ls_repos, mcp__bitbucket__bb_get_repo, mcp__atlassian_confluence_jira__getAccessibleAtlassianResources, mcp__atlassian_confluence_jira__getVisibleJiraProjects, mcp__atlassian_confluence_jira__getJiraProjectIssueTypesMetadata, mcp__atlassian_confluence_jira__createJiraIssue, mcp__atlassian_confluence_jira__lookupJiraAccountId
 argument-hint: [destination-branch] [ticket-number] [reviewers...] [--jira-project PROJECT_KEY]
 description: Create Bitbucket PR with proper branch naming and automatic Jira code review ticket creation
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Bitbucket Pull Request Creation with Jira Integration

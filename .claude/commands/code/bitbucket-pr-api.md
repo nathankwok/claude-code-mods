@@ -7,7 +7,7 @@ allowed-tools: Bash(git:*), Bash(uv:*),
                mcp__atlassian_confluence_jira__lookupJiraAccountId
 argument-hint: [destination-branch] [ticket-number] [reviewers...] [--jira-project PROJECT_KEY] [--no-jira] [--draft]
 description: Create Bitbucket PR with hybrid API + MCP Jira integration (API token preferred, app password fallback)
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Hybrid Bitbucket PR Creation with Jira Integration

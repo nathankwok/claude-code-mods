@@ -7,7 +7,7 @@ allowed-tools: Bash(git:*), Bash(uv:*),
                mcp__atlassian_confluence_jira__lookupJiraAccountId
 argument-hint: <pr-url> [--project PROJECT_KEY] [--assignee USERNAME] [--branch BRANCH]
 description: Create standalone Jira code review ticket for a PR using hybrid approach
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Jira Code Review Ticket Creation

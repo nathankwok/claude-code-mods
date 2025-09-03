@@ -278,7 +278,7 @@ Based on BMAD agent structure:
 name: agent-name
 description: Agent description and usage
 tools: [tool1, tool2, tool3]
-model: sonnet
+model: claude-sonnet-4-0
 color: blue
 ---
 

@@ -2,7 +2,7 @@
 name: crypto-market-agent-sonnet
 description: Use proactively for real-time cryptocurrency market data retrieval and analysis for Top N cryptocurrencies by market cap
 tools: WebSearch, Write
-model: sonnet
+model: claude-sonnet-4-0
 color: blue
 ---
 

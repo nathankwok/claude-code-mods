@@ -2,7 +2,7 @@
 name: code-implementation-agent
 description: Specialized agent for implementing code changes according to PRD phases. Use proactively when executing PRD implementations that require phase-by-phase development with automatic code review gates.
 tools: Read, Write, Edit, MultiEdit, Bash, Grep, Glob, TodoWrite, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
-model: sonnet
+model: claude-sonnet-4-0
 color: blue
 ---
 

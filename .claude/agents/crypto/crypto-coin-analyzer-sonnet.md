@@ -2,7 +2,7 @@
 name: crypto-coin-analyzer-sonnet
 description: Cryptocurrency analysis specialist for real-time market insights. Use proactively when given one specific crypto ticker symbol to analyze current price, news, sentiment, and technical indicators.
 tools: WebSearch, Bash, Write
-model: sonnet
+model: claude-sonnet-4-0
 color: blue
 ---
 

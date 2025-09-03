@@ -4,7 +4,7 @@ allowed-tools: Bash(git:*), Bash(uv:*),
                mcp__atlassian_confluence_jira__getAccessibleAtlassianResources
 argument-hint: [pr-id] [--comments] [--jira] [--all]
 description: Check Bitbucket PR status with optional Jira ticket integration (API token preferred)
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Hybrid PR Status Monitoring with Jira Integration

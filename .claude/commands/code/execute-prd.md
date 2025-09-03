@@ -1,7 +1,7 @@
 ---
 description: Execute PRD with parallel multi-agent implementation based on dependency graph and phase breakdown
 argument-hint: [prd-file]
-model: opus
+model: claude-opus-4-1
 allowed-tools: ["Read", "Write", "Glob", "Grep", "Task", "TodoWrite", "Bash", "mcp__context7__resolve-library-id", "mcp__context7__get-library-docs", "mcp__gemini-cli__ask-gemini"]
 ---
 

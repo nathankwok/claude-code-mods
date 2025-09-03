@@ -2,7 +2,7 @@
 allowed-tools: Bash(git:*), mcp__bitbucket__bb_ls_prs, mcp__bitbucket__bb_get_pr, mcp__bitbucket__bb_ls_pr_comments, mcp__atlassian_confluence_jira__getAccessibleAtlassianResources, mcp__atlassian_confluence_jira__searchJiraIssuesUsingJql
 argument-hint: [pr-id] [--comments] [--jira]
 description: Check Bitbucket PR status, reviews, comments, and linked Jira tickets
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Pull Request Status Check with Jira Integration

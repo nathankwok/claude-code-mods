@@ -2,7 +2,7 @@
 name: brainstorming-agent
 description: Interactive brainstorming agent to understand project or feature to inform PRD generation
 tools: Read, Write, Edit, MultiEdit, Bash, Grep, Glob, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
-model: sonnet
+model: claude-sonnet-4-0
 color: blue
 ---
 

@@ -2,7 +2,7 @@
 allowed-tools: Bash(git:*), mcp__atlassian_confluence_jira
 argument-hint: [pr-url] [branch-name] [--jira-project PROJECT_KEY (default: DATAENG)] [--assignee EMAIL_OR_NAME]
 description: Create a Jira code review ticket for an existing pull request with enhanced error recovery, standardization, and automatic sprint assignment
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Enhanced Jira Code Review Ticket Creation

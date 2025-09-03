@@ -587,7 +587,7 @@ Each slash command will have the following structure:
 allowed-tools: Bash(git:*), Bash(uv:*), mcp__atlassian_confluence_jira__*
 argument-hint: [arguments...]
 description: Hybrid Bitbucket API and Jira MCP command
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Command logic:
