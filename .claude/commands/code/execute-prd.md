@@ -1,6 +1,6 @@
 ---
 description: Execute PRD with parallel multi-agent implementation based on dependency graph and phase breakdown
-argument-hint: [prd-file]
+argument-hint: prd-file
 model: claude-opus-4-1
 ---
 

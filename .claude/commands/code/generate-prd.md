@@ -1,40 +1,57 @@
 ---
-description: "Generate comprehensive PRDs with parallelizable phases, dependency mapping, and multi-agent coordination strategy"
-argument-hint: "brainstorm_brief_file_path"
-allowed-tools: ["Task", "Read"]
+description: Generate comprehensive PRDs directly from problem descriptions using sophisticated generate-prd-agent
+argument-hint: "problem/feature description"
+model: claude-opus-4-1
 ---
 
-# Generate PRD
+# Direct PRD Generation Workflow
 
-## Brainstorm brief file: $ARGUMENTS
+Generate comprehensive PRD for: $ARGUMENTS
 
-This command delegates PRD generation to a specialized agent that conducts thorough research and creates comprehensive PRDs with phase-based implementation strategies.
+## Workflow Execution Instructions
 
-## Process
+This command provides a streamlined path from problem description to comprehensive PRD by leveraging the sophisticated research and analysis capabilities of the generate-prd-agent.
 
-1. **Validate Input**: Ensure feature file exists and is readable
-2. **Delegate to Agent**: Pass the feature file to the specialized PRD generation agent
-3. **Monitor Progress**: The agent will handle all research, analysis, and PRD creation
+### PRD Generation
 
-## Agent Responsibilities
+1. **Input Processing**: Parse and validate the problem/feature description
+2. **Agent Delegation**: Invoke the generate-prd-agent with the Task tool
+3. **Context**: Pass the problem description directly to the agent: "$ARGUMENTS"
+4. **Instructions for generate-prd-agent**:
+   - Parse the problem description and understand the feature requirements
+   - Conduct deep codebase analysis and external research as needed
+   - Research existing patterns and implementation approaches
+   - Create phase-based implementation plans with dependency mapping
+   - Design multi-agent coordination strategies for implementation
+   - Generate comprehensive PRD optimized for one-pass implementation success
+   - Save as: `prds/{next_highest_integer}_{feature_name}.md`
+   - Score the PRD for implementation confidence (target: 8+)
 
-The PRD generation agent will:
-- Conduct deep codebase analysis and external research
-- Create phase-based implementation plans with dependency mapping  
-- Design multi-agent coordination strategies
-- Generate comprehensive PRDs optimized for one-pass implementation success
+## Agent Capabilities Leveraged
+
+The generate-prd-agent will autonomously:
+- **Research & Analysis**: Conduct thorough codebase analysis and external research
+- **Pattern Recognition**: Identify existing patterns and architectural decisions
+- **Context Gathering**: Use available tools to gather necessary technical context
+- **Quality Assurance**: Apply comprehensive validation checkpoints
+- **Strategic Planning**: Design phase-based implementation with multi-agent coordination
+
+## Expected Output
+
+**Comprehensive PRD**: Complete PRD saved to `prds/{next_highest_integer}_{feature_name}.md` with:
+- Detailed problem analysis and solution approach
+- Phase-based implementation strategy
+- Multi-agent coordination plan
+- Technical context and integration points
+- Quality validation criteria
+- Implementation confidence score of 8+
+
+## Success Criteria
+- Problem description successfully processed and understood
+- Generate-prd-agent produces comprehensive PRD with score 8+
+- PRD ready for immediate `/execute-prd` execution
+- All research and analysis completed autonomously by the agent
 
 ## Execution
 
-Let me first validate the feature file exists and then delegate to the PRD generation agent:
-
-### Step 1: Validate Feature File
-I'll check if the specified feature file exists and is readable.
-
-### Step 2: Read Feature File Content  
-I'll read the feature file to understand the requirements that need to be passed to the agent.
-
-### Step 3: Delegate to PRD Agent
-I'll use the Task tool to launch the specialized "generate-prd-agent" with the feature file content and requirements.
-
-Let me start by checking if the feature file exists:
+Let me delegate directly to the generate-prd-agent with your problem description:
