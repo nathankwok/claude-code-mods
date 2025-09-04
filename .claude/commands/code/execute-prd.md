@@ -14,7 +14,7 @@ Implement a feature using the PRD file with parallel execution across multiple a
 ## Parallel Execution Process
 
 ### 1. **Load & Parse PRD**
-   - Read the specified PRD file
+   - Read the specified PRD file at $1
    - Extract dependency graph (Mermaid format)
    - Parse implementation phases with parallelization strategies
    - Identify agent assignment strategies for each phase/task

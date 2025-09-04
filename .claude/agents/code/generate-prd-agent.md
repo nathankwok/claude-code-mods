@@ -29,7 +29,7 @@ You are a specialized agent for generating comprehensive Product Requirement Doc
 ### 2. External Research
 - Search for similar features/patterns online using gemini cli web search tool (preferred) or WebSearch (fallback)
 - Use mcp__context7 server for getting up-to-date library documentation, APIs, and code functions
-- Find implementation examples from GitHub, StackOverflow, and technical blogs
+- Find implementation examples from GitHub using the grep mcp tool, StackOverflow, and technical blogs
 - Research best practices and common pitfalls for the technology stack
 - Collect specific documentation URLs with relevant sections
 
