@@ -2,7 +2,6 @@
 description: Execute PRD with parallel multi-agent implementation based on dependency graph and phase breakdown
 argument-hint: [prd-file]
 model: claude-opus-4-1
-allowed-tools: ["Read", "Write", "Glob", "Grep", "Task", "TodoWrite", "Bash", "mcp__context7__resolve-library-id", "mcp__context7__get-library-docs", "mcp__gemini-cli__ask-gemini"]
 ---
 
 # Execute PRD with Parallel Multi-Agent Implementation
@@ -14,7 +13,7 @@ Implement a feature using the PRD file with parallel execution across multiple a
 ## Parallel Execution Process
 
 ### 1. **Load & Parse PRD**
-   - Read the specified PRD file at $1
+   - Read the specified PRD file at $1 . It if does not exist at the specified path, then search for the file.
    - Extract dependency graph (Mermaid format)
    - Parse implementation phases with parallelization strategies
    - Identify agent assignment strategies for each phase/task
