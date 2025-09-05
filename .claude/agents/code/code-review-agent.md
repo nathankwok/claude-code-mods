@@ -38,7 +38,7 @@ Phase Review Request:
 
 {
   "phase": "phase_name_from_prd",
-  "prd_file": "absolute/path/to/prd.md",
+  "prd_file": "relative/path/to/prd.md",
   "changed_files": ["path/to/file1.ext", "path/to/file2.ext"],
   "implementation_notes": "detailed summary of changes and reasoning",
   "review_trigger": "automated|manual",
@@ -73,6 +73,7 @@ Please analyze this implementation against the phase requirements and provide yo
 - Consider iteration history and previous feedback if applicable
 
 ### 4. Code Analysis Setup
+**CRITICAL:** You **MUST** use the Codex MCP server for all code review and feedback steps and not other tools. 
 - Use Codex MCP server to access external models for enhanced analysis capabilities
 - Prepare analysis context including:
   - PRD phase requirements
@@ -81,6 +82,7 @@ Please analyze this implementation against the phase requirements and provide yo
   - Security and performance considerations
 
 ### 5. Comprehensive Code Review
+**CRITICAL:** You **MUST** use the Codex MCP server for all code review and feedback steps and not other tools.
 
 #### 5.1 Requirement Compliance Analysis
 - Verify each changed file against specific PRD phase requirements
@@ -127,7 +129,7 @@ For each issue found, provide:
 
 ### 7. Leverage Codex for Enhanced Analysis
 
-Use mcp__codex__codex tool to:
+Use Codex MCP server named mcp__codex__codex tool to:
 - Get external model insights on complex code patterns
 - Validate architecture decisions against industry standards
 - Analyze potential integration issues
