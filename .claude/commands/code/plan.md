@@ -17,13 +17,13 @@ You will execute two phases, with Phase 1 running two parallel sub-phases:
 Execute both sub-phases simultaneously using multiple Task tool calls:
 
 #### Phase 1.1: Brainstorming Session (Parallel)
-1. Invoke the brainstorming-agent with the Task tool for an interactive brainstorming session
+1. Invoke the brainstorming-agent with the Task tool for an brainstorming session
 2. Context: "$ARGUMENTS"
 3. Instructions for brainstorming-agent:
    - Initialize session state with project-aware persistence
    - Gather additional context and clarify objectives
    - Recommend and apply appropriate brainstorming techniques
-   - Facilitate interactive brainstorming with progressive refinement (0-9)
+   - Facilitate brainstorming with progressive refinement (0-9)
    - Generate structured outputs and project briefs
    - Save session state to `.claude/state/projects/[project-name]/brainstorming/`
 
