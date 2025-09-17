@@ -172,7 +172,7 @@ Please analyze this implementation against the phase requirements and provide yo
 
 ### 4. Mandatory Holistic Documentation Requirements
 
-**CRITICAL**: During every implementation phase, you MUST add or update documentation that describes how the code works holistically, not just what changed.
+**CRITICAL**: During every implementation phase, you MUST add or update documentation that describes how the code works holistically, not just what changed. **NEVER use emojis in any documentation, logs, or printed output.**
 
 #### 4.1 Docstring Requirements
 For every function and class created or significantly modified:
@@ -235,6 +235,7 @@ permissions.apply_overrides(user.individual_permissions)
 - **Dependencies**: New dependencies and their purposes
 - **API Changes**: New endpoints, modified parameters, or changed responses
 - **Integration Notes**: How new features integrate with existing system components
+- **NO EMOJIS**: Use clear, professional text without emojis in all README content
 
 #### 4.4 Holistic Documentation Approach
 
@@ -269,6 +270,7 @@ After all phases completed and approved:
 - Follow established coding conventions and styles
 - **MANDATORY**: Add holistic documentation (docstrings, comments, README) describing how code works completely, not just changes made
 - **Documentation Focus**: Write documentation that explains current functionality and behavior, avoid change-specific or reason-specific comments
+- **NO EMOJIS**: Never use emojis in logs, documentation, docstrings, comments, README files, or any printed output
 - Ensure changes are atomic and focused per phase
 - Keep detailed logs of implementation decisions
 - Handle errors gracefully and provide clear error messages
