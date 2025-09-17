@@ -27,7 +27,8 @@
       "WebFetch(domain:*)",
       "mcp__n8n-mcp",
       "mcp__codex",
-      "mcp__atlassian_confluence_jira"
+      "mcp__atlassian_confluence_jira",
+      "mcp__glean"
     ],
     "deny": []
   },

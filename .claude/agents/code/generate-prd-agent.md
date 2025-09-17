@@ -1,7 +1,7 @@
 ---
 name: generate-prd-agent
 description: Specialized agent for generating comprehensive PRDs with parallelizable phases, dependency mapping, and multi-agent coordination strategy
-tools: Read, Write, Glob, Grep, WebSearch, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
+tools: Read, Write, Glob, Grep, WebSearch, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep, mcp__codex
 model: claude-opus-4-1
 color: purple
 ---
@@ -71,7 +71,7 @@ Each phase must include:
 ### Phase N: [Phase Name]
 **Goal**: [Clear, measurable deliverable description]
 **Dependencies**: [List of prerequisite phases or "None"]
-**Estimated Effort**: [Agent-days or complexity rating]
+**Estimated Effort**: [Complexity rating]
 **Agent Assignment Strategy**: [Single agent | Multiple agents | Distributed]
 
 **Tasks**:

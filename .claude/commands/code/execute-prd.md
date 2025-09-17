@@ -14,6 +14,7 @@ Implement a feature using the PRD file with parallel execution across multiple a
 
 ### 1. **Load & Parse PRD**
 - Read the specified PRD file at $1. If it doesn't exist at the specified path, search for the file.
+- **Capture current branch**: `ORIGINAL_BRANCH=$(git branch --show-current)`
 - Extract dependency graph (Mermaid format)
 - Parse implementation phases with parallelization strategies
 - Identify agent assignment strategies for each phase/task
@@ -106,7 +107,17 @@ For each execution wave (phases with no dependencies):
   git worktree add worktrees/foundation-wave1 -b foundation-$(date +%s)
   cd worktrees/foundation-wave1
   ```
-- **Review Gate**: Foundation-Review-1 must approve before Wave 2 starts
+- **Review Gate**: Foundation-Review-1 must approve before merge to main
+- **Immediate Merge After Approval**:
+  ```bash
+  # After review approval, immediately merge to original branch
+  git checkout $ORIGINAL_BRANCH
+  git merge --no-ff foundation-$(date +%s)
+  
+  # Clean up completed worktree
+  git worktree remove worktrees/foundation-wave1
+  git worktree prune
+  ```
 
 #### Wave 2: Parallel Development (Depends on Wave 1)
 - **Agent Pair 1**: Agent-CoreLogic-Impl-2 + Agent-CoreLogic-Review-2
@@ -116,7 +127,7 @@ For each execution wave (phases with no dependencies):
   - `worktrees/ui-components-wave2/`
 - **Setup Commands**:
   ```bash
-  # Start from approved Wave 1 state
+  # Start from current original branch (includes Wave 1 merged work)
   git worktree add worktrees/core-logic-wave2 -b core-logic-$(date +%s)
   git worktree add worktrees/ui-components-wave2 -b ui-components-$(date +%s)
   
@@ -125,64 +136,134 @@ For each execution wave (phases with no dependencies):
   cd worktrees/ui-components-wave2  # Agent pair 3 works here
   ```
 - **Review Gates**: BOTH CoreLogic-Review-2 AND UIComponents-Review-3 must approve
+- **Immediate Merge After Both Approvals**:
+  ```bash
+  # After BOTH reviews approve, merge each worktree to original branch immediately
+  git checkout $ORIGINAL_BRANCH
+  
+  # Merge first worktree
+  git merge --no-ff core-logic-$(date +%s)
+  
+  # Merge second worktree
+  git merge --no-ff ui-components-$(date +%s)
+  
+  # Clean up completed worktrees
+  git worktree remove worktrees/core-logic-wave2
+  git worktree remove worktrees/ui-components-wave2
+  git worktree prune
+  ```
 
 #### Wave 3: Integration (Depends on Wave 2)
 - **Agent Pair**: Agent-Integration-Impl-4 + Agent-Integration-Review-4  
 - **Worktree**: `worktrees/integration-wave3/`
 - **Setup Commands**:
   ```bash
+  # Start from current original branch (includes Wave 1 and Wave 2 merged work)
   git worktree add worktrees/integration-wave3 -b integration-$(date +%s)
   cd worktrees/integration-wave3
   
-  # Merge work from both Wave 2 worktrees
-  git merge --no-ff worktrees/core-logic-wave2
-  git merge --no-ff worktrees/ui-components-wave2
+  # Note: No manual merging needed - worktree already includes all previous work
+  # Agent works on integration tasks with full context from previous phases
+  ```
+- **Review Gate**: Integration-Review-4 must approve before merge to original branch
+- **Immediate Merge After Approval**:
+  ```bash
+  # After review approval, immediately merge to original branch
+  git checkout $ORIGINAL_BRANCH
+  git merge --no-ff integration-$(date +%s)
+  
+  # Clean up completed worktree
+  git worktree remove worktrees/integration-wave3
+  git worktree prune
   ```
 
-### 7. **Merge Coordination Between Waves**
+### 7. **Immediate Merge After Each Phase**
 
-#### After Wave Completion with Review Approval
-When all agent pairs in a wave have completed and received review approval:
+#### Phase-by-Phase Merge Strategy
+Each phase is merged to the original branch immediately after review approval, **not** waiting until the end:
 
-1. **Merge Worktree Work to Main Branch**
+1. **Single Phase Completion**
    ```bash
-   # Return to main branch
-   git checkout main
+   # After review approval for any single phase
+   git checkout $ORIGINAL_BRANCH
+   git merge --no-ff {phase-branch-name}
    
-   # Merge each completed worktree (in dependency order)
-   git merge --no-ff worktrees/foundation-wave1
-   git merge --no-ff worktrees/core-logic-wave2  
-   git merge --no-ff worktrees/ui-components-wave2
+   # Clean up immediately
+   git worktree remove worktrees/{phase-name}
+   git worktree prune
    ```
 
-2. **Handle Merge Conflicts**
-   - If conflicts arise during merge, resolve them manually
+2. **Parallel Phase Completion**
+   ```bash
+   # After ALL parallel phases in a wave receive review approval
+   git checkout $ORIGINAL_BRANCH
+   
+   # Merge each phase in sequence (order matters for conflict resolution)
+   git merge --no-ff {first-phase-branch}
+   git merge --no-ff {second-phase-branch}
+   
+   # Clean up all worktrees from this wave
+   git worktree remove worktrees/{first-phase}
+   git worktree remove worktrees/{second-phase}
+   git worktree prune
+   ```
+
+3. **Handle Merge Conflicts During Immediate Merge**
+   - If conflicts arise during merge, resolve them immediately
    - Use `git status` to see conflicted files
    - Edit files to resolve conflicts
    - Use `git add` to mark conflicts as resolved
    - Complete merge with `git commit`
 
-3. **Validate Merge Success**
+4. **Validate Each Merge**
    ```bash
-   # Verify merge completed successfully
-   git log --oneline -5
+   # After each phase merge, validate success
+   git checkout $ORIGINAL_BRANCH
+   git log --oneline -3
    git status
    
-   # Run any integration tests
-   # Validate that all phase requirements are met
+   # Run any phase-specific tests
+   # Validate that current phase requirements are met
    ```
 
-### 8. **Worktree Cleanup**
+#### Benefits of Immediate Merging
+- **Faster Integration**: Issues are caught and resolved immediately
+- **Simpler Dependencies**: Next phases always start from complete, tested state
+- **Reduced Complexity**: No complex multi-phase merge coordination at the end
+- **Better Error Isolation**: Problems are isolated to the specific phase that caused them
 
-After successful merge to main branch:
+### 8. **Worktree Cleanup (Automatic)**
+
+Cleanup happens **automatically after each phase merge** - no manual cleanup needed at the end:
 
 ```bash
-# Remove completed worktrees
+# Cleanup is integrated into each phase completion:
+
+# Phase 1 completion:
 git worktree remove worktrees/foundation-wave1
+git worktree prune
+
+# Phase 2 completion (after both parallel phases):
 git worktree remove worktrees/core-logic-wave2
 git worktree remove worktrees/ui-components-wave2
+git worktree prune
 
-# Clean up worktree administrative files
+# Phase 3 completion:
+git worktree remove worktrees/integration-wave3
+git worktree prune
+
+# No final cleanup needed - all worktrees cleaned up during execution
+```
+
+#### Emergency Cleanup (If Needed)
+If something goes wrong and worktrees are left behind:
+
+```bash
+# List any remaining worktrees
+git worktree list
+
+# Remove all worktrees in worktrees/ directory
+git worktree remove --force worktrees/*
 git worktree prune
 
 # Remove worktree directories
@@ -238,22 +319,41 @@ git worktree add worktrees/{phase-name} -b {new-branch-name}
 
 ### 10. **Validation & Completion**
 
-#### Final Integration Check
-After all phases complete:
+#### Continuous Validation Throughout Execution
+Since each phase merges immediately, validation happens continuously:
 
 ```bash
-# Verify all changes are merged to main
-git checkout main
+# After each phase merge, validate incrementally:
+git checkout $ORIGINAL_BRANCH
 git status
 
-# Run comprehensive validation
-# - Execute any test suites
+# Run phase-specific tests
+# Validate current phase requirements
+# Ensure integration with previous phases works
+```
+
+#### Final PRD Completion Check
+After the last phase completes and merges:
+
+```bash
+# Final verification - all work is already in original branch
+git checkout $ORIGINAL_BRANCH
+git status
+
+# Run comprehensive end-to-end validation
+# - Execute full test suites
 # - Validate all PRD requirements are met
-# - Check that system works end-to-end
+# - Check that complete system works end-to-end
 
 # Tag successful implementation
-git tag -a "prd-{feature-name}-complete" -m "Completed PRD implementation with Git worktrees"
+git tag -a "prd-{feature-name}-complete" -m "Completed PRD implementation with immediate phase merging"
 ```
+
+#### Benefits of Immediate Merge Approach
+- **Continuous Integration**: Each phase is immediately integrated and tested
+- **Early Problem Detection**: Issues found and fixed at each phase boundary
+- **No Final Merge Conflicts**: Complex end-stage merge coordination eliminated
+- **Clean Original Branch**: Original branch always represents the current complete state
 
 ## Implementation Notes
 
@@ -271,13 +371,13 @@ git tag -a "prd-{feature-name}-complete" -m "Completed PRD implementation with G
 - **Test the implementation** within the worktree environment
 - **Provide clear approval/rejection** with specific feedback
 
-### Coordination Protocol
-1. **Pre-execution**: Validate all agent pairs have assigned worktrees
+### Coordination Protocol (Immediate Merge Approach)
+1. **Pre-execution**: Capture original branch (`$ORIGINAL_BRANCH`) and validate all agent pairs have assigned worktrees
 2. **During execution**: Periodic sync checks (every 15 minutes)
-3. **Phase boundaries**: Full synchronization with review approvals required
-4. **Cross-wave dependencies**: Next wave waits for ALL current wave approvals
+3. **Phase completion**: Review approval → **immediate merge to original branch** → worktree cleanup
+4. **Cross-wave dependencies**: Next wave starts from updated original branch (includes all previous work)
 5. **Error conditions**: Immediate halt and status report
-6. **Completion**: Final integration validation before marking PRD complete
+6. **Completion**: Continuous integration means final validation is just end-to-end testing
 
 ### Key Benefits of Git Worktree Approach
 - **Complete Isolation**: Agent pairs cannot interfere with each other's work
@@ -293,4 +393,4 @@ git tag -a "prd-{feature-name}-complete" -m "Completed PRD implementation with G
 - **Merge Time**: Merging between worktrees is efficient with Git's merge algorithms
 - **Cleanup**: Worktree removal is quick and thorough
 
-This approach transforms multi-agent execution from conflict-prone shared workspace to isolated, parallel development with clean integration points.
+This approach transforms multi-agent execution from conflict-prone shared workspace to isolated, parallel development with **immediate integration after each phase**. Key change: worktrees are merged to main immediately after review approval, not at the end, ensuring continuous integration and early problem detection.
