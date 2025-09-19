@@ -97,7 +97,7 @@ if [[ "$SHOW_ALL" == "true" ]]; then
 fi
 
 # Execute Python script
-PR_STATUS_RESULT=$(uv run .claude/scripts/bitbucket/pr_status_api.py check-status "${CMD_ARGS[@]}" 2>&1)
+PR_STATUS_RESULT=$(uv run ~/.claude/scripts/bitbucket/pr_status_api.py check-status "${CMD_ARGS[@]}" 2>&1)
 PR_EXIT_CODE=$?
 
 if [[ $PR_EXIT_CODE -ne 0 ]]; then
