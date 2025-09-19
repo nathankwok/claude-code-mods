@@ -63,7 +63,7 @@ while [[ $# -gt 0 ]]; do
       ;;
     *)
       echo "Unknown option: $1"
-      echo "Usage: /jira-code-review <pr-url> [--project KEY] [--assignee USER] [--branch BRANCH]"
+      echo "Usage: /create-code-review-ticket-api <pr-url> [--project KEY] [--assignee USER] [--branch BRANCH]"
       exit 1
       ;;
   esac
@@ -72,7 +72,7 @@ done
 # Validate PR URL
 if [[ -z "$PR_URL" ]]; then
     echo "❌ Error: PR URL is required"
-    echo "Usage: /jira-code-review <pr-url> [--project KEY] [--assignee USER] [--branch BRANCH]"
+    echo "Usage: /create-code-review-ticket-api <pr-url> [--project KEY] [--assignee USER] [--branch BRANCH]"
     exit 1
 fi
 
@@ -271,16 +271,16 @@ echo "   4. Close ticket when PR is merged"
 
 ```bash
 # Basic usage with PR URL
-/jira-code-review https://bitbucket.org/workspace/repo/pull-requests/123
+/create-code-review-ticket-api https://bitbucket.org/workspace/repo/pull-requests/123
 
 # Specify project and assignee
-/jira-code-review https://bitbucket.org/workspace/repo/pull-requests/123 --project PROJ --assignee john.doe
+/create-code-review-ticket-api https://bitbucket.org/workspace/repo/pull-requests/123 --project PROJ --assignee john.doe
 
 # Provide branch name explicitly
-/jira-code-review https://bitbucket.org/workspace/repo/pull-requests/123 --branch feature-auth
+/create-code-review-ticket-api https://bitbucket.org/workspace/repo/pull-requests/123 --branch feature-auth
 
 # Full options
-/jira-code-review https://bitbucket.org/workspace/repo/pull-requests/123 --project PROJ --assignee john.doe --branch main-123
+/create-code-review-ticket-api https://bitbucket.org/workspace/repo/pull-requests/123 --project PROJ --assignee john.doe --branch main-123
 ```
 
 ## Success Criteria

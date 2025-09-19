@@ -135,7 +135,7 @@ echo "🌿 **Branch**: $BRANCH_NAME"
 
 ### Step 3: Jira Integration (MCP Tools)
 
-For production branches, create code review ticket:
+Create code review ticket:
 
 ```bash
 # Determine if we should create Jira ticket
@@ -167,7 +167,7 @@ Execute MCP operations for Jira ticket creation:
 
 2. **Discover Jira Project**:
    - If `--jira-project` specified: Use that project
-   - Otherwise: Use `mcp__atlassian_confluence_jira__getVisibleJiraProjects` to find appropriate project
+   - Otherwise: Use `mcp__atlassian_confluence_jira__getVisibleJiraProjects` to find the default `DATAENG` project
 
 3. **Get Issue Type Metadata**:
    - Use `mcp__atlassian_confluence_jira__getJiraProjectIssueTypesMetadata` to find "Task" type
@@ -175,10 +175,10 @@ Execute MCP operations for Jira ticket creation:
 4. **Create Code Review Ticket**:
    - Use `mcp__atlassian_confluence_jira__createJiraIssue` with:
      - **Issue Type**: Task
-     - **Summary**: `{repo} {branch-name} Code Review`
+     - **Summary**: `{repo} {full-branch-name} Code Review`
      - **Description**: `Pull Request: {pr-url}`
-     - **Story Points**: 1 (via additional_fields if available)
-     - **Component**: Code Review (via additional_fields if available)
+     - **Story Points**: 1
+     - **Component**: Code Review
 
 5. **Assign Reviewer** (if specified):
    - Use `mcp__atlassian_confluence_jira__lookupJiraAccountId` to find reviewer
@@ -233,24 +233,24 @@ echo "  4. Merge when approved and CI passes"
 
 ```bash
 # Basic PR creation
-/bitbucket-pr-api main 123
+/bitbucket-pr-api main DATAENG-123
 
 # With reviewers  
-/bitbucket-pr-api development 456 @john,@jane
+/bitbucket-pr-api development DATAENG-456 @john,@jane
 
 # Production branch with specific Jira project
-/bitbucket-pr-api release 789 @team --jira-project PROJ
+/bitbucket-pr-api release PROJ-789 @team --jira-project PROJ
 
 # Draft PR without Jira ticket
-/bitbucket-pr-api feature 321 --draft --no-jira
+/bitbucket-pr-api feature DATAENG-321 --draft --no-jira
 
 # Custom title
-/bitbucket-pr-api main 555 --title "Critical bug fix for authentication"
+/bitbucket-pr-api main DATAENG-555 --title "Critical bug fix for authentication"
 ```
 
 ## Success Criteria
 
-- ✅ Branch created with naming convention: `{destination}-{ticket}`
+- ✅ Branch created with naming convention: `feature/{jira-board}-{ticket-number}`
 - ✅ PR created with proper title, description, and metadata
 - ✅ Reviewers assigned and notified
 - ✅ Jira ticket created automatically for production branches  

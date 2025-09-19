@@ -163,27 +163,26 @@ def get_git_status() -> GitStatus:
     )
 
 
-def create_branch_name(destination_branch: str, ticket_number: str) -> str:
+def create_branch_name(ticket_number: str, branch_type: str = "feature") -> str:
     """
     Create branch name following naming convention.
-    
+
     Args:
-        destination_branch: Target branch name
-        ticket_number: Ticket/issue number
-        
+        branch_type: Target branch name (used to determine branch type)
+        ticket_number: Jira ticket (e.g., "DATAENG-123")
+
     Returns:
-        Branch name in format: {destination}-{ticket}
+        Branch name in format: feature/{ticket} or hotfix/{ticket}
     """
-    # Sanitize inputs
-    destination_clean = re.sub(r'[^a-zA-Z0-9-_]', '-', destination_branch)
+    # Sanitize ticket number (preserve alphanumeric, dashes, and underscores)
     ticket_clean = re.sub(r'[^a-zA-Z0-9-_]', '-', ticket_number)
-    
-    branch_name = f"{destination_clean}-{ticket_clean}"
-    
-    # Ensure branch name is valid (no consecutive dashes, no leading/trailing dashes)
-    branch_name = re.sub(r'-+', '-', branch_name)
-    branch_name = branch_name.strip('-')
-    
+
+    # Ensure ticket is valid (no consecutive dashes, no leading/trailing dashes)
+    ticket_clean = re.sub(r'-+', '-', ticket_clean)
+    ticket_clean = ticket_clean.strip('-')
+
+    branch_name = f"{branch_type}/{ticket_clean}"
+
     return branch_name
 
 
@@ -273,54 +272,69 @@ def parse_reviewers(reviewers_input: Optional[str]) -> List[str]:
 def generate_pr_description(git_status: GitStatus, ticket_number: str) -> str:
     """
     Generate PR description from git status and ticket information.
-    
+
     Args:
         git_status: Current git repository status
         ticket_number: Associated ticket number
-        
+
     Returns:
         Formatted PR description
     """
     description_parts = [
-        f"## Changes for Ticket {ticket_number}",
+        "# Summary",
+        "<!-- Provide a concise description of the changes in this PR -->",
+        "",
+        "",
+        "# Related Tickets",
+        "<!-- List links to the related ticket(s) -->",
+        f"- {ticket_number}",
+        "",
+        "",
+        "# Proof of Functionality",
+        "<!-- Provide at least one of the following: -->",
+        "- Logs or stdout examples (Python logs, CloudWatch links, Terraform outputs, etc.)",
+        "- Screenshots or images showing the desired behavior",
+        "- Snowflake queries or links to completed prefect/dbt/aws jobs",
+        "- Other examples demonstrating the feature works",
         "",
     ]
-    
+
     # Add changes summary if available
     if git_status.has_changes or git_status.staged_files:
         description_parts.extend([
-            "### Files Changed:",
+            "**Files Changed:**",
             ""
         ])
-        
+
         all_changed_files = set(git_status.staged_files + git_status.unstaged_files)
         for file in sorted(all_changed_files):
             description_parts.append(f"- `{file}`")
-        
+
         description_parts.append("")
-    
+
     # Add recent commits
     if git_status.recent_commits:
         description_parts.extend([
-            "### Recent Commits:",
+            "**Recent Commits:**",
             ""
         ])
-        
+
         for commit in git_status.recent_commits[:3]:  # Show last 3 commits
             description_parts.append(f"- {commit}")
-        
+
         description_parts.append("")
-    
+
     description_parts.extend([
-        "### Review Checklist:",
-        "- [ ] Code follows project standards",
-        "- [ ] Tests are included and passing",
-        "- [ ] Documentation is updated if needed",
-        "- [ ] No breaking changes without discussion",
         "",
-        f"**Ticket Reference:** {ticket_number}"
+        "# Test Instructions",
+        "<!-- Detailed instructions for reviewers to test the feature end-to-end -->",
+        "",
+        "",
+        "# Notes",
+        "<!-- Optional: any additional context, caveats, or references -->",
+        ""
     ])
-    
+
     return "\n".join(description_parts)
 
 
@@ -428,7 +442,7 @@ def create_pr_command(
         logger.info(f"Current branch: {git_status.current_branch}")
         
         # Create branch name
-        branch_name = create_branch_name(destination_branch, ticket_number)
+        branch_name = create_branch_name(ticket_number)
         logger.info(f"Target branch name: {branch_name}")
         
         # Get workspace and repository info
@@ -524,7 +538,7 @@ def create_pr_command(
 def check_branch_command(destination_branch: str, ticket_number: str):
     """Check if target branch name would conflict."""
     try:
-        branch_name = create_branch_name(destination_branch, ticket_number)
+        branch_name = create_branch_name(ticket_number)
         git_status = get_git_status()
         
         # Check if branch exists

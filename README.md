@@ -111,7 +111,7 @@ This approach ensures your hooks remain functional across different environments
   - `pr-status.md` - Check PR status, reviews, comments, and linked Jira tickets
   - `bitbucket-pr-api.md` - Hybrid PR creation using direct API
   - `pr-status-api.md` - Hybrid PR status monitoring
-  - `jira-code-review.md` - Hybrid Jira ticket creation for existing PRs
+  - `create-code-review-ticket-api.md` - Hybrid Jira ticket creation for existing PRs
 - `logs/` - JSON logs of all hook executions
   - `user_prompt_submit.json` - User prompt submissions with validation
   - `pre_tool_use.json` - Tool use events with security blocking
@@ -230,12 +230,12 @@ These commands use the Bitbucket API directly (via Python scripts) while maintai
 - **Optional Jira search** - Uses MCP to find linked tickets
 - Multiple PR state filtering
 
-#### `/jira-code-review` - Standalone Code Review Ticket Creation
+#### `/create-code-review-ticket-api` - Standalone Code Review Ticket Creation
 ```bash
 # Usage examples:
-/jira-code-review https://bitbucket.org/workspace/repo/pull-requests/123
-/jira-code-review <pr-url> --project PROJ --assignee john.doe
-/jira-code-review <pr-url> --branch feature-auth
+/create-code-review-ticket-api https://bitbucket.org/workspace/repo/pull-requests/123
+/create-code-review-ticket-api <pr-url> --project PROJ --assignee john.doe
+/create-code-review-ticket-api <pr-url> --branch feature-auth
 ```
 
 **Features:**
