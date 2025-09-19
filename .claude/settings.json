@@ -28,7 +28,8 @@
       "mcp__n8n-mcp",
       "mcp__codex",
       "mcp__atlassian_confluence_jira",
-      "mcp__glean"
+      "mcp__glean",
+      "mcp__bitbucket"
     ],
     "deny": []
   },
