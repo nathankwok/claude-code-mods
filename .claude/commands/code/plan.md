@@ -1,7 +1,7 @@
 ---
 description: Complete workflow from brainstorming through architecture to PRD generation
 argument-hint: "project/feature description"
-model: claude-opus-4-1-20250805
+model: claude-opus-4-0
 ---
 
 # Complete Planning & Building Workflow

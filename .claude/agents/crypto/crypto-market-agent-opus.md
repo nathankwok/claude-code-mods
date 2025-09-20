@@ -2,7 +2,7 @@
 name: crypto-market-agent-opus
 description: Use proactively for real-time cryptocurrency market data retrieval and analysis for Top N cryptocurrencies by market cap
 tools: WebSearch, Write
-model: claude-opus-4-1
+model: claude-opus-4-0
 color: red
 ---
 

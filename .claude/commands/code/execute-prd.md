@@ -1,7 +1,7 @@
 ---
 description: Execute PRD with parallel multi-agent implementation using Git worktrees for agent isolation
 argument-hint: prd-file
-model: claude-opus-4-1
+model: claude-opus-4-0
 ---
 
 # Execute PRD with Parallel Multi-Agent Implementation

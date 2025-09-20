@@ -2,7 +2,7 @@
 name: macro-crypto-correlation-scanner-opus
 description: Use proactively to analyze correlations between macroeconomic events and cryptocurrency market movements. Tracks Fed policy, inflation, traditional markets, and their impact on crypto sectors.
 tools: WebSearch, Bash
-model: claude-opus-4-1
+model: claude-opus-4-0
 color: red
 ---
 
