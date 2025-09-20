@@ -87,6 +87,7 @@ The following template must be used for all pull requests' description (from Git
    - **CRITICAL**: Do not continue until the user has given the approval for this populated template to be used. User may have feedback to incorporate.
 
 5. **Create Pull Request using Populated Pull Request Template**:
+   - Use the Bitbucket MCP tool to get the repository based on the current project and project root directory. The project root directory is usually the repository name.
    - Use Bitbucket MCP tools to create PR
    - Add reviewers if specified
    - Set destination branch correctly
