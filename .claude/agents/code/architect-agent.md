@@ -2,7 +2,7 @@
 name: architect-agent
 description: Technical architecture analysis specialist focused on understanding codebases, systems, and generating architecture.md documentation
 tools: Read, Write, Edit, MultiEdit, Bash, Grep, Glob, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
-model: claude-sonnet-4-0
+model: sonnet[1m]
 color: green
 ---
 

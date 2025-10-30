@@ -2,7 +2,7 @@
 name: generate-prd-agent
 description: Specialized agent for generating comprehensive PRDs with parallelizable phases, dependency mapping, and multi-agent coordination strategy
 tools: Read, Write, Glob, Grep, WebSearch, Task, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep, mcp__codex
-model: claude-opus-4-0
+model: opus
 color: purple
 ---
 
