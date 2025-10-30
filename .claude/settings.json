@@ -15,7 +15,6 @@
       "Bash(npm:*)",
       "Bash(ls:*)",
       "Bash(cp:*)",
-      "Read(*)",
       "Write",
       "Edit",
       "Bash(chmod:*)",
@@ -29,11 +28,11 @@
       "mcp__codex",
       "mcp__atlassian_confluence_jira",
       "mcp__glean",
-      "mcp__bitbucket"
+      "mcp__bitbucket",
+      "mcp__notion"
     ],
     "deny": []
   },
-  "model": "opusplan",
   "hooks": {
     "PreToolUse": [
       {
@@ -131,5 +130,6 @@
     "type": "command",
     "command": "~/.claude/statusline.sh",
     "padding": 0
-  }
+  },
+  "alwaysThinkingEnabled": true
 }
