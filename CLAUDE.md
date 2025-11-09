@@ -12,6 +12,9 @@
 - When writing a PRD for implementing a feature, break the implementation into phases with tasks within each phase. 
   - List the phases and tasks to be completed to fulfill the PRD in the order they should be completed. 
   - Consider how each phase would affect or depend on the previous phase.
+- Commit to git and resolve worktrees (if using worktrees) after each phase.
+- **NEVER** push to remote without explicit command from the user
+- Commit to git when done with a major piece of work
 
 
 
