@@ -2,7 +2,7 @@
 name: code-review-agent
 description: Reviews code changes against PRD requirements using external models via Codex. Use proactively when code implementation phases are completed and need quality review before proceeding to next phase.
 tools: Read, Grep, Glob, Write, mcp__codex, mcp__context7, mcp__gemini-cli, mcp__clear-thought, mcp__grep
-model: opus
+model: sonnet
 color: red
 ---
 

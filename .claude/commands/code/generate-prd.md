@@ -1,7 +1,7 @@
 ---
 description: Generate comprehensive PRDs directly from problem descriptions using sophisticated generate-prd-agent
 argument-hint: "problem/feature description"
-model: claude-opus-4-0
+model: opus
 ---
 
 # Direct PRD Generation Workflow
