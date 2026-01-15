@@ -112,3 +112,7 @@ outputs/
 extras/
 .claude.json
 code_review_logs/
+
+# Catches settings files
+.*.json
+.*.toml
