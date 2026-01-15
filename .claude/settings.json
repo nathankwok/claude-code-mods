@@ -30,10 +30,15 @@
       "mcp__atlassian_confluence_jira",
       "mcp__glean",
       "mcp__bitbucket",
-      "mcp__notion"
+      "mcp__notion",
+      "Bash(timeout:*)",
+      "WebSearch"
     ],
-    "deny": []
+    "deny": [],
+    "ask": [],
+    "defaultMode": "dontAsk"
   },
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
@@ -131,6 +136,9 @@
     "type": "command",
     "command": "~/.claude/statusline.sh",
     "padding": 0
+  },
+  "enabledPlugins": {
+    "n8n-mcp-skills@n8n-mcp-skills": true
   },
   "alwaysThinkingEnabled": true
 }
